@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Corfovia</title>
+  <script>
+    // GitHub Pages Single Page Application (SPA) Redirect for /fr/ and /en/
+    (function() {
+      var l = window.location;
+      var pathSegments = l.pathname.split('/').filter(Boolean);
+      
+      // Si l'utilisateur accède à /fr, /fr/, /en, ou /en/
+      if (pathSegments.length > 0 && (pathSegments[0] === 'fr' || pathSegments[0] === 'en')) {
+        var lang = pathSegments[0];
+        localStorage.setItem('corfovia_language', lang);
+        
+        var subPath = pathSegments.slice(1).join('/');
+        var target = '/' + (subPath ? subPath + '/' : '');
+        
+        // Redirection vers la page avec mémorisation de la langue
+        window.location.replace(l.protocol + '//' + l.host + target + (target.indexOf('?') === -1 ? '?' : '&') + 'lang=' + lang + (l.hash || ''));
+      } else {
+        // Redirection vers l'accueil
+        window.location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>

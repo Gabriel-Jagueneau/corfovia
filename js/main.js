@@ -340,19 +340,13 @@
   // NETTOYAGE D'URL (ÉLIMINATION DE index.html ET DU HASH AU CHARGEMENT)
   // =========================================================================
   const initCleanURL = () => {
+    // Si index.html ou un hash est présent dans l'adresse, le nettoyer
     if (window.history && window.history.replaceState) {
       const loc = window.location;
-      let cleanPath = loc.pathname;
-
-      if (cleanPath.endsWith('/index.html')) {
-        cleanPath = cleanPath.slice(0, -10);
-      } else if (cleanPath.endsWith('index.html')) {
-        cleanPath = cleanPath.slice(0, -10);
-      }
-      if (!cleanPath) cleanPath = '/';
-
-      if (loc.pathname !== cleanPath || loc.hash) {
-        window.history.replaceState(null, document.title, cleanPath + loc.search);
+      if (loc.pathname.endsWith('index.html') || loc.hash) {
+        let clean = loc.pathname.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
+        if (!clean) clean = '/';
+        window.history.replaceState(null, document.title, clean + loc.search);
       }
     }
   };

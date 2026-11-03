@@ -1,65 +1,42 @@
-# Corfovia — Haute Nutrition Cellulaire
+# Corfovia — Haute Nutrition & Sport
 
-> Site vitrine officiel de la marque **Corfovia** ([corfovia.com](https://corfovia.com)).  
-> Conçu selon les principes de l'**Apple Design System** et de la méthodologie **Fluid Motion** (interactions tactiles ultra-réactives, morphing header, palette chaleureuse velours & crème).
+Site vitrine officiel de **Corfovia** ([corfovia.com](https://corfovia.com)).
 
----
+## ✨ Le Produit : Abadakor
+Muffin au chocolat bio & local conçu pour les sportifs et les personnes actives :
+- **Performance & Récupération** : 14 mg de fer naturel hautement assimilable et 100% des VNR en vitamine B12.
+- **Confort digestif absolu** : Zéro nausée, zéro brûlure d'estomac pendant l'effort.
+- **Anti-gaspillage circulaire** : Revalorisation noble de ressources locales riches en micronutriments.
 
-## ✨ Création Signature : Abadakor
+## 🚀 Fonctionnalités Clés
+- **Design System Apple** : Micro-interactions tactiles réactives (`pointerdown`), typographie soignée et animations fluides.
+- **Header flottant morphing** : Suivi dynamique du scroll, jauge de progression intégrée et dropdown produits en verre dépoli.
+- **Bilingue FR / EN dynamique** : Système i18n sans duplication de fichiers HTML, changement de langue instantané.
+- **URLs épurées** : Zéro suffixe `.html` ni ancres `#` visibles dans la barre d'adresse.
+- **SEO & Réseaux sociaux** : Méta-balises OpenGraph, Twitter Cards et favicon configurés pour `corfovia.com`.
 
-**Abadakor** réinvente l'assimilation du fer au quotidien :
-- **Plaisir sans compromis** : Un véritable muffin au chocolat bio, sans arrière-goût métallique.
-- **Efficacité nutritionnelle** : Fer héminique naturel et vitamine B12 bio-disponibles.
-- **Circuit court** : Ingrédients 100% bio et locaux, filières anti-gaspillage.
-
----
-
-## 🚀 Fonctionnalités & Expérience Utilisateur
-
-- **Header flottant à morphing fluide** : Transition dynamique en îlot compact lors du défilement, avec jauge de progression intégrée et badge de section en direct.
-- **Menu déroulant sur mesure** : Dropdown produits en verre dépoli (*backdrop-filter blur*) avec voile d'arrière-plan immersif.
-- **Jauges comparatives interactives** : Visualisation scientifique de la biodisponibilité (assimilation à 94% vs compléments synthétiques à 18%).
-- **Design System tactile** : Rendu Apple moderne, micro-interactions instantanées sans latence (`pointerdown`), typographie soignée (*Playfair Display* & *Plus Jakarta Sans*).
-- **SEO & Réseaux sociaux** : Métadonnées OpenGraph, Twitter Cards, PWA theme-color, Sitemap XML et Robots.txt configurés pour `corfovia.com`.
-
----
-
-## 📁 Architecture du Projet
-
+## 📁 Structure du Projet
 ```text
 corfovia/
-├── index.html                     # Page d'accueil (Vision, Piliers, Innovation, Science)
+├── index.html                     # Accueil (Vision, Piliers, Innovation, Science)
 ├── products/
 │   └── muffin-vitalite/
-│       └── index.html             # Page produit détaillée Abadakor
+│       └── index.html             # Fiche détaillée Abadakor
 ├── css/
-│   ├── style.css                  # Design System, typographie, composants, animations
+│   ├── style.css                  # Styles globaux & composants
 │   └── responsive.css             # Adaptations mobiles & tablettes
 ├── js/
-│   └── main.js                    # Interactions, morphing header, scroll spy, accordéons
-├── images/                        # Emblème circulaire, photographies & QR code
-├── CNAME                          # Domaine personnalisé GitHub Pages (corfovia.com)
-├── sitemap.xml                    # Plan du site SEO
-├── robots.txt                     # Directives pour moteurs de recherche
-└── README.md                      # Documentation du projet
+│   ├── i18n.js                    # Moteur de traduction dynamique FR / EN
+│   └── main.js                    # Interactions, morphing header, scroll spy
+├── images/                        # Logos officiels, visuel fournée et QR code
+├── CNAME                          # Configuration domaine GitHub Pages (corfovia.com)
+├── sitemap.xml                    # Sitemap SEO
+├── robots.txt                     # Indexation moteurs de recherche
+└── README.md
 ```
 
----
-
 ## 🛠️ Déploiement
-
-Le site est statique (HTML5 / CSS3 / JavaScript Vanilla ES6+), sans dépendances complexes, et optimisé pour être servi directement via **GitHub Pages**, Vercel, Netlify ou tout serveur web moderne.
+Site statique (HTML5 / CSS3 / Vanilla JS). Compatible avec **GitHub Pages**, Vercel, Netlify ou tout serveur statique sans configuration requise.
 
 ---
-
 © Corfovia — Tous droits réservés.
-
----
-
-## 🌐 Internationalisation (i18n) & URLs Épurées
-
-Le site est architecturé pour une expérience de navigation pure (zéro suffixe  ni hash  visibles) et prêt pour le multi-langue :
-- **Français (défaut)** :  ou 
-- **Anglais (prévu)** : 
-- **Pages produits** : 
-- **Gestionnaire d'URL dynamique ()** : Nettoie automatiquement les URLs à la volée via l'API HTML5 History ( / ), garantissant une barre d'adresse sobre et élégante.

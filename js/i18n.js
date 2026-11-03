@@ -1,10 +1,7 @@
 /**
  * CORFOVIA — Système Internationalisation (i18n)
- * Inspiré de Plintzy :
- * - Dictionnaire complet FR / EN
- * - Traduction dynamique intégrale de toutes les sections
- * - Persistance du choix dans localStorage
- * - Évite les erreurs 404 (Cannot GET /fr/) sur les serveurs statiques (Live Server, GitHub Pages)
+ * Dictionnaire complet FR / EN
+ * Traduction dynamique intégrale de toutes les sections
  */
 
 (() => {
@@ -97,11 +94,16 @@
       'routine.p3.desc': "Un bon chocolat classique dans un muffin moelleux et réconfortant.",
       'routine.btn': 'Commander Abadakor →',
 
-      // Communauté & Footer
+      // Communauté & Instagram
       'comm.title': 'Rejoignez le',
       'comm.title.span': 'Cercle Corfovia',
+      'comm.subtitle': "Découvrez les coulisses de nos fournées artisanales, nos conseils en nutrition cellulaire et l'actualité d'Abadakor sur Instagram.",
+      'comm.cta.title': 'Suivez-nous sur Instagram',
       'comm.desc': "Découvrez les coulisses de nos fournées artisanales, nos conseils sport et nutrition, et l'actualité de nos créations gourmandes sur notre compte Instagram officiel.",
       'comm.qr': 'Scannez le QR Code',
+      'comm.btn': '@corfovia sur Instagram',
+
+      // Footer
       'footer.baseline': "La nutrition pour le sport et l'énergie active, réinventée dans un délicieux muffin éco-responsable.",
       'footer.col1.title': 'Maison',
       'footer.col2.title': 'Créations',
@@ -110,11 +112,13 @@
       'footer.link.pack4': 'Coffret 4 muffins',
       'footer.link.pack12': 'Cure 12 muffins',
       'footer.link.pack24': 'Pack 24 muffins',
+      'footer.link.ritual': 'Rituel & Conseils',
       'footer.exigence1': 'Fer Héminique Naturel',
       'footer.exigence2': '100% Bio & Local',
       'footer.exigence3': 'Bon Chocolat Gourmand',
-      'footer.copy': 'Tous droits réservés. L’abus de plaisir est fortement encouragé.',
-      'footer.crafted': 'Haute Pâtisserie Santé & Nutrition Active.',
+      'footer.exigence4': 'Zéro additif chimique',
+      'footer.copy': '© 2026 Corfovia. Tous droits réservés. Haute nutrition cellulaire bio.',
+      'footer.mention': 'Façonné avec rigueur scientifique & passion artisanale.',
 
       // Page Produit Abadakor
       'product.breadcrumb.home': 'Accueil',
@@ -223,24 +227,31 @@
       'routine.p3.desc': 'Real classic chocolate baked into a comforting, delicious treat.',
       'routine.btn': 'Order Abadakor →',
 
-      // Communauté & Footer
+      // Communauté & Instagram
       'comm.title': 'Join the',
       'comm.title.span': 'Corfovia Circle',
+      'comm.subtitle': 'Discover the backstage of our artisanal batches, our sports nutrition tips and the latest Abadakor news on Instagram.',
+      'comm.cta.title': 'Follow us on Instagram',
       'comm.desc': 'Go behind the scenes of our artisanal batches, discover sports nutrition tips and the latest creations on our official Instagram account.',
       'comm.qr': 'Scan the QR Code',
+      'comm.btn': '@corfovia on Instagram',
+
+      // Footer
       'footer.baseline': 'Active sports nutrition and sustainable energy, reinvented in a delicious eco-conscious muffin.',
       'footer.col1.title': 'House',
       'footer.col2.title': 'Creations',
-      'footer.col3.title': 'Values',
+      'footer.col3.title': 'Standards',
       'footer.link.abadakor': 'Abadakor Muffin',
       'footer.link.pack4': '4 Muffin Box',
       'footer.link.pack12': '12 Muffin Cure',
       'footer.link.pack24': '24 Muffin Pack',
+      'footer.link.ritual': 'Ritual & Recommendations',
       'footer.exigence1': 'Natural Heme Iron',
       'footer.exigence2': '100% Organic & Local',
       'footer.exigence3': 'Gourmet Chocolate',
-      'footer.copy': 'All rights reserved. Excess of pleasure is strongly encouraged.',
-      'footer.crafted': 'High-End Cellular Baking & Active Sports Nutrition.',
+      'footer.exigence4': 'Zero chemical additives',
+      'footer.copy': '© 2026 Corfovia. All rights reserved. Organic cellular nutrition.',
+      'footer.mention': 'Crafted with scientific rigor & artisanal passion.',
 
       // Page Produit Abadakor
       'product.breadcrumb.home': 'Home',
@@ -268,13 +279,31 @@
   };
 
   /**
+   * Récupère la langue active (Query parameter > localStorage > Navigateur > 'fr')
+   */
+  const getLanguageFromPath = () => {
+    if (typeof window === 'undefined') return null;
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    if (pathSegments.length > 0 && VALID_LANGS.includes(pathSegments[0])) {
+      return pathSegments[0];
+    }
+    return null;
+  };
+
+  /**
    * Récupère la langue active :
-   * 1. Query parameter (?lang=en ou ?lang=fr)
-   * 2. localStorage
-   * 3. Navigateur
-   * 4. 'fr' par défaut
+   * 1. URL Path (/fr/ ou /en/) exactement comme Plintzy
+   * 2. Paramètre ?lang=
+   * 3. localStorage
+   * 4. Navigateur
    */
   const getLanguage = () => {
+    const urlLang = getLanguageFromPath();
+    if (urlLang && VALID_LANGS.includes(urlLang)) {
+      localStorage.setItem(STORAGE_KEY, urlLang);
+      return urlLang;
+    }
+
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const qLang = params.get('lang');
@@ -297,24 +326,27 @@
   };
 
   /**
-   * Applique une nouvelle langue :
-   * - Sauvegarde dans localStorage
-   * - Met à jour le paramètre ?lang= si présent sans altérer le chemin du fichier (zéro Cannot GET)
-   * - Traduit dynamiquement tous les éléments data-i18n et data-i18n-html
+   * Change la langue active et synchronise l'URL (/fr/ ou /en/) exactement comme Plintzy
    */
-  const setLanguage = (langCode) => {
+  const setLanguage = (langCode, syncUrl = true) => {
     if (!VALID_LANGS.includes(langCode)) return;
     localStorage.setItem(STORAGE_KEY, langCode);
 
-    // Synchronisation propre du paramètre dans l'URL si on utilise les paramètres, ou clean
-    if (typeof window !== 'undefined' && window.history && window.history.replaceState) {
-      const url = new URL(window.location.href);
-      if (langCode === 'en') {
-        url.searchParams.set('lang', 'en');
+    if (syncUrl && typeof window !== 'undefined' && window.history && window.history.replaceState) {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      let pagePath = '';
+
+      if (pathSegments.length > 0 && VALID_LANGS.includes(pathSegments[0])) {
+        pagePath = pathSegments.slice(1).join('/');
       } else {
-        url.searchParams.delete('lang');
+        pagePath = pathSegments.join('/');
       }
-      window.history.replaceState(null, document.title, url.pathname + url.search + url.hash);
+
+      // Construit l'URL propre : /fr/ ou /en/ ou /fr/products/muffin-vitalite/
+      const newUrl = '/' + langCode + '/' + (pagePath ? pagePath + '/' : '');
+      if (window.location.pathname !== newUrl) {
+        window.history.replaceState(null, document.title, newUrl + window.location.search);
+      }
     }
 
     applyTranslations(langCode);
@@ -323,9 +355,6 @@
     window.dispatchEvent(new CustomEvent('corfoviaLanguageChange', { detail: { lang: langCode } }));
   };
 
-  /**
-   * Met à jour le texte de tous les éléments du DOM
-   */
   const applyTranslations = (langCode) => {
     const dict = translations[langCode] || translations.fr;
 
@@ -337,7 +366,7 @@
       }
     });
 
-    // Textes avec HTML (gras, retours à la ligne, balises em)
+    // Textes avec HTML
     document.querySelectorAll('[data-i18n-html]').forEach((el) => {
       const key = el.getAttribute('data-i18n-html');
       if (dict[key]) {
@@ -371,13 +400,13 @@
         e.preventDefault();
         const targetLang = btn.getAttribute('data-lang');
         if (targetLang) {
-          setLanguage(targetLang);
+          setLanguage(targetLang, true);
         }
       });
     });
 
     const currentLang = getLanguage();
-    setLanguage(currentLang);
+    setLanguage(currentLang, true);
   };
 
   window.CorfoviaI18n = {
