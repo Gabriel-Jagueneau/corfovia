@@ -291,32 +291,77 @@
   // =========================================================================
   // 5. SMOOTH IN-PAGE ANCHOR SCROLL
   // =========================================================================
+  // =========================================================================
+  // GESTION DU DÉFILEMENT DOUX SANS POLLUTION DE L'URL (ZÉRO HASH # DANS L'ADRESSE)
+  // =========================================================================
   const initSmoothAnchors = () => {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
-        const targetId = anchor.getAttribute('href');
-        if (targetId === '#') return;
-        const el = document.querySelector(targetId);
-        if (el) {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#') return;
+
+        const urlParts = href.split('#');
+        const targetId = urlParts[1];
+        if (!targetId) return;
+
+        const targetEl = document.getElementById(targetId);
+        const pagePath = urlParts[0];
+
+        // Vérifie si la cible se trouve sur la page courante
+        const isCurrentPage = !pagePath || 
+                              pagePath === '' || 
+                              pagePath === './' || 
+                              pagePath === 'index.html' || 
+                              pagePath === '/' || 
+                              pagePath === '../../' || 
+                              (targetEl !== null);
+
+        if (targetEl && isCurrentPage) {
           e.preventDefault();
-          const targetOffset = el.getBoundingClientRect().top + window.pageYOffset - 68;
+          const targetOffset = targetEl.getBoundingClientRect().top + window.pageYOffset - 68;
           window.scrollTo({
             top: targetOffset,
             behavior: 'smooth'
           });
+
+          // Nettoyage immédiat de l'URL pour ne jamais afficher de #... dans la barre d'adresse
+          if (window.history && window.history.replaceState) {
+            let cleanPath = window.location.pathname;
+            if (cleanPath.endsWith('/index.html')) cleanPath = cleanPath.slice(0, -10);
+            if (!cleanPath) cleanPath = '/';
+            window.history.replaceState(null, document.title, cleanPath + window.location.search);
+          }
         }
       });
     });
   };
 
+  // =========================================================================
+  // NETTOYAGE D'URL (ÉLIMINATION DE index.html ET DU HASH AU CHARGEMENT)
+  // =========================================================================
+  const initCleanURL = () => {
+    if (window.history && window.history.replaceState) {
+      const loc = window.location;
+      let cleanPath = loc.pathname;
+
+      if (cleanPath.endsWith('/index.html')) {
+        cleanPath = cleanPath.slice(0, -10);
+      } else if (cleanPath.endsWith('index.html')) {
+        cleanPath = cleanPath.slice(0, -10);
+      }
+      if (!cleanPath) cleanPath = '/';
+
+      if (loc.pathname !== cleanPath || loc.hash) {
+        window.history.replaceState(null, document.title, cleanPath + loc.search);
+      }
+    }
+  };
 
   // =========================================================================
-  // GESTION DYNAMIQUE DE LA SCROLLBAR (INVISIBILITÉ TOUT EN HAUT & AUTO-FADE)
-  // =========================================================================
-    // =========================================================================
   // BOOTSTRAP
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
+    initCleanURL();
     initHeaderMorph();
     initProductsDropdown();
     initTactileResponse();

@@ -15,8 +15,8 @@
 :root {
   /* Brand Master Colors */
   --accent-dark: #520b1c;
-  --accent: #70122a;
-  --accent-vivid: #921634;
+  --accent: #921634;
+  --accent-vivid: #70122a;
   --accent-light: #b01f43;
   --accent-soft: rgba(112, 18, 42, 0.06);
   --accent-border: rgba(112, 18, 42, 0.1);
@@ -73,9 +73,12 @@
    SCROLLBAR MASQUÉE (NAVIGATION PURE & ZERO POLLUTION VISUELLE)
    ========================================================================== */
 /* Standard W3C (Firefox & navigateurs modernes) */
-html, body {
-  scrollbar-width: none !important; /* Cache la barre sous Firefox */
-  -ms-overflow-style: none !important; /* IE et Edge Legacy */
+html,
+body {
+  scrollbar-width: none !important;
+  /* Cache la barre sous Firefox */
+  -ms-overflow-style: none !important;
+  /* IE et Edge Legacy */
 }
 
 /* WebKit (Chrome, Safari, Edge, Opera, macOS/iOS) */
@@ -210,6 +213,57 @@ body {
 
 .site-nav.is-scrolled .nav-brand-logo {
   height: 30px;
+}
+
+
+/* ==========================================================================
+   SÉLECTEUR DE LANGUE DISCRET & ÉPURÉ (APPLE GLASS CAPSULE)
+   ========================================================================== */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(112, 18, 42, 0.05);
+  border: 1px solid rgba(112, 18, 42, 0.08);
+  border-radius: var(--radius-pill);
+  padding: 2px 4px;
+  gap: 2px;
+  margin-left: 8px;
+  user-select: none;
+}
+
+.lang-switcher-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1;
+}
+
+.lang-switcher-btn:hover {
+  color: var(--accent);
+}
+
+.lang-switcher-btn.active {
+  background: #ffffff;
+  color: var(--accent);
+  box-shadow: 0 2px 6px rgba(112, 18, 42, 0.12);
+}
+
+.site-nav.is-scrolled .lang-switcher {
+  padding: 1px 3px;
+}
+
+.site-nav.is-scrolled .lang-switcher-btn {
+  font-size: 0.68rem;
+  padding: 3px 6px;
 }
 
 .nav-links {

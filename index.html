@@ -32,10 +32,11 @@
   <meta property="og:title" content="Corfovia — Abadakor, le Muffin Santé au Bon Chocolat">
   <meta property="og:description" content="Combler ses besoins en fer avec un délicieux muffin au chocolat bio et local ? Dès la première bouchée : « Ah bah d'accord ! »">
   <meta property="og:url" content="https://corfovia.com/">
-  <meta property="og:image" content="https://corfovia.com/images/hero-muffins.jpg">
+  <meta property="og:image" content="https://corfovia.com/images/corfovia-meta.png">
   <meta property="og:image:alt" content="Fournée artisanale de muffins Abadakor par Corfovia">
   <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="779">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:height" content="1024">
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
@@ -43,7 +44,7 @@
   <meta name="twitter:creator" content="@corfovia">
   <meta name="twitter:title" content="Corfovia — Abadakor, le Muffin Santé au Bon Chocolat">
   <meta name="twitter:description" content="94% d'assimilation de fer héminique dans un délicieux muffin au chocolat bio et local. Fini les gélules difficiles.">
-  <meta name="twitter:image" content="https://corfovia.com/images/hero-muffins.jpg">
+  <meta name="twitter:image" content="https://corfovia.com/images/corfovia-meta.png">
   <meta name="twitter:image:alt" content="Muffins Abadakor Corfovia">
 
   <!-- Préconnexions & Optimisations Réseau -->
@@ -55,7 +56,7 @@
   <!-- Favicons & Icônes Applicatives -->
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/corfovia-meta.png">
   <link rel="shortcut icon" href="images/favicon-32x32.png">
 
   <!-- Feuilles de Style -->
@@ -68,7 +69,7 @@
   <!-- FLOATING MORPHING HEADER -->
   <header class="site-nav">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand" aria-label="Corfovia Accueil">
+      <a href="./" class="nav-brand" aria-label="Corfovia Accueil">
         <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia">
       </a>
 
@@ -79,14 +80,14 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="#vision" class="nav-link active" data-section="vision">La Vision</a></li>
-        <li><a href="#creation" class="nav-link" data-section="creation">L'Innovation</a></li>
-        <li><a href="#routine" class="nav-link" data-section="routine">Notre Science</a></li>
+        <li><a href="#vision" class="nav-link active" data-section="vision" data-i18n="nav.vision">La Vision</a></li>
+        <li><a href="#creation" class="nav-link" data-section="creation" data-i18n="nav.innovation">L'Innovation</a></li>
+        <li><a href="#routine" class="nav-link" data-section="routine" data-i18n="nav.science">Notre Science</a></li>
         
         <!-- Bouton Produits avec Dropdown Apple Custom -->
         <li class="nav-dropdown-wrapper">
           <button class="nav-link nav-dropdown-btn" id="navProductsTrigger" aria-expanded="false" aria-haspopup="true">
-            <span>Produits</span>
+            <span data-i18n="nav.products">Produits</span>
             <svg class="nav-chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -94,22 +95,30 @@
 
           <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
             <div class="nav-dropdown-items">
-              <a href="products/muffin-vitalite/index.html" class="nav-dropdown-item" role="menuitem">
+              <a href="products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
                 <div class="nav-dropdown-icon-wrap">
                   <img src="images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
                 </div>
                 <div class="nav-dropdown-item-info">
                   <div class="nav-dropdown-item-top">
                     <span class="nav-dropdown-item-title">Abadakor</span>
-                    <span class="nav-dropdown-item-badge">Sport & Vitalité</span>
+                    <span class="nav-dropdown-item-badge" data-i18n="nav.badge.abadakor">Sport & Vitalité</span>
                   </div>
-                  <p class="nav-dropdown-item-desc">Muffin au chocolat bio & local, nutriments pour le sport et démarche anti-gaspi.</p>
+                  <p class="nav-dropdown-item-desc" data-i18n="nav.dropdown.desc">Muffin au chocolat bio & local, nutriments pour le sport et démarche anti-gaspi.</p>
                 </div>
                 <svg class="nav-dropdown-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </a>
             </div>
+          </div>
+        </li>
+
+        <!-- Sélecteur de Langue FR | EN (Style Apple Capsule) -->
+        <li class="lang-switcher-wrapper">
+          <div class="lang-switcher" role="group" aria-label="Choix de la langue">
+            <button class="lang-switcher-btn active" data-lang="fr" aria-pressed="true">FR</button>
+            <button class="lang-switcher-btn" data-lang="en" aria-pressed="false">EN</button>
           </div>
         </li>
       </ul>
@@ -134,11 +143,11 @@
           <div class="hero-content-left">
 
             <h1 class="hero-glorious-title">
-              <em>La vitalité</em> est un <span class="hero-highlight">art de vivre.</span>
+              <em data-i18n="hero.title.em">La vitalité</em> <span data-i18n="hero.title.after">est un</span> <span class="hero-highlight" data-i18n="hero.title.highlight">art de vivre.</span>
             </h1>
 
             <p class="hero-glorious-p">
-              Le muffin conçu pour le sport et l'énergie active. Recharge naturelle en fer et B12, issue de la valorisation de filières bio et locales : <em>Abadakor !</em>
+              <span data-i18n="hero.subtitle">Le muffin conçu pour le sport et l'énergie active. Recharge naturelle en fer et B12, issue de la valorisation de filières bio et locales :</span> <em>Abadakor !</em>
             </p>
 
             <!-- BANDEAU DE RÉASSURANCE HAUT DE GAMME -->
@@ -149,8 +158,8 @@
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 <div class="trust-text-group">
-                  <span class="trust-title">100% Bio & Local</span>
-                  <span class="trust-desc">Filières courtes et responsables</span>
+                  <span class="trust-title" data-i18n="hero.trust1.title">100% Bio & Local</span>
+                  <span class="trust-desc" data-i18n="hero.trust1.desc">Filières courtes et responsables</span>
                 </div>
               </div>
 
@@ -162,14 +171,14 @@
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 <div class="trust-text-group">
-                  <span class="trust-title">Anti-Gaspillage Engagé</span>
-                  <span class="trust-desc">Valorisation de ressources locales</span>
+                  <span class="trust-title" data-i18n="hero.trust2.title">Anti-Gaspillage Engagé</span>
+                  <span class="trust-desc" data-i18n="hero.trust2.desc">Valorisation de ressources locales</span>
                 </div>
               </div>
             </div>
 
             <div class="hero-cta-group">
-              <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
+              <a href="products/muffin-vitalite/" class="btn-clay btn-clay-primary">
                 Découvrir Abadakor →
               </a>
               <a href="#routine" class="btn-clay btn-clay-secondary">
@@ -189,7 +198,7 @@
           <div class="section-title-wrap">
             <h2 class="section-serif-title">Les 4 Piliers de la <span>Vitalité Corfovia</span></h2>
             <p class="section-serif-sub">
-              L'alliance pionnière de la haute nutrition cellulaire et de l'artisanat pâtissier.
+              <span data-i18n="pillars.subtitle">L'alliance pionnière de la haute nutrition cellulaire et de l'artisanat pâtissier.</span>
             </p>
           </div>
 
@@ -202,8 +211,8 @@
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
-              <h4>Performance Sportive</h4>
-              <p>Optimisation du transport d'oxygène, endurance décuplée et récupération musculaire accélérée.</p>
+              <h4 data-i18n="pillar1.title">Performance Sportive</h4>
+              <p data-i18n="pillar1.desc">Optimisation du transport d'oxygène, endurance décuplée et récupération musculaire accélérée.</p>
             </div>
 
             <!-- Pillar 2 -->
@@ -214,8 +223,8 @@
                   <path d="M7 12h2l1.5-3 2 6 1.5-3h3"></path>
                 </svg>
               </div>
-              <h4>Éco-Valorisation Circulaire</h4>
-              <p>Revalorisation vertueuse de ressources locales riches en nutriments, sans gaspillage.</p>
+              <h4 data-i18n="pillar2.title">Éco-Valorisation Circulaire</h4>
+              <p data-i18n="pillar2.desc">Revalorisation vertueuse de ressources locales riches en nutriments, sans gaspillage.</p>
             </div>
 
             <!-- Pillar 3 -->
@@ -226,8 +235,8 @@
                   <circle cx="12" cy="12" r="2"></circle>
                 </svg>
               </div>
-              <h4>Vrai Chocolat</h4>
-              <p>Un bon chocolat classique et une pointe de sel : le plaisir gourmand d'un vrai muffin moelleux.</p>
+              <h4 data-i18n="pillar3.title">Vrai Chocolat</h4>
+              <p data-i18n="pillar3.desc">Un bon chocolat classique et une pointe de sel : le plaisir gourmand d'un vrai muffin moelleux.</p>
             </div>
 
             <!-- Pillar 4 -->
@@ -237,8 +246,8 @@
                   <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
                 </svg>
               </div>
-              <h4>Énergie Durable</h4>
-              <p>Oxygénation cellulaire profonde et tonus stable au quotidien, sans pic ni coup de fatigue.</p>
+              <h4 data-i18n="pillar4.title">Énergie Durable</h4>
+              <p data-i18n="pillar4.desc">Oxygénation cellulaire profonde et tonus stable au quotidien, sans pic ni coup de fatigue.</p>
             </div>
 
           </div>
@@ -252,9 +261,9 @@
         <div class="container">
 
           <div class="section-title-wrap">
-            <h2 class="section-serif-title">L'Innovation : <span>Abadakor</span></h2>
+            <h2 class="section-serif-title"><span data-i18n="inno.title">L'Innovation :</span> <span data-i18n="inno.title.span">Abadakor</span></h2>
             <p class="section-serif-sub">
-              « Booster son énergie avec un vrai muffin au chocolat ? » Dès la première bouchée : <em>« Ah, bah d'accord ! »</em>
+              <span data-i18n-html="inno.subtitle">« Booster son énergie avec un vrai muffin au chocolat ? » Dès la première bouchée : <em>« Ah, bah d'accord ! »</em></span>
             </p>
           </div>
 
@@ -270,8 +279,8 @@
                 </svg>
               </div>
               <div class="breakthrough-text">
-                <h4>Goût Chocolat Parfait</h4>
-                <p>Le goût classique du bon chocolat. La texture généreuse d'un muffin gourmand.</p>
+                <h4 data-i18n="inno.card1.title">Goût Chocolat Parfait</h4>
+                <p data-i18n="inno.card1.desc">Le goût classique du bon chocolat. La texture généreuse d'un muffin gourmand.</p>
               </div>
             </div>
 
@@ -282,8 +291,8 @@
                 </svg>
               </div>
               <div class="breakthrough-text">
-                <h4>Anti-Gaspillage Engagé</h4>
-                <p>Revalorisation de ressources locales pour un apport naturel en fer et vitamine B12, zéro gaspillage.</p>
+                <h4 data-i18n="inno.card2.title">Anti-Gaspillage Engagé</h4>
+                <p data-i18n="inno.card2.desc">Revalorisation de ressources locales pour un apport naturel en fer et vitamine B12, zéro gaspillage.</p>
               </div>
             </div>
 
@@ -295,8 +304,8 @@
                 </svg>
               </div>
               <div class="breakthrough-text">
-                <h4>Confort Intestinal 100%</h4>
-                <p>Tolérance digestive totale à l'effort, sans nausée ni lourdeur d'estomac.</p>
+                <h4 data-i18n="inno.card3.title">Confort Intestinal 100%</h4>
+                <p data-i18n="inno.card3.desc">Tolérance digestive totale à l'effort, sans nausée ni lourdeur d'estomac.</p>
               </div>
             </div>
 
@@ -305,11 +314,11 @@
           <!-- Invitation Callout Box -->
           <div class="collection-invite-box">
             <div class="collection-invite-text">
-              <h4>Le Muffin qui met tout le monde d'accord</h4>
-              <p>Disponible en coffrets 4, 12 ou 24 muffins pour une cure aussi efficace que savoureuse.</p>
+              <h4 data-i18n="inno.invite.title">Le Muffin qui met tout le monde d'accord</h4>
+              <p data-i18n="inno.invite.desc">Disponible en coffrets 4, 12 ou 24 muffins pour une cure aussi efficace que savoureuse.</p>
             </div>
-            <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
-              Commander Abadakor →
+            <a href="products/muffin-vitalite/" class="btn-clay btn-clay-primary">
+              <span data-i18n="inno.invite.btn">Commander Abadakor →</span>
             </a>
           </div>
 
@@ -326,8 +335,8 @@
             <!-- Left : Luxury Circular Radial Gauges Showcase -->
             <div class="vitality-gauges-showcase">
               <div class="gauges-showcase-header">
-                <h3>Assimilation & Biodisponibilité</h3>
-                <span class="gauges-showcase-pill">Études Cliniques</span>
+                <h3 data-i18n="science.header.title">Assimilation & Biodisponibilité</h3>
+                <span class="gauges-showcase-pill" data-i18n="science.header.badge">Études Cliniques</span>
               </div>
 
               <!-- Dual Radial Dials Grid -->
@@ -348,11 +357,11 @@
                     </svg>
                     <div class="dial-inner-text">
                       <span class="dial-percent">94%</span>
-                      <span class="dial-percent-sub">Absorbé</span>
+                      <span class="dial-percent-sub" data-i18n="science.dial.absorbed">Absorbé</span>
                     </div>
                   </div>
-                  <div class="dial-title">Nutrition Corfovia</div>
-                  <div class="dial-desc">Assimilation optimale pour le sport & respect total du microbiote</div>
+                  <div class="dial-title" data-i18n="science.dial.corfovia.title">Nutrition Corfovia</div>
+                  <div class="dial-desc" data-i18n="science.dial.corfovia.desc">Assimilation optimale pour le sport & respect total du microbiote</div>
                 </div>
 
                 <!-- Dial Synthetic Iron (18%) -->
@@ -364,11 +373,11 @@
                     </svg>
                     <div class="dial-inner-text">
                       <span class="dial-percent" style="color: #8c7377;">18%</span>
-                      <span class="dial-percent-sub">Absorbé</span>
+                      <span class="dial-percent-sub" data-i18n="science.dial.absorbed">Absorbé</span>
                     </div>
                   </div>
-                  <div class="dial-title">Fer de Synthèse</div>
-                  <div class="dial-desc">82% rejeté sans effet actif & irritations digestives fréquentes</div>
+                  <div class="dial-title" data-i18n="science.dial.synthetic.title">Fer de Synthèse</div>
+                  <div class="dial-desc" data-i18n="science.dial.synthetic.desc">82% rejeté sans effet actif & irritations digestives fréquentes</div>
                 </div>
 
               </div>
@@ -376,21 +385,21 @@
               <!-- Micro Comparative Summary Styled -->
               <div class="gauges-micro-comparison">
                 <div class="micro-comp-col micro-comp-traditional">
-                  <div class="micro-comp-badge">Synthétique</div>
-                  <strong class="micro-comp-title">Complément Chimique</strong>
+                  <div class="micro-comp-badge" data-i18n="comp.synthetic.badge">Synthétique</div>
+                  <strong class="micro-comp-title" data-i18n="comp.synthetic.title">Complément Chimique</strong>
                   <ul class="micro-comp-list">
-                    <li><span>✕</span> Spasmes & nausées</li>
-                    <li><span>✕</span> Faible absorption (18%)</li>
-                    <li><span>✕</span> 82% éliminé sans effet</li>
+                    <li><span>✕</span> <span data-i18n="comp.synthetic.item1">Spasmes & nausées</span></li>
+                    <li><span>✕</span> <span data-i18n="comp.synthetic.item2">Faible absorption (18%)</span></li>
+                    <li><span>✕</span> <span data-i18n="comp.synthetic.item3">82% éliminé sans effet</span></li>
                   </ul>
                 </div>
                 <div class="micro-comp-col micro-comp-corfovia">
-                  <div class="micro-comp-badge">Naturel</div>
-                  <strong class="micro-comp-title">Muffin Abadakor</strong>
+                  <div class="micro-comp-badge" data-i18n="comp.natural.badge">Naturel</div>
+                  <strong class="micro-comp-title" data-i18n="comp.natural.title">Muffin Abadakor</strong>
                   <ul class="micro-comp-list">
-                    <li><span>✓</span> Confort digestif 100%</li>
-                    <li><span>✓</span> Vrai muffin gourmand</li>
-                    <li><span>✓</span> Énergie & récupération</li>
+                    <li><span>✓</span> <span data-i18n="comp.natural.item1">Confort digestif 100%</span></li>
+                    <li><span>✓</span> <span data-i18n="comp.natural.item2">Vrai muffin gourmand</span></li>
+                    <li><span>✓</span> <span data-i18n="comp.natural.item3">Énergie & récupération</span></li>
                   </ul>
                 </div>
               </div>
@@ -399,9 +408,9 @@
 
             <!-- Right Editorial Content -->
             <div class="routine-content">
-              <h2>Le secret d'une <span>vitalité active</span></h2>
+              <h2><span data-i18n="routine.title">Le secret d'une</span> <span data-i18n="routine.title.span">vitalité active</span></h2>
               <p>
-                Assimilation record pour le muscle et le souffle, zéro inconfort gastrique, dans un bon muffin : <em>Abadakor !</em>
+                <span data-i18n="routine.desc">Assimilation record pour le muscle et le souffle, zéro inconfort gastrique, dans un bon muffin :</span> <em>Abadakor !</em>
               </p>
 
               <div class="routine-pillars">
@@ -414,8 +423,8 @@
                     </svg>
                   </div>
                   <div class="pillar-text">
-                    <h4>Oxygénation & Récupération</h4>
-                    <p>14 mg de fer naturel et 100% en B12 active pour l'endurance et le muscle.</p>
+                    <h4 data-i18n="routine.p1.title">Oxygénation & Récupération</h4>
+                    <p data-i18n="routine.p1.desc">14 mg de fer naturel et 100% en B12 active pour l'endurance et le muscle.</p>
                   </div>
                 </div>
 
@@ -427,8 +436,8 @@
                     </svg>
                   </div>
                   <div class="pillar-text">
-                    <h4>Confort Intestinal Absolu</h4>
-                    <p>Zéro douleur gastrique, zéro nausée ni constipation. Doux pour votre microbiote.</p>
+                    <h4 data-i18n="routine.p2.title">Confort Intestinal Absolu</h4>
+                    <p data-i18n="routine.p2.desc">Zéro douleur gastrique, zéro nausée ni constipation. Doux pour votre microbiote.</p>
                   </div>
                 </div>
 
@@ -440,15 +449,15 @@
                     </svg>
                   </div>
                   <div class="pillar-text">
-                    <h4>Plaisir Chocolat</h4>
-                    <p>Un bon chocolat classique dans un muffin moelleux et réconfortant.</p>
+                    <h4 data-i18n="routine.p3.title">Plaisir Chocolat</h4>
+                    <p data-i18n="routine.p3.desc">Un bon chocolat classique dans un muffin moelleux et réconfortant.</p>
                   </div>
                 </div>
 
               </div>
 
-              <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
-                Commander Abadakor →
+              <a href="products/muffin-vitalite/" class="btn-clay btn-clay-primary">
+                <span data-i18n="routine.btn">Commander Abadakor →</span>
               </a>
             </div>
 
@@ -462,7 +471,7 @@
       <section class="section-subscribe-banner" id="communaute">
         <div class="container">
           <div class="subscribe-card-glorious">
-            <h3>Rejoignez l'Aventure Corfovia</h3>
+            <h3><span data-i18n="comm.title">Rejoignez le</span> <span data-i18n="comm.title.span">Cercle Corfovia</span></h3>
             <p class="social-sub-desc">
               Découvrez les coulisses de nos fournées artisanales, nos conseils en nutrition cellulaire et l'actualité
               d'Abadakor sur Instagram.
@@ -473,13 +482,13 @@
               <!-- QR Code Card -->
               <div class="instagram-qr-card">
                 <img class="instagram-qr-img" src="images/instagram-qr-corfovia.png" alt="QR Code Instagram @corfovia">
-                <span class="instagram-qr-hint">Scannez le QR Code</span>
+                <span class="instagram-qr-hint" data-i18n="comm.qr">Scannez le QR Code</span>
               </div>
 
               <!-- Direct Follow Button & Action -->
               <div class="social-cta-box">
                 <h4>Suivez-nous sur Instagram</h4>
-                <p>Rejoignez notre communauté de passionnés de vitalité et de haute pâtisserie.</p>
+                <p><span data-i18n="comm.desc">Découvrez les coulisses de nos fournées artisanales, nos conseils sport et nutrition, et l'actualité de nos créations gourmandes sur notre compte Instagram officiel.</span></p>
 
                 <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -508,11 +517,11 @@
 
           <!-- Brand Info -->
           <div class="footer-brand-col">
-            <a href="index.html" class="nav-brand" aria-label="Corfovia Accueil">
+            <a href="./" class="nav-brand" aria-label="Corfovia Accueil">
               <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia" style="height: 40px;">
             </a>
             <p class="footer-brand-baseline">
-              La nutrition pour le sport et l'énergie active, réinventée dans un délicieux muffin éco-responsable.
+              <span data-i18n="footer.baseline">La nutrition pour le sport et l'énergie active, réinventée dans un délicieux muffin éco-responsable.</span>
             </p>
             <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram"
               style="padding: 10px 20px; font-size: 0.84rem;">
@@ -527,33 +536,33 @@
 
           <!-- Col 1 : Maison -->
           <div class="footer-col">
-            <h5>Maison</h5>
+            <h5 data-i18n="footer.col1.title">Maison</h5>
             <ul>
-              <li><a href="index.html">La Vision</a></li>
-              <li><a href="#creation">L'Innovation</a></li>
-              <li><a href="#routine">Notre Science</a></li>
-              <li><a href="products/muffin-vitalite/index.html">Le Produit Abadakor</a></li>
+              <li><a href="./" data-i18n="nav.vision">La Vision</a></li>
+              <li><a href="#creation" data-i18n="nav.innovation">L'Innovation</a></li>
+              <li><a href="#routine" data-i18n="nav.science">Notre Science</a></li>
+              <li><a href="products/muffin-vitalite/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
             </ul>
           </div>
 
           <!-- Col 2 : Abadakor -->
           <div class="footer-col">
-            <h5>Abadakor</h5>
+            <h5 data-i18n="footer.col2.title">Créations</h5>
             <ul>
-              <li><a href="products/muffin-vitalite/index.html">Coffret 4 muffins</a></li>
-              <li><a href="products/muffin-vitalite/index.html">Cure 12 muffins</a></li>
-              <li><a href="products/muffin-vitalite/index.html">Pack 24 muffins</a></li>
-              <li><a href="products/muffin-vitalite/index.html">Rituel & Conseils</a></li>
+              <li><a href="products/muffin-vitalite/" data-i18n="footer.link.pack4">Coffret 4 muffins</a></li>
+              <li><a href="products/muffin-vitalite/" data-i18n="footer.link.pack12">Cure 12 muffins</a></li>
+              <li><a href="products/muffin-vitalite/" data-i18n="footer.link.pack24">Pack 24 muffins</a></li>
+              <li><a href="products/muffin-vitalite/">Rituel & Conseils</a></li>
             </ul>
           </div>
 
           <!-- Col 3 : Exigence -->
           <div class="footer-col">
-            <h5>Exigence</h5>
+            <h5 data-i18n="footer.col3.title">Exigence</h5>
             <ul>
-              <li><span>100% Bio & Local</span></li>
-              <li><span>Fer Héminique Naturel</span></li>
-              <li><span>Bon Chocolat Gourmand</span></li>
+              <li><span data-i18n="footer.exigence2">100% Bio & Local</span></li>
+              <li><span data-i18n="footer.exigence1">Fer Héminique Naturel</span></li>
+              <li><span data-i18n="footer.exigence3">Bon Chocolat Gourmand</span></li>
               <li><span>Zéro additif chimique</span></li>
             </ul>
           </div>
@@ -574,6 +583,7 @@
 
   </div>
 
+  <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>
 

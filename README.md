@@ -53,3 +53,13 @@ Le site est statique (HTML5 / CSS3 / JavaScript Vanilla ES6+), sans dépendances
 ---
 
 © Corfovia — Tous droits réservés.
+
+---
+
+## 🌐 Internationalisation (i18n) & URLs Épurées
+
+Le site est architecturé pour une expérience de navigation pure (zéro suffixe  ni hash  visibles) et prêt pour le multi-langue :
+- **Français (défaut)** :  ou 
+- **Anglais (prévu)** : 
+- **Pages produits** : 
+- **Gestionnaire d'URL dynamique ()** : Nettoie automatiquement les URLs à la volée via l'API HTML5 History ( / ), garantissant une barre d'adresse sobre et élégante.
