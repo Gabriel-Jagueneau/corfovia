@@ -8,9 +8,9 @@
 ## ✨ Création Signature : Abadakor
 
 **Abadakor** réinvente l'assimilation du fer au quotidien :
-- **Plaisir sans compromis** : Un véritable fondant au chocolat bio, sans arrière-goût métallique.
+- **Plaisir sans compromis** : Un véritable muffin au chocolat bio, sans arrière-goût métallique.
 - **Efficacité nutritionnelle** : Fer héminique naturel et vitamine B12 bio-disponibles.
-- **Circuit court** : Ingrédients français, 100% bio et locaux.
+- **Circuit court** : Ingrédients 100% bio et locaux, filières anti-gaspillage.
 
 ---
 

@@ -1025,39 +1025,94 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+  margin-top: 20px;
 }
 
 .micro-comp-col {
-  padding: 14px;
-  border-radius: 14px;
-  font-size: 0.8rem;
-  line-height: 1.45;
-}
-
-.micro-comp-corfovia {
-  background: #f3f8f3;
-  border: 1px solid rgba(46, 125, 50, 0.2);
-  color: #215e24;
-}
-
-.micro-comp-corfovia strong {
-  display: block;
-  font-size: 0.84rem;
-  margin-bottom: 4px;
-  color: #1b4d1d;
+  padding: 16px 18px;
+  border-radius: 18px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .micro-comp-traditional {
-  background: #fdf4f4;
-  border: 1px dashed rgba(180, 40, 40, 0.2);
+  background: rgba(180, 40, 40, 0.04);
+  border: 1px solid rgba(180, 40, 40, 0.14);
+  color: #721616;
+}
+
+.micro-comp-corfovia {
+  background: rgba(112, 18, 42, 0.05);
+  border: 1px solid rgba(112, 18, 42, 0.16);
+  color: var(--accent-dark);
+  box-shadow: 0 4px 14px rgba(112, 18, 42, 0.04);
+}
+
+.micro-comp-badge {
+  align-self: flex-start;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.micro-comp-traditional .micro-comp-badge {
+  background: rgba(180, 40, 40, 0.1);
   color: #8c2626;
 }
 
-.micro-comp-traditional strong {
-  display: block;
-  font-size: 0.84rem;
-  margin-bottom: 4px;
-  color: #721616;
+.micro-comp-corfovia .micro-comp-badge {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.micro-comp-title {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.micro-comp-traditional .micro-comp-title {
+  color: #5c1414;
+}
+
+.micro-comp-corfovia .micro-comp-title {
+  color: var(--accent);
+}
+
+.micro-comp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.micro-comp-list li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+}
+
+.micro-comp-traditional .micro-comp-list li span {
+  color: #b02222;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.micro-comp-corfovia .micro-comp-list li span {
+  color: #2e7d32;
+  font-weight: 800;
+  font-size: 0.85rem;
 }
 
 /* ROUTINE RIGHT EDITORIAL CONTENT */
