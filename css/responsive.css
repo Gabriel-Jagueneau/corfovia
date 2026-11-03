@@ -1,0 +1,245 @@
+/* ==========================================================================
+   CORFOVIA — RESPONSIVE STYLES
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .site-nav {
+    padding: 0 16px;
+  }
+
+  .nav-inner {
+    max-width: 100%;
+  }
+
+  .hero-glorious {
+    padding: 110px 0 54px 0;
+  }
+
+  .pillars-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .creation-breakthroughs-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .products-glorious-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .routine-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .perks-row-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .product-detail-glorious-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 880px) {
+  .site-wrapper {
+    padding-top: 0;
+  }
+
+  .hero-glorious {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    padding: 100px 0 140px 0;
+    box-sizing: border-box;
+    background-image: 
+      linear-gradient(180deg, 
+        rgba(250, 245, 239, 0.97) 0%, 
+        rgba(250, 245, 239, 0.94) 55%, 
+        rgba(250, 245, 239, 0.85) 100%),
+      url('../images/hero-muffins.jpg');
+    background-position: center bottom;
+  }
+
+  .hero-glorious::after {
+    height: 180px;
+  }
+
+  .site-nav {
+    top: 12px;
+    padding: 0 12px;
+  }
+
+  .nav-inner {
+    height: 58px;
+    padding: 0 16px;
+  }
+
+  .nav-brand-logo {
+    height: 32px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-current-badge {
+    display: inline-flex;
+  }
+  .nav-dropdown-menu {
+    position: fixed;
+    top: 75px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    max-width: none;
+    transform-origin: top center;
+  }
+
+
+  .site-nav.is-scrolled {
+    top: 8px;
+  }
+
+  .site-nav.is-scrolled .nav-inner {
+    max-width: 100%;
+    height: 50px;
+    padding: 0 14px;
+  }
+
+  .site-nav.is-scrolled .nav-brand-logo {
+    height: 26px;
+  }
+
+  .hero-glorious-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-trust-bar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 20px;
+  }
+
+  .trust-divider {
+    display: none;
+  }
+
+  .pillars-deck-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .products-glorious-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .science-comparison-grid,
+  .gauges-micro-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .radial-dials-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .subscribe-card-glorious {
+    padding: 40px 20px;
+  }
+
+  .subscribe-card-glorious h3 {
+    font-size: 1.85rem;
+  }
+
+  .social-join-grid {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .social-cta-box {
+    align-items: center;
+    text-align: center;
+  }
+
+  .perks-row-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .footer-glorious-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .footer-brand-col {
+    grid-column: span 2;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .pack-selector-glorious {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .perspective-pills-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero-glorious-title {
+    font-size: 2.15rem;
+  }
+
+  .hero-glorious-p {
+    font-size: 1rem;
+  }
+
+  .hero-trust-bar {
+    width: 100%;
+  }
+
+  .btn-clay {
+    width: 100%;
+    padding: 13px 20px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn-clay {
+    width: 100%;
+  }
+
+  .instagram-qr-img {
+    width: 140px;
+  }
+
+  .footer-glorious-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand-col {
+    grid-column: span 1;
+  }
+}

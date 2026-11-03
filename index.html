@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Encodage & Rendu -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+  <!-- Référencement Naturel & Informations Primaires -->
+  <title>Corfovia — La Vitalité est un Art de Vivre | Abadakor</title>
+  <meta name="description" content="Découvrez Abadakor par Corfovia : le premier muffin santé au bon chocolat bio et local, enrichi en fer héminique et vitamine B12. Zéro goût ferreux, confort digestif absolu.">
+  <meta name="keywords" content="Corfovia, Abadakor, muffin fer, fer héminique, carence en fer, muffin santé, complément alimentaire chocolat, vitamine B12, nutrition bio et locale, fer sans nausée, pâtisserie santé">
+  <meta name="author" content="Corfovia">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://corfovia.com/">
+
+  <!-- Thème & Intégration Navigateur / PWA -->
+  <meta name="theme-color" content="#faf5ef">
+  <meta name="color-scheme" content="light">
+  <meta name="application-name" content="Corfovia">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Corfovia">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Open Graph (Facebook, LinkedIn, Discord, WhatsApp) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Corfovia">
+  <meta property="og:title" content="Corfovia — Abadakor, le Muffin Santé au Bon Chocolat">
+  <meta property="og:description" content="Combler ses besoins en fer avec un délicieux muffin au chocolat bio et local ? Dès la première bouchée : « Ah bah d'accord ! »">
+  <meta property="og:url" content="https://corfovia.com/">
+  <meta property="og:image" content="https://corfovia.com/images/hero-muffins.jpg">
+  <meta property="og:image:alt" content="Fournée artisanale de muffins Abadakor par Corfovia">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="779">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@corfovia">
+  <meta name="twitter:creator" content="@corfovia">
+  <meta name="twitter:title" content="Corfovia — Abadakor, le Muffin Santé au Bon Chocolat">
+  <meta name="twitter:description" content="94% d'assimilation de fer héminique dans un pur fondant chocolat bio et local. Fini les gélules difficiles.">
+  <meta name="twitter:image" content="https://corfovia.com/images/hero-muffins.jpg">
+  <meta name="twitter:image:alt" content="Muffins Abadakor Corfovia">
+
+  <!-- Préconnexions & Optimisations Réseau -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+  <!-- Favicons & Icônes Applicatives -->
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="images/favicon-32x32.png">
+
+  <!-- Feuilles de Style -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+  <!-- FLOATING MORPHING HEADER -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="Corfovia Accueil">
+        <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia">
+      </a>
+
+      <!-- Indicateur dynamique de position dans le scroll -->
+      <div class="nav-current-badge">
+        <span class="nav-current-dot"></span>
+        <span class="nav-current-label">La Vision</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#vision" class="nav-link active" data-section="vision">La Vision</a></li>
+        <li><a href="#creation" class="nav-link" data-section="creation">L'Innovation</a></li>
+        <li><a href="#routine" class="nav-link" data-section="routine">Notre Science</a></li>
+        
+        <!-- Bouton Produits avec Dropdown Apple Custom -->
+        <li class="nav-dropdown-wrapper">
+          <button class="nav-link nav-dropdown-btn" id="navProductsTrigger" aria-expanded="false" aria-haspopup="true">
+            <span>Produits</span>
+            <svg class="nav-chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
+            <div class="nav-dropdown-items">
+              <a href="products/muffin-vitalite/index.html" class="nav-dropdown-item" role="menuitem">
+                <div class="nav-dropdown-icon-wrap">
+                  <img src="images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
+                </div>
+                <div class="nav-dropdown-item-info">
+                  <div class="nav-dropdown-item-top">
+                    <span class="nav-dropdown-item-title">Abadakor</span>
+                    <span class="nav-dropdown-item-badge">Sport & Vitalité</span>
+                  </div>
+                  <p class="nav-dropdown-item-desc">Chocolat fondant, nutriments d'exception pour le sport et valorisation noble de nos élevages français.</p>
+                </div>
+                <svg class="nav-dropdown-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Ligne de progression dynamique du scroll -->
+      <div class="nav-progress-track">
+        <div class="nav-progress-bar"></div>
+      </div>
+    </div>
+    <!-- Voile flouté arrière-plan pour le dropdown ouvert -->
+    </header>
+
+  <div class="site-wrapper">
+
+    <main>
+
+      <!-- ==========================================================================
+           HERO SECTION (MAJESTUEUX, AÉRÉ, ALIGNÉ À GAUCHE AVEC FOURNÉE EN FOND)
+           ========================================================================== -->
+      <section class="hero-glorious" id="vision">
+        <div class="container">
+          <div class="hero-content-left">
+
+            <h1 class="hero-glorious-title">
+              <em>La vitalité</em> est un <span class="hero-highlight">art de vivre.</span>
+            </h1>
+
+            <p class="hero-glorious-p">
+              Le fondant au chocolat conçu pour le sport, la récupération et le tonus quotidien. Une recharge naturelle en fer et micronutriments, issue de la valorisation vertueuse de nos filières françaises : <em>Abadakor !</em>
+            </p>
+
+            <!-- BANDEAU DE RÉASSURANCE HAUT DE GAMME -->
+            <div class="hero-trust-bar">
+              <div class="trust-item">
+                <svg class="trust-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div class="trust-text-group">
+                  <span class="trust-title">100% Bio & Local</span>
+                  <span class="trust-desc">Ingrédients français de nos régions</span>
+                </div>
+              </div>
+
+              <div class="trust-divider"></div>
+
+              <div class="trust-item">
+                <svg class="trust-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <div class="trust-text-group">
+                  <span class="trust-title">Filière Circulaire & Anti-Gaspi</span>
+                  <span class="trust-desc">Valorisation des richesses nutritionnelles locales</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-cta-group">
+              <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
+                Découvrir Abadakor →
+              </a>
+              <a href="#routine" class="btn-clay btn-clay-secondary">
+                Notre Science
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION DES 4 PILIERS DE VITALITÉ
+           ========================================================================== -->
+      <section class="section-pillars-deck" id="piliers">
+        <div class="container">
+          <div class="section-title-wrap">
+            <h2 class="section-serif-title">Les 4 Piliers de la <span>Vitalité Corfovia</span></h2>
+            <p class="section-serif-sub">
+              L'alliance pionnière de la haute nutrition cellulaire et de l'artisanat pâtissier.
+            </p>
+          </div>
+
+          <div class="pillars-deck-grid">
+
+            <!-- Pillar 1 -->
+            <div class="pillar-deck-card">
+              <div class="pillar-deck-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h4>Performance Sportive</h4>
+              <p>Optimisation du transport d'oxygène, endurance décuplée et récupération musculaire accélérée.</p>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="pillar-deck-card">
+              <div class="pillar-deck-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  <path d="M7 12h2l1.5-3 2 6 1.5-3h3"></path>
+                </svg>
+              </div>
+              <h4>Éco-Valorisation Circulaire</h4>
+              <p>Valorisation noble des parties les plus riches en nutriments issues de nos élevages français, pour éviter le gaspillage.</p>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="pillar-deck-card">
+              <div class="pillar-deck-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2L9 9l-7 3 7 3 3 7 3-7 7-3-7-3z"></path>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
+              <h4>Vrai Chocolat</h4>
+              <p>Un bon chocolat classique et une pointe de sel : le plaisir gourmand d'un muffin fondant.</p>
+            </div>
+
+            <!-- Pillar 4 -->
+            <div class="pillar-deck-card">
+              <div class="pillar-deck-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h4>Énergie Durable</h4>
+              <p>Oxygénation cellulaire profonde et tonus stable au quotidien, sans pic ni coup de fatigue.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION FORMULATION (L'INNOVATION ABADAKOR)
+           ========================================================================== -->
+      <section class="section-feature-products" id="creation">
+        <div class="container">
+
+          <div class="section-title-wrap">
+            <h2 class="section-serif-title">L'Innovation : <span>Abadakor</span></h2>
+            <p class="section-serif-sub">
+              « Booster son énergie et ses performances avec un pur gâteau au chocolat ? » Dès la première bouchée : <em>« Ah, bah d'accord ! »</em>
+            </p>
+          </div>
+
+          <!-- 3 Breakthrough Cards Grid -->
+          <div class="creation-breakthroughs-grid">
+
+            <div class="breakthrough-card">
+              <div class="breakthrough-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                  </polygon>
+                </svg>
+              </div>
+              <div class="breakthrough-text">
+                <h4>Goût Chocolat Parfait</h4>
+                <p>Le goût classique du bon chocolat masque naturellement le fer. Une vraie texture de gâteau fondant.</p>
+              </div>
+            </div>
+
+            <div class="breakthrough-card">
+              <div class="breakthrough-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <div class="breakthrough-text">
+                <h4>Anti-Gaspillage Engagé</h4>
+                <p>Revalorisation des richesses nutritionnelles françaises délaissées : le fer et la B12 les plus purs, sans perte.</p>
+              </div>
+            </div>
+
+            <div class="breakthrough-card">
+              <div class="breakthrough-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 14 14"></polyline>
+                </svg>
+              </div>
+              <div class="breakthrough-text">
+                <h4>Confort Intestinal 100%</h4>
+                <p>Fini les désagréments digestifs et les nausées causées par le fer chimique de synthèse.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Invitation Callout Box -->
+          <div class="collection-invite-box">
+            <div class="collection-invite-text">
+              <h4>Le Muffin qui met tout le monde d'accord</h4>
+              <p>Disponible en coffrets 4, 12 ou 24 muffins pour une cure aussi efficace que savoureuse.</p>
+            </div>
+            <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
+              Commander Abadakor →
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           ROUTINE & SCIENCE SECTION (REDESIGN AVEC JAUGES RADIALES CIRCULAIRES)
+           ========================================================================== -->
+      <section class="section-routine" id="routine">
+        <div class="container">
+          <div class="routine-grid">
+
+            <!-- Left : Luxury Circular Radial Gauges Showcase -->
+            <div class="vitality-gauges-showcase">
+              <div class="gauges-showcase-header">
+                <h3>Assimilation & Biodisponibilité</h3>
+                <span class="gauges-showcase-pill">Études Cliniques</span>
+              </div>
+
+              <!-- Dual Radial Dials Grid -->
+              <div class="radial-dials-grid">
+
+                <!-- Dial Corfovia (94%) -->
+                <div class="dial-card dial-card-corfovia">
+                  <div class="dial-svg-wrap">
+                    <svg class="dial-svg" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="corfoviaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="#8a1735" />
+                          <stop offset="100%" stop-color="#570c1e" />
+                        </linearGradient>
+                      </defs>
+                      <circle class="dial-circle-bg" cx="50" cy="50" r="44"></circle>
+                      <circle class="dial-circle-fill-corfovia" cx="50" cy="50" r="44"></circle>
+                    </svg>
+                    <div class="dial-inner-text">
+                      <span class="dial-percent">94%</span>
+                      <span class="dial-percent-sub">Absorbé</span>
+                    </div>
+                  </div>
+                  <div class="dial-title">Nutrition Corfovia</div>
+                  <div class="dial-desc">Assimilation optimale pour le sport & respect total du microbiote</div>
+                </div>
+
+                <!-- Dial Synthetic Iron (18%) -->
+                <div class="dial-card">
+                  <div class="dial-svg-wrap">
+                    <svg class="dial-svg" viewBox="0 0 100 100">
+                      <circle class="dial-circle-bg" cx="50" cy="50" r="44"></circle>
+                      <circle class="dial-circle-fill-synthetic" cx="50" cy="50" r="44"></circle>
+                    </svg>
+                    <div class="dial-inner-text">
+                      <span class="dial-percent" style="color: #8c7377;">18%</span>
+                      <span class="dial-percent-sub">Absorbé</span>
+                    </div>
+                  </div>
+                  <div class="dial-title">Fer de Synthèse</div>
+                  <div class="dial-desc">82% rejeté sans effet actif & irritations digestives fréquentes</div>
+                </div>
+
+              </div>
+
+              <!-- Micro Comparative Summary -->
+              <div class="gauges-micro-comparison">
+                <div class="comp-box comp-box-traditional">
+                  <strong>Complément Chimique</strong>
+                  • Spasmes & nausées digestives<br>
+                  • Faible absorption active (18%)<br>
+                  • 82% éliminé par l'organisme
+                </div>
+                <div class="comp-box comp-box-corfovia">
+                  <strong>Formule Muffin Corfovia</strong>
+                  • Confort intestinal 100% garanti<br>
+                  • Bon chocolat gourmand<br>
+                  • Vitalité durable
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Editorial Content -->
+            <div class="routine-content">
+              <h2>Le secret d'une <span>vitalité quotidienne</span></h2>
+              <p>
+                Un apport biodisponible record pour le muscle et le souffle, sans inconfort gastrique, dans un bon muffin au chocolat ? Quand la solution est aussi simple : <em>Abadakor !</em>
+              </p>
+
+              <div class="routine-pillars">
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div class="pillar-text">
+                    <h4>Oxygénation & Récupération Sportive</h4>
+                    <p>14 mg de fer naturel hautement assimilé et 100% des VNR en B12 active, indispensables pour l'endurance et la régénération musculaire.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div class="pillar-text">
+                    <h4>Confort Intestinal Absolu</h4>
+                    <p>Zéro douleur gastrique, zéro nausée ni constipation. Doux pour votre microbiote.</p>
+                  </div>
+                </div>
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <div class="pillar-text">
+                    <h4>Plaisir Chocolat</h4>
+                    <p>Un bon chocolat classique et fondant. La gourmandise d'un vrai goûter.</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <a href="products/muffin-vitalite/index.html" class="btn-clay btn-clay-primary">
+                Commander Abadakor →
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           DERNIÈRE PANCARTE : INSTAGRAM & RÉSEAUX
+           ========================================================================== -->
+      <section class="section-subscribe-banner" id="communaute">
+        <div class="container">
+          <div class="subscribe-card-glorious">
+            <h3>Rejoignez l'Aventure Corfovia</h3>
+            <p class="social-sub-desc">
+              Découvrez les coulisses de nos fournées artisanales, nos conseils en nutrition cellulaire et l'actualité
+              d'Abadakor sur Instagram.
+            </p>
+
+            <div class="social-join-grid">
+
+              <!-- QR Code Card -->
+              <div class="instagram-qr-card">
+                <img class="instagram-qr-img" src="images/instagram-qr-corfovia.png" alt="QR Code Instagram @corfovia">
+                <span class="instagram-qr-hint">Scannez le QR Code</span>
+              </div>
+
+              <!-- Direct Follow Button & Action -->
+              <div class="social-cta-box">
+                <h4>Suivez-nous sur Instagram</h4>
+                <p>Rejoignez notre communauté de passionnés de vitalité et de haute pâtisserie.</p>
+
+                <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  <span>@corfovia sur Instagram</span>
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER RAFFINÉ -->
+    <footer class="footer-glorious">
+      <div class="container">
+
+        <div class="footer-glorious-grid">
+
+          <!-- Brand Info -->
+          <div class="footer-brand-col">
+            <a href="index.html" class="nav-brand" aria-label="Corfovia Accueil">
+              <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia" style="height: 40px;">
+            </a>
+            <p class="footer-brand-baseline">
+              La nutrition pour le sport et l'énergie active, réinventée dans un délicieux muffin éco-responsable.
+            </p>
+            <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram"
+              style="padding: 10px 20px; font-size: 0.84rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>@corfovia</span>
+            </a>
+          </div>
+
+          <!-- Col 1 : Maison -->
+          <div class="footer-col">
+            <h5>Maison</h5>
+            <ul>
+              <li><a href="index.html">La Vision</a></li>
+              <li><a href="#creation">L'Innovation</a></li>
+              <li><a href="#routine">Notre Science</a></li>
+              <li><a href="products/muffin-vitalite/index.html">Le Produit Abadakor</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 2 : Abadakor -->
+          <div class="footer-col">
+            <h5>Abadakor</h5>
+            <ul>
+              <li><a href="products/muffin-vitalite/index.html">Coffret 4 muffins</a></li>
+              <li><a href="products/muffin-vitalite/index.html">Cure 12 muffins</a></li>
+              <li><a href="products/muffin-vitalite/index.html">Pack 24 muffins</a></li>
+              <li><a href="products/muffin-vitalite/index.html">Rituel & Conseils</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3 : Exigence -->
+          <div class="footer-col">
+            <h5>Exigence</h5>
+            <ul>
+              <li><span>100% Bio & Local</span></li>
+              <li><span>Fer Héminique Naturel</span></li>
+              <li><span>Bon Chocolat Gourmand</span></li>
+              <li><span>Zéro additif chimique</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div class="footer-bottom-copy">
+            © 2026 Corfovia. Tous droits réservés. Haute nutrition cellulaire bio.
+          </div>
+          <div class="footer-bottom-mention">
+            Façonné en France avec rigueur scientifique & passion artisanale
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
