@@ -12,7 +12,7 @@
   }
 
   .hero-glorious {
-    padding: 110px 0 54px 0;
+    padding: 110px 0 60px 0;
   }
 
   .pillars-deck-grid {
@@ -20,24 +20,24 @@
     gap: 18px;
   }
 
-  .creation-breakthroughs-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+  .team-members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 36px;
   }
 
-  .products-glorious-grid {
+  .team-members-grid .team-member-card:nth-child(3n + 2).is-visible,
+  .team-members-grid .team-member-card:nth-child(3n + 2).is-visible:hover {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .recipe-ingredients-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
   }
 
   .routine-grid {
     grid-template-columns: 1fr;
     gap: 36px;
-  }
-
-  .perks-row-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
   }
 
   .product-detail-glorious-grid {
@@ -62,13 +62,13 @@
       linear-gradient(180deg, 
         rgba(250, 245, 239, 0.97) 0%, 
         rgba(250, 245, 239, 0.94) 55%, 
-        rgba(250, 245, 239, 0.85) 100%),
+        rgba(243, 235, 225, 0.9) 100%),
       url('../images/hero-muffins.jpg');
     background-position: center bottom;
   }
 
   .hero-glorious::after {
-    height: 180px;
+    height: 160px;
   }
 
   .site-nav {
@@ -92,6 +92,7 @@
   .nav-current-badge {
     display: inline-flex;
   }
+
   .nav-dropdown-menu {
     position: fixed;
     top: 75px;
@@ -101,7 +102,6 @@
     max-width: none;
     transform-origin: top center;
   }
-
 
   .site-nav.is-scrolled {
     top: 8px;
@@ -123,6 +123,7 @@
 
   .hero-trust-bar {
     flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
     padding: 16px 20px;
     border-radius: 20px;
@@ -132,16 +133,20 @@
     display: none;
   }
 
-  .pillars-deck-grid {
+  .pillars-deck-grid,
+  .team-members-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 16px;
   }
 
-  .products-glorious-grid {
+  .recipe-showcase-card {
+    padding: 24px 20px;
+  }
+
+  .recipe-ingredients-grid {
     grid-template-columns: 1fr;
   }
 
-  .science-comparison-grid,
   .gauges-micro-comparison {
     grid-template-columns: 1fr;
   }
@@ -169,11 +174,6 @@
     text-align: center;
   }
 
-  .perks-row-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
   .footer-glorious-grid {
     grid-template-columns: 1fr 1fr;
     gap: 32px;
@@ -187,11 +187,6 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-  }
-
-  .pack-selector-glorious {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
 
   .perspective-pills-row {
@@ -227,6 +222,14 @@
   }
 
   .hero-cta-group .btn-clay {
+    width: 100%;
+  }
+
+  .product-contact-actions {
+    flex-direction: column;
+  }
+
+  .product-contact-actions .btn-clay {
     width: 100%;
   }
 

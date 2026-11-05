@@ -1,7 +1,6 @@
 /**
  * CORFOVIA — Système Internationalisation (i18n)
- * Dictionnaire complet FR / EN
- * Traduction dynamique intégrale de toutes les sections
+ * Dictionnaire complet FR / EN : Vision, Équipe, Science (Modal Sources) & Produit Abadakor
  */
 
 (() => {
@@ -14,273 +13,302 @@
     fr: {
       // Header & Navigation
       'nav.vision': 'La Vision',
-      'nav.innovation': "L'Innovation",
+      'nav.innovation': 'Notre Équipe',
       'nav.science': 'Notre Science',
-      'nav.products': 'Produits',
-      'nav.badge.abadakor': 'Sport & Vitalité',
-      'nav.dropdown.eyebrow': 'Haute Nutrition Santé',
-      'nav.dropdown.lead': "Nos créations d'exception",
-      'nav.dropdown.desc': 'Muffin au chocolat bio & local, nutriments pour le sport et démarche anti-gaspi.',
+      'nav.products': 'Produit',
+      'nav.badge.abadakor': '90 – 100 g',
+      'nav.dropdown.desc': 'Découvrez le muffin au chocolat, sa composition complète et ses différents points de vue.',
 
-      // Hero
-      'hero.title.em': 'La vitalité',
-      'hero.title.after': 'est un',
-      'hero.title.highlight': 'art de vivre.',
-      'hero.subtitle': "Le muffin conçu pour le sport et l'énergie active. Recharge naturelle en fer et B12, issue de la valorisation de filières bio et locales :",
-      'hero.trust1.title': '100% Bio & Local',
-      'hero.trust1.desc': 'Filières courtes et responsables',
-      'hero.trust2.title': 'Anti-Gaspillage Engagé',
-      'hero.trust2.desc': 'Valorisation de ressources locales',
-      'hero.cta.discover': 'Découvrir Abadakor →',
-      'hero.cta.science': 'Notre Science',
+      // Hero (Présentation de Corfovia & Vision)
+      'hero.title.em': 'Corfovia :',
+      'hero.title.after': 'la gourmandise engagée,',
+      'hero.title.highlight': "sans l'excès de sucre.",
+      'hero.subtitle': 'Substituer les collations trop sucrées et revaloriser des protéines animales non valorisées à haute densité nutritionnelle au sein de la pâtisserie gourmande.',
+      'hero.cta.discover': 'Découvrir notre équipe →',
+      'hero.cta.science': 'Voir notre création Abadakor',
 
-      // Piliers
-      'pillars.title': 'Les 4 Piliers de la',
-      'pillars.title.span': 'Vitalité Corfovia',
-      'pillars.subtitle': "L'alliance pionnière de la haute nutrition cellulaire et de l'artisanat pâtissier.",
-      'pillar1.title': 'Performance Sportive',
-      'pillar1.desc': "Optimisation du transport d'oxygène, endurance décuplée et récupération musculaire accélérée.",
-      'pillar2.title': 'Éco-Valorisation Circulaire',
-      'pillar2.desc': 'Revalorisation vertueuse de ressources locales riches en nutriments, sans gaspillage.',
-      'pillar3.title': 'Vrai Chocolat',
-      'pillar3.desc': "Un bon chocolat classique et une pointe de sel : le plaisir gourmand d'un vrai muffin moelleux.",
-      'pillar4.title': 'Énergie Durable',
-      'pillar4.desc': 'Oxygénation cellulaire profonde et tonus stable au quotidien, sans pic ni coup de fatigue.',
+      // Piliers de la Vision Corfovia (Concis & Pertinents)
+      'pillars.title': 'Les 4 Piliers',
+      'pillars.title.span': 'Corfovia',
+      'pillars.subtitle': 'Anti-gaspillage, densité nutritionnelle et gourmandise sans sucre raffiné.',
+      'pillar1.kpi': 'Anti-Gaspi',
+      'pillar1.title': 'Économie Circulaire',
+      'pillar1.desc': "Réintégrer dans l'alimentation des protéines animales délaissées.",
+      'pillar2.kpi': 'Indice Glycémique',
+      'pillar2.title': 'Substitut au Sucre',
+      'pillar2.desc': 'Remplacer les collations trop sucrées par des fibres de chicorée.',
+      'pillar3.kpi': 'Fer & Vitamine B12',
+      'pillar3.title': 'Haute Biodisponibilité',
+      'pillar3.desc': 'Privilégier le fer héminique naturellement assimilable (15–35 %).',
+      'pillar4.kpi': 'Zéro Frein Gustatif',
+      'pillar4.title': 'Acceptabilité Gourmande',
+      'pillar4.desc': 'Intégrer des nutriments délaissés sans jamais altérer le goût.',
 
-      // Innovation
-      'inno.title': "L'Innovation :",
-      'inno.title.span': 'Abadakor',
-      'inno.subtitle': '« Booster son énergie avec un vrai muffin au chocolat ? » Dès la première bouchée : <em>« Ah, bah d\'accord ! »</em>',
-      'inno.card1.title': 'Goût Chocolat Parfait',
-      'inno.card1.desc': "Le goût classique du bon chocolat. La texture généreuse d'un muffin gourmand.",
-      'inno.card2.title': 'Anti-Gaspillage Engagé',
-      'inno.card2.desc': 'Revalorisation de ressources locales pour un apport naturel en fer et vitamine B12, zéro gaspillage.',
-      'inno.card3.title': 'Confort Intestinal 100%',
-      'inno.card3.desc': "Tolérance digestive totale à l'effort, sans nausée ni lourdeur d'estomac.",
-      'inno.invite.title': 'Le Muffin qui met tout le monde d’accord',
-      'inno.invite.desc': 'Disponible en coffrets 4, 12 ou 24 muffins pour une cure aussi efficace que savoureuse.',
-      'inno.invite.btn': 'Commander Abadakor →',
+      // Notre Équipe (6 Membres & 6 Rôles — Épuré)
+      'inno.title': "L'Équipe",
+      'inno.title.span': 'Corfovia',
+      'inno.subtitle': "6 étudiants, 6 expertises complémentaires autour d'une même création.",
+      'team.m1.role': 'Direction & Stratégie',
+      'team.m1.name': 'Membre 1',
+      'team.m2.role': 'R&D & Formulation',
+      'team.m2.name': 'Membre 2',
+      'team.m3.role': 'Nutrition & Sciences',
+      'team.m3.name': 'Membre 3',
+      'team.m4.role': 'Qualité & Procédés',
+      'team.m4.name': 'Membre 4',
+      'team.m5.role': 'Sourcing & Filières',
+      'team.m5.name': 'Membre 5',
+      'team.m6.role': 'Design & Digital',
+      'team.m6.name': 'Gabriel Jagueneau',
+      'inno.invite.title': 'Notre création : le muffin Abadakor',
+      'inno.invite.desc': '90–100 g • Chocolat, Oligofructose & 30 g de protéines animales non valorisées.',
+      'inno.invite.btn': 'Voir la recette & le produit →',
 
-      // Science & Jauges
-      'science.header.title': 'Assimilation & Biodisponibilité',
-      'science.header.badge': 'Études Cliniques',
-      'science.dial.corfovia.title': 'Nutrition Corfovia',
-      'science.dial.corfovia.desc': "Assimilation optimale pour le sport & respect total du microbiote",
-      'science.dial.synthetic.title': 'Fer de Synthèse',
-      'science.dial.synthetic.desc': "82% rejeté sans effet actif & irritations digestives fréquentes",
+      // Science & Jauges (UI réduite & visuelle)
+      'science.header.title': 'Biodisponibilité du Fer',
+      'science.header.badge': '×3 à ×4 plus assimilé',
+      'science.dial.corfovia.title': 'Fer Héminique',
+      'science.dial.corfovia.desc': 'Protéines animales valorisées',
+      'science.dial.synthetic.title': 'Fer Non-Héminique',
+      'science.dial.synthetic.desc': 'Freiné par les phytates',
       'science.dial.absorbed': 'Absorbé',
+      'science.footnote': 'Absorption moyenne ~25 % vs ~5 % (Hurrell & Egli, 2010 • EFSA, 2015)',
+      'comp.synthetic.badge': 'Classique',
+      'comp.natural.badge': 'Corfovia',
 
-      // Tableau comparatif
-      'comp.synthetic.badge': 'Synthétique',
-      'comp.synthetic.title': 'Complément Chimique',
-      'comp.synthetic.item1': 'Spasmes & nausées',
-      'comp.synthetic.item2': 'Faible absorption (18%)',
-      'comp.synthetic.item3': '82% éliminé sans effet',
-      'comp.natural.badge': 'Naturel',
-      'comp.natural.title': 'Muffin Abadakor',
-      'comp.natural.item1': 'Confort digestif 100%',
-      'comp.natural.item2': 'Vrai muffin gourmand',
-      'comp.natural.item3': 'Énergie & récupération',
+      // Modal Sources Scientifiques
+      'science.sources.title': 'Sources Scientifiques & Réglementaires',
+      'science.sources.modal.sub': 'Références officielles appuyant notre démarche nutritionnelle et fonctionnelle.',
+      'science.source1.text': "Scientific Opinion on Dietary Reference Values for iron. EFSA Journal 2015;13(10):4254. Documente les différences d'absorption entre le fer héminique d'origine animale et le fer non-héminique.",
+      'science.source2.text': "Iron bioavailability and dietary reference values. Am J Clin Nutr, 91(5), 1461S–1467S. Établit un taux d'absorption de 15 % à 35 % pour le fer héminique contre 2 % à 10 % pour le fer non-héminique.",
+      'science.source3.text': 'Scientific Opinion on the substantiation of a health claim related to non-digestible carbohydrates (oligofructose) and a reduction of post-prandial glycaemic responses. EFSA Journal 2014;12(1):3513.',
+      'science.source4.text': 'Base de données de référence sur la composition nutritionnelle des aliments en France, détaillant les teneurs naturelles des protéines animales en fer héminique et en vitamine B12.',
 
-      // Editorial Routine
-      'routine.title': "Le secret d'une",
-      'routine.title.span': 'vitalité active',
-      'routine.desc': "Assimilation record pour le muscle et le souffle, zéro inconfort gastrique, dans un bon muffin :",
-      'routine.p1.title': 'Oxygénation & Récupération',
-      'routine.p1.desc': "14 mg de fer naturel et 100% en B12 active pour l'endurance et le muscle.",
-      'routine.p2.title': 'Confort Intestinal Absolu',
-      'routine.p2.desc': 'Zéro douleur gastrique, zéro nausée ni constipation. Doux pour votre microbiote.',
-      'routine.p3.title': 'Plaisir Chocolat',
-      'routine.p3.desc': "Un bon chocolat classique dans un muffin moelleux et réconfortant.",
-      'routine.btn': 'Commander Abadakor →',
+      // Editorial Science (3 repères visuels)
+      'routine.title': 'La science',
+      'routine.title.span': 'en 3 repères',
+      'routine.p1.title': 'Fer Héminique & Vitamine B12',
+      'routine.p1.desc': "Transport de l'oxygène & réduction de la fatigue (UE 432/2012).",
+      'routine.p2.title': 'Substitut aux Collations Trop Sucrées',
+      'routine.p2.desc': 'Oligofructose : pic glycémique réduit après le repas (EFSA, 2014).',
+      'routine.p3.title': 'Protéines Animales Valorisées',
+      'routine.p3.desc': "Intégrées au cœur d'un muffin au chocolat moelleux de 90–100 g.",
+      'routine.btn': 'Voir le produit →',
+      'routine.btn.sources': 'Sources scientifiques (4)',
 
-      // Communauté & Instagram
-      'comm.title': 'Rejoignez le',
-      'comm.title.span': 'Cercle Corfovia',
-      'comm.subtitle': "Découvrez les coulisses de nos fournées artisanales, nos conseils en nutrition cellulaire et l'actualité d'Abadakor sur Instagram.",
-      'comm.cta.title': 'Suivez-nous sur Instagram',
-      'comm.desc': "Découvrez les coulisses de nos fournées artisanales, nos conseils sport et nutrition, et l'actualité de nos créations gourmandes sur notre compte Instagram officiel.",
+      // Communauté & Contact
+      'comm.title': 'Échanger avec',
+      'comm.title.span': "l'équipe Corfovia",
+      'comm.subtitle': 'Une question sur notre projet ou le muffin Abadakor ? Écrivez-nous directement.',
+      'comm.cta.title': 'Direct sur Instagram',
+      'comm.desc': 'Coulisses du projet, essais pâtissiers et échanges en message privé.',
       'comm.qr': 'Scannez le QR Code',
-      'comm.btn': '@corfovia sur Instagram',
+      'comm.btn': 'Nous contacter sur @corfovia',
 
       // Footer
-      'footer.baseline': "La nutrition pour le sport et l'énergie active, réinventée dans un délicieux muffin éco-responsable.",
-      'footer.col1.title': 'Maison',
-      'footer.col2.title': 'Créations',
-      'footer.col3.title': 'Exigence',
+      'footer.baseline': "Projet d'innovation alimentaire revalorisant des protéines animales non valorisées au sein de créations pâtissières gourmandes.",
+      'footer.col1.title': 'Maison Corfovia',
+      'footer.col2.title': 'Produit',
+      'footer.col3.title': 'Engagements',
+      'footer.link.contact': 'Nous Contacter',
       'footer.link.abadakor': 'Le Muffin Abadakor',
-      'footer.link.pack4': 'Coffret 4 muffins',
-      'footer.link.pack12': 'Cure 12 muffins',
-      'footer.link.pack24': 'Pack 24 muffins',
-      'footer.link.ritual': 'Rituel & Conseils',
-      'footer.exigence1': 'Fer Héminique Naturel',
-      'footer.exigence2': '100% Bio & Local',
-      'footer.exigence3': 'Bon Chocolat Gourmand',
-      'footer.exigence4': 'Zéro additif chimique',
-      'footer.copy': '© 2026 Corfovia. Tous droits réservés. Haute nutrition cellulaire bio.',
-      'footer.mention': 'Façonné avec rigueur scientifique & passion artisanale.',
+      'footer.link.recipe': 'Composition & Recette',
+      'footer.link.sources': 'Sources Documentaires',
+      'footer.exigence1': 'Protéines Animales Valorisées',
+      'footer.exigence2': 'Démarche Anti-Gaspillage',
+      'footer.exigence3': 'Savoir-Faire Pâtissier',
+      'footer.exigence4': 'Sources Scientifiques',
+      'footer.copy': "© 2026 Corfovia. Tous droits réservés. Projet d'innovation alimentaire & anti-gaspillage.",
+      'footer.mention': 'Démarche transparente & sources scientifiques documentées.',
 
-      // Page Produit Abadakor
+      // Page Produit Abadakor (Composition réservée à cette page + Points de vue)
       'product.breadcrumb.home': 'Accueil',
-      'product.badge': 'Muffin au Chocolat Moelleux • Pointe de Sel',
-      'product.pill.cacao': 'Chocolat',
-      'product.pill.local': 'Bio & Local',
-      'product.pill.sport': 'Sport & B12',
-      'product.pill.etui': 'Étui Fraîcheur',
-      'product.desc': "« Améliorer son endurance et sa récupération avec un vrai muffin au chocolat ? » Dès la première bouchée : <em>« Ah bah d'accord ! »</em> 14 mg de fer naturel, 100% en vitamine B12 et des nutriments issus de filières bio et locales anti-gaspi.",
-      'product.pack.label': 'Choisissez votre format de cure :',
-      'product.pack4.title': 'Coffret 4 Muffins',
-      'product.pack4.sub': '19,90 € (Découverte)',
-      'product.pack12.title': 'Cure 12 Muffins',
-      'product.pack12.sub': '49,90 € (-17%)',
-      'product.pack24.title': 'Pack 24 Muffins',
-      'product.pack24.sub': '89,90 € (-25%)',
-      'product.btn.add': 'Ajouter au Panier',
-      'product.acc1.title': 'Ingrédients Bio & Locaux',
-      'product.acc1.content': "Chocolat classique, farine d'avoine sans gluten, extrait nutritionnel naturel riche en fer et minéraux (filières bio et locales anti-gaspillage), sucre de fleur de coco, œufs bio de plein air, huile de coco vierge, fleur de sel de Guérande.",
-      'product.acc2.title': 'Valeurs Micronutritionnelles par Muffin',
-      'product.acc2.content': "• <strong>Fer naturel hautement assimilable :</strong> 14 mg (100% VNR - oxygénation et transport d'oxygène)<br>• <strong>Vitamine B12 active :</strong> 2,5 µg (100% VNR - métabolisme énergétique et réduction de la fatigue)<br>• <strong>Coenzyme Q10 & Minéraux d'origine naturelle :</strong> 28 mg (récupération cellulaire)<br>• <strong>Protéines complètes :</strong> 9,4 g • 218 kcal • Zéro troubles gastriques lors de l'effort",
-      'product.acc3.title': 'Rituel & Conseils de Dégustation',
-      'product.acc3.content': "Idéal 1h30 avant l'entraînement ou après l'effort pour la récupération musculaire. Délicieux également au petit-déjeuner. Réchauffez 10 secondes au micro-ondes pour un cœur encore plus moelleux."
+      'product.perspectives.label': 'Sélectionner un point de vue :',
+      'product.pill.face': 'Vue de face',
+      'product.pill.dessus': 'Vue de dessus',
+      'product.pill.coupe': 'Vue en coupe',
+      'product.pill.profil': 'Vue de profil',
+      'product.view.face.title': 'Vue de Face • Dôme Pâtissier Généreux (90–100 g)',
+      'product.view.face.sub': "Silhouette traditionnelle d'un muffin au chocolat fraîchement sorti du four",
+      'product.view.dessus.title': 'Vue de Dessus • Croûte Chocolatée Craquelée',
+      'product.view.dessus.sub': 'Aspect gourmand obtenu grâce à la cuisson de la pâte au chocolat et au beurre',
+      'product.view.coupe.title': 'Vue en Coupe • Mie Moelleuse & Homogène',
+      'product.view.coupe.sub': 'Intégration fine des 30 g de protéines animales non valorisées au sein de la mie',
+      'product.view.profil.title': 'Vue de Profil • Format Individuel 90 à 100 g',
+      'product.view.profil.sub': 'Une portion généreuse pensée pour allier plaisir pâtissier et densité nutritionnelle',
+      'product.weight.badge': 'Muffin total : 90 à 100 g • 30 g de protéines animales non valorisées',
+      'product.desc': "« Valoriser 30 g de protéines animales non valorisées dans un vrai muffin pâtissier au chocolat ? » Dès la première bouchée : <em>« Ah bah d'accord ! »</em> Une recette gourmande où l'oligofructose remplace le sucre raffiné.",
+      'product.recipe.box.title': 'La Recette du Muffin',
+      'product.tag.protein': 'Protéines animales non valorisées (30 g / muffin)',
+      'product.tag.beneo': 'Oligofructose',
+      'product.tag.choc': 'Chocolat',
+      'product.tag.butter': 'Beurre',
+      'product.tag.yeast': 'Levure chimique',
+      'product.tag.flour': 'Farine',
+      'product.tag.eggs': 'Œufs',
+      'product.tag.salt': 'Sel',
+      'product.tag.milk': 'Lait',
+      'product.contact.desc': "Ce produit est présenté dans le cadre du projet Corfovia. Pour toute question, dégustation ou demande d'information, contactez notre équipe :",
+      'product.btn.contact': 'Nous contacter sur @corfovia →',
+      'product.btn.science': 'Voir les sources documentaires',
+      'product.acc1.title': 'Recette & Composition (Muffin de 90 à 100 g)',
+      'product.acc1.content': '• <strong>Oligofructose :</strong> fibre prébiotique issue de la racine de chicorée qui remplace le sucre.<br>• <strong>Protéines animales non valorisées :</strong> 30 g par muffin.<br>• <strong>Ingrédients pâtissiers :</strong> Beurre, levure chimique, farine, œufs, sel, lait, chocolat.<br>• <strong>Poids total :</strong> 90 à 100 g par muffin.',
+      'product.acc2.title': 'Intérêt Nutritionnel Documenté (ANSES / EFSA)',
+      'product.acc2.content': "• <strong>Fer héminique & Vitamine B12 :</strong> selon la table ANSES-Ciqual, ces protéines animales non valorisées sont naturellement riches en fer héminique (biodisponibilité de 15 à 35 % selon Hurrell & Egli, 2010) et en vitamine B12.<br>• <strong>Réduction de la réponse glycémique :</strong> le remplacement des sucres par l'oligofructose dans les aliments induit une hausse plus faible de la glycémie postprandiale (Avis EFSA Journal 2014;12(1):3513).",
+      'product.acc3.title': 'Démarche Anti-Gaspillage Alimentaire',
+      'product.acc3.content': "Bien que très riches sur le plan nutritionnel, ces protéines animales non valorisées sont aujourd'hui délaissées. Abadakor les intègre directement au sein d'une matrice pâtissière au chocolat familière et gourmande afin de les revaloriser sans compromis sur le plaisir."
     },
 
     en: {
       // Header & Navigation
       'nav.vision': 'The Vision',
-      'nav.innovation': 'Innovation',
+      'nav.innovation': 'Our Team',
       'nav.science': 'Our Science',
-      'nav.products': 'Products',
-      'nav.badge.abadakor': 'Sport & Vitality',
-      'nav.dropdown.eyebrow': 'Cellular Health Nutrition',
-      'nav.dropdown.lead': 'Our signature creations',
-      'nav.dropdown.desc': 'Organic & local chocolate muffin, sport nutrients with an eco-conscious upcycling approach.',
+      'nav.products': 'Product',
+      'nav.badge.abadakor': '90 – 100 g',
+      'nav.dropdown.desc': 'Discover the chocolate muffin, its full recipe composition and its different angles.',
 
       // Hero
-      'hero.title.em': 'Vitality',
-      'hero.title.after': 'is an',
-      'hero.title.highlight': 'art of living.',
-      'hero.subtitle': 'The muffin designed for athletic performance and active energy. Natural iron & B12 boost through organic and local upcycled ingredients:',
-      'hero.trust1.title': '100% Organic & Local',
-      'hero.trust1.desc': 'Short & responsible supply chains',
-      'hero.trust2.title': 'Committed Zero-Waste',
-      'hero.trust2.desc': 'Upcycling valuable local resources',
-      'hero.cta.discover': 'Discover Abadakor →',
-      'hero.cta.science': 'Our Science',
+      'hero.title.em': 'Corfovia:',
+      'hero.title.after': 'committed pastry indulgence,',
+      'hero.title.highlight': 'without the excess sugar.',
+      'hero.subtitle': 'Replacing overly sugary snacks and upcycling nutrient-dense unvalued animal proteins at the heart of gourmet pastry.',
+      'hero.cta.discover': 'Meet our team →',
+      'hero.cta.science': 'View our creation Abadakor',
 
       // Piliers
-      'pillars.title': 'The 4 Pillars of',
-      'pillars.title.span': 'Corfovia Vitality',
-      'pillars.subtitle': 'The pioneering blend of high cellular nutrition and artisanal baking craftsmanship.',
-      'pillar1.title': 'Sport Performance',
-      'pillar1.desc': 'Optimized oxygen transport, enhanced endurance and accelerated muscle recovery.',
-      'pillar2.title': 'Circular Upcycling',
-      'pillar2.desc': 'Virtuous upcycling of nutrient-dense local resources without food waste.',
-      'pillar3.title': 'Real Chocolate',
-      'pillar3.desc': 'Pure classic chocolate with a pinch of sea salt: the authentic indulgence of a soft baked muffin.',
-      'pillar4.title': 'Sustained Energy',
-      'pillar4.desc': 'Deep cellular oxygenation and steady daily vitality, with no energy crash.',
+      'pillars.title': 'The 4 Pillars',
+      'pillars.title.span': 'of Corfovia',
+      'pillars.subtitle': 'Anti-waste, nutritional density and indulgence without refined sugar.',
+      'pillar1.kpi': 'Anti-Waste',
+      'pillar1.title': 'Circular Economy',
+      'pillar1.desc': 'Reintegrating overlooked animal proteins into everyday nutrition.',
+      'pillar2.kpi': 'Glycemic Impact',
+      'pillar2.title': 'Sugar Substitute',
+      'pillar2.desc': 'Replacing overly sugary snacks with chicory root fibers.',
+      'pillar3.kpi': 'Iron & Vitamin B12',
+      'pillar3.title': 'High Bioavailability',
+      'pillar3.desc': 'Prioritizing naturally absorbable heme iron (15–35% absorbed).',
+      'pillar4.kpi': 'Zero Taste Barrier',
+      'pillar4.title': 'Gourmet Acceptability',
+      'pillar4.desc': 'Integrating overlooked nutrients without ever compromising on taste.',
 
-      // Innovation
-      'inno.title': 'The Innovation:',
-      'inno.title.span': 'Abadakor',
-      'inno.subtitle': '“Boost your athletic energy with a real chocolate muffin?” From the very first bite: <em>“Ah, got it!”</em>',
-      'inno.card1.title': 'Pure Chocolate Taste',
-      'inno.card1.desc': 'Classic chocolate flavor. The generous, rich texture of a true gourmet muffin.',
-      'inno.card2.title': 'Committed Zero-Waste',
-      'inno.card2.desc': 'Upcycling local nutrient-dense treasures for a natural iron and vitamin B12 supply, zero waste.',
-      'inno.card3.title': '100% Gut Comfort',
-      'inno.card3.desc': 'Complete digestive tolerance during training, free from nausea or stomach heaviness.',
-      'inno.invite.title': 'The muffin that gets everyone on board',
-      'inno.invite.desc': 'Available in 4, 12, or 24 muffin boxes for an intake as efficient as it is delicious.',
-      'inno.invite.btn': 'Order Abadakor →',
+      // Our Team (6 Members & 6 Roles)
+      'inno.title': 'The Corfovia',
+      'inno.title.span': 'Team',
+      'inno.subtitle': '6 students, 6 complementary areas of expertise around a shared creation.',
+      'team.m1.role': 'Direction & Strategy',
+      'team.m1.name': 'Member 1',
+      'team.m2.role': 'R&D & Formulation',
+      'team.m2.name': 'Member 2',
+      'team.m3.role': 'Nutrition & Science',
+      'team.m3.name': 'Member 3',
+      'team.m4.role': 'Quality & Processes',
+      'team.m4.name': 'Member 4',
+      'team.m5.role': 'Sourcing & Supply',
+      'team.m5.name': 'Member 5',
+      'team.m6.role': 'Design & Digital',
+      'team.m6.name': 'Gabriel Jagueneau',
+      'inno.invite.title': 'Our creation: the Abadakor muffin',
+      'inno.invite.desc': '90–100 g • Chocolate, Oligofructose & 30 g unvalued animal proteins.',
+      'inno.invite.btn': 'View recipe & product →',
 
       // Science & Jauges
-      'science.header.title': 'Absorption & Bioavailability',
-      'science.header.badge': 'Clinical Studies',
-      'science.dial.corfovia.title': 'Corfovia Nutrition',
-      'science.dial.corfovia.desc': 'Optimal assimilation for sport & gentle on the gut microbiome',
-      'science.dial.synthetic.title': 'Synthetic Iron Pills',
-      'science.dial.synthetic.desc': '82% wasted unabsorbed & frequent digestive cramps',
+      'science.header.title': 'Iron Bioavailability',
+      'science.header.badge': '×3 to ×4 more absorbed',
+      'science.dial.corfovia.title': 'Heme Iron',
+      'science.dial.corfovia.desc': 'Upcycled animal proteins',
+      'science.dial.synthetic.title': 'Non-Heme Iron',
+      'science.dial.synthetic.desc': 'Inhibited by phytates',
       'science.dial.absorbed': 'Absorbed',
+      'science.footnote': 'Average absorption ~25% vs ~5% (Hurrell & Egli, 2010 • EFSA, 2015)',
+      'comp.synthetic.badge': 'Standard',
+      'comp.natural.badge': 'Corfovia',
 
-      // Tableau comparatif
-      'comp.synthetic.badge': 'Synthetic',
-      'comp.synthetic.title': 'Chemical Supplement',
-      'comp.synthetic.item1': 'Spasms & nausea',
-      'comp.synthetic.item2': 'Poor absorption (18%)',
-      'comp.synthetic.item3': '82% excreted without effect',
-      'comp.natural.badge': 'Natural',
-      'comp.natural.title': 'Abadakor Muffin',
-      'comp.natural.item1': '100% digestive comfort',
-      'comp.natural.item2': 'Real gourmet muffin',
-      'comp.natural.item3': 'Energy & muscle recovery',
+      // Modal Sources Scientifiques
+      'science.sources.title': 'Scientific & Regulatory Sources',
+      'science.sources.modal.sub': 'Official references supporting our nutritional and functional approach.',
+      'science.source1.text': 'Scientific Opinion on Dietary Reference Values for iron. EFSA Journal 2015;13(10):4254. Documents absorption differences between animal-derived heme iron and non-heme iron.',
+      'science.source2.text': 'Iron bioavailability and dietary reference values. Am J Clin Nutr, 91(5), 1461S–1467S. Establishes a 15% to 35% absorption rate for heme iron versus 2% to 10% for non-heme iron.',
+      'science.source3.text': 'Scientific Opinion on the substantiation of a health claim related to non-digestible carbohydrates (oligofructose) and a reduction of post-prandial glycaemic responses. EFSA Journal 2014;12(1):3513.',
+      'science.source4.text': 'French reference database on the nutritional composition of foods, detailing natural heme iron and vitamin B12 levels in animal proteins.',
 
-      // Editorial Routine
-      'routine.title': 'The secret to',
-      'routine.title.span': 'active vitality',
-      'routine.desc': 'Unmatched absorption for muscles and stamina, zero digestive discomfort, packed in a delicious muffin:',
-      'routine.p1.title': 'Oxygenation & Recovery',
-      'routine.p1.desc': '14 mg of natural iron and 100% NRV active B12 for endurance and muscle regeneration.',
-      'routine.p2.title': 'Absolute Gut Comfort',
-      'routine.p2.desc': 'Zero gastric pain, zero nausea, zero cramps. Perfectly gentle on your microbiome.',
-      'routine.p3.title': 'Chocolate Pleasure',
-      'routine.p3.desc': 'Real classic chocolate baked into a comforting, delicious treat.',
-      'routine.btn': 'Order Abadakor →',
+      // Editorial Science
+      'routine.title': 'Science',
+      'routine.title.span': 'in 3 key facts',
+      'routine.p1.title': 'Heme Iron & Vitamin B12',
+      'routine.p1.desc': 'Normal oxygen transport & reduction of tiredness (EU 432/2012).',
+      'routine.p2.title': 'Substitute for Overly Sugary Snacks',
+      'routine.p2.desc': 'Oligofructose: lower blood glucose rise after meals (EFSA, 2014).',
+      'routine.p3.title': 'Upcycled Animal Proteins',
+      'routine.p3.desc': 'Integrated at the heart of a soft 90–100 g chocolate muffin.',
+      'routine.btn': 'View product →',
+      'routine.btn.sources': 'Scientific sources (4)',
 
-      // Communauté & Instagram
-      'comm.title': 'Join the',
-      'comm.title.span': 'Corfovia Circle',
-      'comm.subtitle': 'Discover the backstage of our artisanal batches, our sports nutrition tips and the latest Abadakor news on Instagram.',
-      'comm.cta.title': 'Follow us on Instagram',
-      'comm.desc': 'Go behind the scenes of our artisanal batches, discover sports nutrition tips and the latest creations on our official Instagram account.',
+      // Communauté & Contact
+      'comm.title': 'Connect with',
+      'comm.title.span': 'the Corfovia team',
+      'comm.subtitle': 'Have a question about our project or the Abadakor muffin? Message us directly.',
+      'comm.cta.title': 'Direct on Instagram',
+      'comm.desc': 'Behind the scenes, baking trials and direct messages.',
       'comm.qr': 'Scan the QR Code',
-      'comm.btn': '@corfovia on Instagram',
+      'comm.btn': 'Contact us on @corfovia',
 
       // Footer
-      'footer.baseline': 'Active sports nutrition and sustainable energy, reinvented in a delicious eco-conscious muffin.',
-      'footer.col1.title': 'House',
-      'footer.col2.title': 'Creations',
-      'footer.col3.title': 'Standards',
-      'footer.link.abadakor': 'Abadakor Muffin',
-      'footer.link.pack4': '4 Muffin Box',
-      'footer.link.pack12': '12 Muffin Cure',
-      'footer.link.pack24': '24 Muffin Pack',
-      'footer.link.ritual': 'Ritual & Recommendations',
-      'footer.exigence1': 'Natural Heme Iron',
-      'footer.exigence2': '100% Organic & Local',
-      'footer.exigence3': 'Gourmet Chocolate',
-      'footer.exigence4': 'Zero chemical additives',
-      'footer.copy': '© 2026 Corfovia. All rights reserved. Organic cellular nutrition.',
-      'footer.mention': 'Crafted with scientific rigor & artisanal passion.',
+      'footer.baseline': 'Food innovation project upcycling unvalued animal proteins into gourmet pastry creations.',
+      'footer.col1.title': 'Corfovia House',
+      'footer.col2.title': 'Product',
+      'footer.col3.title': 'Commitments',
+      'footer.link.contact': 'Contact Us',
+      'footer.link.abadakor': 'The Abadakor Muffin',
+      'footer.link.recipe': 'Composition & Recipe',
+      'footer.link.sources': 'Documentary Sources',
+      'footer.exigence1': 'Upcycled Animal Proteins',
+      'footer.exigence2': 'Anti-Waste Approach',
+      'footer.exigence3': 'Pastry Craftsmanship',
+      'footer.exigence4': 'Scientific Sources',
+      'footer.copy': '© 2026 Corfovia. All rights reserved. Food innovation & anti-waste project.',
+      'footer.mention': 'Transparent approach & documented scientific sources.',
 
-      // Page Produit Abadakor
+      // Page Produit Abadakor (Composition réservée à cette page + Points de vue)
       'product.breadcrumb.home': 'Home',
-      'product.badge': 'Moist Chocolate Muffin • Pinch of Sea Salt',
-      'product.pill.cacao': 'Chocolate',
-      'product.pill.local': 'Organic & Local',
-      'product.pill.sport': 'Sport & B12',
-      'product.pill.etui': 'Freshness Case',
-      'product.desc': '“Improve your endurance and recovery with a delicious chocolate muffin?” From the very first bite: <em>“Ah, got it!”</em> 14 mg of natural iron, 100% active B12 and nutrient-rich upcycled local ingredients.',
-      'product.pack.label': 'Choose your box format:',
-      'product.pack4.title': '4 Muffin Box',
-      'product.pack4.sub': '€19.90 (Discovery)',
-      'product.pack12.title': '12 Muffin Cure',
-      'product.pack12.sub': '€49.90 (-17%)',
-      'product.pack24.title': '24 Muffin Pack',
-      'product.pack24.sub': '€89.90 (-25%)',
-      'product.btn.add': 'Add to Cart',
-      'product.acc1.title': 'Organic & Local Ingredients',
-      'product.acc1.content': 'Classic chocolate, gluten-free oat flour, natural nutrient extract rich in iron and minerals (zero-waste local supply chains), coconut blossom sugar, organic free-range eggs, virgin coconut oil, Guérande sea salt.',
-      'product.acc2.title': 'Micronutritional Values per Muffin',
-      'product.acc2.content': '• <strong>Highly bioavailable natural iron:</strong> 14 mg (100% NRV - oxygen transport)<br>• <strong>Active Vitamin B12:</strong> 2.5 µg (100% NRV - energy metabolism and fatigue reduction)<br>• <strong>Coenzyme Q10 & natural minerals:</strong> 28 mg (cellular recovery)<br>• <strong>Complete protein:</strong> 9.4 g • 218 kcal • Zero gastric discomfort during exercise',
-      'product.acc3.title': 'Ritual & Tasting Recommendations',
-      'product.acc3.content': 'Ideal 90 minutes before a workout for steady energy, or right after exercise for muscle recovery. Also delicious for breakfast. Microwave for 10 seconds for an even softer melt-in-the-mouth center.'
+      'product.perspectives.label': 'Select a point of view:',
+      'product.pill.face': 'Front view',
+      'product.pill.dessus': 'Top view',
+      'product.pill.coupe': 'Cross-section',
+      'product.pill.profil': 'Side view',
+      'product.view.face.title': 'Front View • Generous Bakery Dome (90–100 g)',
+      'product.view.face.sub': 'Traditional silhouette of a freshly baked chocolate muffin',
+      'product.view.dessus.title': 'Top View • Cracked Chocolate Crust',
+      'product.view.dessus.sub': 'Gourmet appearance achieved by baking the rich chocolate and butter batter',
+      'product.view.coupe.title': 'Cross-Section • Soft & Homogeneous Crumb',
+      'product.view.coupe.sub': 'Fine integration of 30 g of unvalued animal proteins inside the crumb',
+      'product.view.profil.title': 'Side View • Individual 90 to 100 g Portion',
+      'product.view.profil.sub': 'A generous portion designed to combine pastry indulgence with nutritional density',
+      'product.weight.badge': 'Total muffin: 90 to 100 g • 30 g unvalued animal proteins',
+      'product.desc': '“Upcycling 30 g of unvalued animal proteins in a real chocolate bakery muffin?” From the first bite: <em>“Ah, got it!”</em> A gourmet recipe where oligofructose replaces refined sugar.',
+      'product.recipe.box.title': 'The Muffin Recipe',
+      'product.tag.protein': 'Unvalued animal proteins (30 g / muffin)',
+      'product.tag.beneo': 'Oligofructose',
+      'product.tag.choc': 'Chocolate',
+      'product.tag.butter': 'Butter',
+      'product.tag.yeast': 'Baking powder',
+      'product.tag.flour': 'Flour',
+      'product.tag.eggs': 'Eggs',
+      'product.tag.salt': 'Salt',
+      'product.tag.milk': 'Milk',
+      'product.contact.desc': 'This product is presented as part of the Corfovia project. For any questions, tasting inquiries or information, contact our team:',
+      'product.btn.contact': 'Contact us on @corfovia →',
+      'product.btn.science': 'View documentary sources',
+      'product.acc1.title': 'Recipe & Composition (90 to 100 g Muffin)',
+      'product.acc1.content': '• <strong>Oligofructose:</strong> prebiotic fiber from chicory root replacing refined sugar.<br>• <strong>Unvalued animal proteins:</strong> 30 g per muffin.<br>• <strong>Pastry ingredients:</strong> Butter, baking powder, flour, eggs, salt, milk, chocolate.<br>• <strong>Total weight:</strong> 90 to 100 g per muffin.',
+      'product.acc2.title': 'Documented Nutritional Interest (ANSES / EFSA)',
+      'product.acc2.content': '• <strong>Heme iron & Vitamin B12:</strong> according to the ANSES-Ciqual database, these unvalued animal proteins are naturally rich in heme iron (15–35% bioavailability according to Hurrell & Egli, 2010) and vitamin B12.<br>• <strong>Lower glycemic response:</strong> replacing sugars with oligofructose in foods induces a lower post-prandial blood glucose rise (EFSA Journal 2014;12(1):3513).',
+      'product.acc3.title': 'Anti-Food-Waste Approach',
+      'product.acc3.content': 'Although nutritionally dense, these unvalued animal proteins are often overlooked today. Abadakor incorporates them directly into a familiar, indulgent chocolate muffin matrix to upcycle them without compromising on taste.'
     }
   };
 
-  /**
-   * Récupère la langue active (Query parameter > localStorage > Navigateur > 'fr')
-   */
   const getLanguageFromPath = () => {
     if (typeof window === 'undefined') return null;
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
@@ -290,13 +318,6 @@
     return null;
   };
 
-  /**
-   * Récupère la langue active :
-   * 1. URL Path (/fr/ ou /en/) exactement comme Plintzy
-   * 2. Paramètre ?lang=
-   * 3. localStorage
-   * 4. Navigateur
-   */
   const getLanguage = () => {
     const urlLang = getLanguageFromPath();
     if (urlLang && VALID_LANGS.includes(urlLang)) {
@@ -325,29 +346,9 @@
     return VALID_LANGS.includes(browserLang) ? browserLang : 'fr';
   };
 
-  /**
-   * Change la langue active et synchronise l'URL (/fr/ ou /en/) exactement comme Plintzy
-   */
-  const setLanguage = (langCode, syncUrl = true) => {
+  const setLanguage = (langCode) => {
     if (!VALID_LANGS.includes(langCode)) return;
     localStorage.setItem(STORAGE_KEY, langCode);
-
-    if (syncUrl && typeof window !== 'undefined' && window.history && window.history.replaceState) {
-      const pathSegments = window.location.pathname.split('/').filter(Boolean);
-      let pagePath = '';
-
-      if (pathSegments.length > 0 && VALID_LANGS.includes(pathSegments[0])) {
-        pagePath = pathSegments.slice(1).join('/');
-      } else {
-        pagePath = pathSegments.join('/');
-      }
-
-      // Construit l'URL propre : /fr/ ou /en/ ou /fr/products/muffin-vitalite/
-      const newUrl = '/' + langCode + '/' + (pagePath ? pagePath + '/' : '');
-      if (window.location.pathname !== newUrl) {
-        window.history.replaceState(null, document.title, newUrl + window.location.search);
-      }
-    }
 
     applyTranslations(langCode);
     updateLanguageButtons(langCode);
@@ -358,7 +359,6 @@
   const applyTranslations = (langCode) => {
     const dict = translations[langCode] || translations.fr;
 
-    // Textes bruts
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       if (dict[key]) {
@@ -366,7 +366,6 @@
       }
     });
 
-    // Textes avec HTML
     document.querySelectorAll('[data-i18n-html]').forEach((el) => {
       const key = el.getAttribute('data-i18n-html');
       if (dict[key]) {
@@ -375,9 +374,6 @@
     });
   };
 
-  /**
-   * Met à jour l'état visuel du switcher FR / EN
-   */
   const updateLanguageButtons = (langCode) => {
     document.querySelectorAll('.lang-switcher-btn').forEach((btn) => {
       const btnLang = btn.getAttribute('data-lang');
@@ -391,9 +387,6 @@
     });
   };
 
-  /**
-   * Initialisation au chargement de la page
-   */
   const init = () => {
     document.querySelectorAll('.lang-switcher-btn').forEach((btn) => {
       btn.addEventListener('click', (e) => {
