@@ -69,10 +69,10 @@
       heroBottomY = y0;
       const spanH = Math.max(700, yEnd - y0);
 
-      // Amplitude horizontale douce pour éviter tout virage brusque
-      const xStart = Math.round(W * 0.60);
-      const xRight = Math.round(W * 0.64);
-      const xLeft = Math.round(W * 0.36);
+      // Amplitude horizontale ultra-douce pour éviter tout virage brusque
+      const xStart = Math.round(W * 0.62);
+      const xRight = Math.round(W * 0.66);
+      const xLeft = Math.round(W * 0.34);
       const xEnd = Math.round(W * 0.50);
 
       // Calage des dégradés (fondu au départ sous le Hero + étalement horizontal sur le Footer)
@@ -85,30 +85,46 @@
         spreadGradient.setAttribute('x2', `${W}`);
       }
 
-      // 2 grandes boucles très ouvertes et amples (rayon de courbure large, zéro angle sec)
-      const R = Math.round(Math.min(175, Math.max(95, W * 0.125)));
-      const dy = 135;
-      const cy = 240;
-      const k = 0.85; // Tangentes longues pour une entrée/sortie ultra progressive
+      // 2 grandes boucles ultra-lissées (continuité C1 stricte, rayon ample, zéro cassure)
+      // Positionnées au cœur des grilles de cartes (et non sur les titres de sections)
+      const creationEl = document.getElementById('creation');
+      const routineEl = document.getElementById('routine');
+      const communauteEl = document.getElementById('communaute');
+
+      // Boucle #1 : placée sous les cartes des 4 Piliers, bien avant le titre de Notre Équipe
+      let y1 = Math.round(y0 + spanH * 0.19);
+      if (creationEl && creationEl.offsetTop > y0 + 260) {
+        y1 = Math.round(y0 + (creationEl.offsetTop - y0) * 0.66);
+      }
+
+      // Boucle #2 : placée au niveau des jauges/cartes de Notre Science (bien en dessous du titre)
+      let y2 = Math.round(y0 + spanH * 0.69);
+      if (routineEl && communauteEl && communauteEl.offsetTop > routineEl.offsetTop + 260) {
+        y2 = Math.round(routineEl.offsetTop + (communauteEl.offsetTop - routineEl.offsetTop) * 0.56);
+      } else if (routineEl && routineEl.offsetTop > y1 + 360) {
+        y2 = Math.round(routineEl.offsetTop + 260);
+      }
+
+      const R = Math.round(Math.min(185, Math.max(105, W * 0.13)));
+      const dy = 145;
+      const cy = 265;
+      const k = 0.92; // Tangentes longues alignées C1 pour une courbure ultra-lissée
       const tx = Math.round(R * k);
       const ty = Math.round((cy + dy) * k);
-
-      const y1 = Math.round(y0 + spanH * 0.28);
-      const y2 = Math.round(y0 + spanH * 0.68);
 
       const d = [
         // Départ juste en dessous du Hero (y = y0)
         `M ${xStart} ${y0}`,
-        // Descente ample et douce vers la Pirouette #1 (côté droit)
-        `C ${xStart + 35} ${Math.round(y0 + (y1 - y0) * 0.42)}, ${xRight + tx} ${y1 - dy - ty}, ${xRight} ${y1 - dy}`,
-        // Pirouette #1 très ronde et ouverte (vers la gauche)
+        // Descente ample et ultra-lissée vers la Boucle #1 (côté droit, sous les cartes Piliers)
+        `C ${xStart + 25} ${Math.round(y0 + (y1 - dy - y0) * 0.45)}, ${xRight + tx} ${y1 - dy - ty}, ${xRight} ${y1 - dy}`,
+        // Boucle #1 très ronde et ouverte (vers la gauche)
         `C ${xRight - R} ${y1 + cy}, ${xRight - R} ${y1 - cy}, ${xRight} ${y1 + dy}`,
-        // Longue traversée fluide vers la Pirouette #2 (côté gauche)
+        // Longue traversée fluide en S derrière les cartes Équipe vers la Boucle #2 (côté gauche)
         `C ${xRight + tx} ${y1 + dy + ty}, ${xLeft - tx} ${y2 - dy - ty}, ${xLeft} ${y2 - dy}`,
-        // Pirouette #2 très ronde et ouverte (vers la droite)
+        // Boucle #2 très ronde et ouverte (vers la droite, sous les cartes Science)
         `C ${xLeft + R} ${y2 + cy}, ${xLeft + R} ${y2 - cy}, ${xLeft} ${y2 + dy}`,
-        // Arrivée verticale douce pile contre la bordure supérieure du Footer (y = yEnd)
-        `C ${xLeft - tx} ${y2 + dy + ty}, ${xEnd} ${yEnd - 180}, ${xEnd} ${yEnd}`
+        // Arrivée verticale ultra-douce pile contre la bordure supérieure du Footer (y = yEnd)
+        `C ${xLeft - tx} ${y2 + dy + ty}, ${xEnd} ${yEnd - 220}, ${xEnd} ${yEnd}`
       ].join(' ');
 
       mainScrollPath.setAttribute('d', d);
@@ -574,8 +590,21 @@
   };
 
   // =========================================================================
-  // 8. SMOOTH IN-PAGE ANCHOR SCROLL
+  // 8. SMOOTH IN-PAGE & CROSS-PAGE ANCHOR SCROLL
   // =========================================================================
+  const scrollToSectionElement = (targetId, smooth = true) => {
+    if (!targetId) return false;
+    const targetEl = document.getElementById(targetId);
+    if (!targetEl) return false;
+
+    const targetOffset = Math.max(0, targetEl.getBoundingClientRect().top + window.pageYOffset - 68);
+    window.scrollTo({
+      top: targetOffset,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+    return true;
+  };
+
   const initSmoothAnchors = () => {
     document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
       if (anchor.hasAttribute('data-open-sources-modal')) return;
@@ -588,22 +617,11 @@
         if (!targetId) return;
 
         const targetEl = document.getElementById(targetId);
-        const pagePath = urlParts[0];
 
-        const isCurrentPage = !pagePath ||
-          pagePath === '' ||
-          pagePath === './' ||
-          pagePath === 'index.html' ||
-          pagePath === '/' ||
-          (targetEl !== null && pagePath === '');
-
-        if (targetEl && isCurrentPage) {
+        if (targetEl) {
+          // La section existe sur la page actuelle : scroll fluide immédiat
           e.preventDefault();
-          const targetOffset = targetEl.getBoundingClientRect().top + window.pageYOffset - 68;
-          window.scrollTo({
-            top: targetOffset,
-            behavior: 'smooth'
-          });
+          scrollToSectionElement(targetId, true);
 
           if (window.history && window.history.replaceState) {
             let cleanPath = window.location.pathname;
@@ -611,22 +629,47 @@
             if (!cleanPath) cleanPath = '/';
             window.history.replaceState(null, document.title, cleanPath + window.location.search);
           }
+        } else {
+          // Changement de page : mémorise la section cible pour scroller dès l'arrivée sur la nouvelle page
+          try {
+            sessionStorage.setItem('corfovia_pending_scroll', targetId);
+          } catch (_) {}
         }
       });
     });
   };
 
   // =========================================================================
-  // 9. NETTOYAGE D'URL
+  // 9. NETTOYAGE D'URL & SCROLL AUTOMATIQUE APRÈS CHANGEMENT DE PAGE
   // =========================================================================
-  const initCleanURL = () => {
+  const initCleanURLAndPendingScroll = () => {
+    const loc = window.location;
+    const rawHash = loc.hash ? loc.hash.replace(/^#/, '') : '';
+    let pendingTarget = rawHash;
+
+    try {
+      const storedTarget = sessionStorage.getItem('corfovia_pending_scroll');
+      if (storedTarget) {
+        if (!pendingTarget) pendingTarget = storedTarget;
+        sessionStorage.removeItem('corfovia_pending_scroll');
+      }
+    } catch (_) {}
+
     if (window.history && window.history.replaceState) {
-      const loc = window.location;
       if (loc.pathname.endsWith('index.html') || loc.hash) {
         let clean = loc.pathname.replace(/\/index\.html$/, '/').replace(/index\.html$/, '');
         if (!clean) clean = '/';
         window.history.replaceState(null, document.title, clean + loc.search);
       }
+    }
+
+    if (pendingTarget) {
+      // Scroll vers la section cible dès que le layout est prêt
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          scrollToSectionElement(pendingTarget, true);
+        }, 60);
+      });
     }
   };
 
@@ -634,7 +677,6 @@
   // BOOTSTRAP
   // =========================================================================
   document.addEventListener('DOMContentLoaded', () => {
-    initCleanURL();
     initScrollEngine();
     initScrollReveal();
     initSourcesModal();
@@ -643,6 +685,7 @@
     initAccordions();
     initPerspectiveViewer();
     initSmoothAnchors();
+    initCleanURLAndPendingScroll();
   });
 
 })();

@@ -73,8 +73,8 @@
   <!-- FLOATING MORPHING HEADER (Sans barre de progression de scroll) -->
   <header class="site-nav">
     <div class="nav-inner">
-      <a href="./" class="nav-brand" aria-label="Corfovia Accueil">
-        <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia">
+      <a href="/" class="nav-brand" aria-label="Corfovia Accueil">
+        <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia">
       </a>
 
       <!-- Indicateur dynamique de position sur mobile -->
@@ -101,9 +101,9 @@
 
           <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
             <div class="nav-dropdown-items">
-              <a href="products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
+              <a href="/products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
                 <div class="nav-dropdown-icon-wrap">
-                  <img src="images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
+                  <img src="/images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
                 </div>
                 <div class="nav-dropdown-item-info">
                   <div class="nav-dropdown-item-top">
@@ -188,7 +188,7 @@
               <a href="#creation" class="btn-clay btn-clay-primary" data-i18n="hero.cta.discover">
                 Découvrir notre équipe →
               </a>
-              <a href="products/muffin-vitalite/" class="btn-clay btn-clay-secondary" data-i18n="hero.cta.science">
+              <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-secondary" data-i18n="hero.cta.science">
                 Voir notre création Abadakor
               </a>
             </div>
@@ -283,150 +283,323 @@
       </section>
 
       <!-- ==========================================================================
-           SECTION NOTRE ÉQUIPE (6 MEMBRES & 6 RÔLES — CARTES ÉPURÉES SANS PAVÉS DE TEXTE)
+           SECTION NOTRE ÉQUIPE : BANDEAU RÉSEAU RANDOM (IMG 1) + 6 CARTES EN CHEVAUCHEMENT (IMG 2)
            ========================================================================== -->
       <section class="section-feature-products" id="creation">
         <div class="container">
 
+          <!-- En-tête de la section Notre Équipe -->
           <div class="section-title-wrap" data-scroll-reveal>
-            <!-- Vague 2 : Triple ondulation ascendante -->
+            <!-- Vague 2 : Double crête rythmée en M doux -->
             <div class="section-scroll-ornament" aria-hidden="true">
               <svg viewBox="0 0 180 28">
-                <path class="scroll-draw-path" d="M 4 22 C 20 6, 36 24, 54 14 C 74 2, 98 24, 120 12 C 142 2, 158 20, 176 6" />
+                <path class="scroll-draw-path"
+                  d="M 4 22 C 20 6, 36 24, 54 14 C 74 2, 98 24, 120 12 C 142 2, 158 20, 176 6" />
               </svg>
             </div>
             <h2 class="section-serif-title"><span data-i18n="inno.title">L'Équipe</span> <span
                 data-i18n="inno.title.span">Corfovia</span></h2>
             <p class="section-serif-sub">
-              <span data-i18n="inno.subtitle">6 étudiants, 6 expertises complémentaires autour d'une même création.</span>
+              <span data-i18n="inno.subtitle">6 étudiants, 6 expertises complémentaires autour d'une même
+                création.</span>
             </p>
           </div>
 
-          <!-- Grille éditoriale discrète & visuelle des 6 membres -->
+          <!-- GRILLE DES 6 MEMBRES EN CHEVAUCHEMENT DU BANDEAU (Img 2 : Tête qui chevauche, Statut, Nom, Réseaux) -->
           <div class="team-members-grid">
 
             <!-- Membre 01 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">01</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-1.jpg"
+              data-member-initials="M1">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-1.jpg" alt="Membre 1 — Direction de Projet"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  <img class="team-member-photo" src="images/team/membre-1.jpg" alt="Membre 1 — Direction & Stratégie"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m1.role">Direction & Stratégie</span>
                 <h4 class="team-member-name" data-i18n="team.m1.name">Membre 1</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <!-- Membre 02 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">02</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-2.jpg"
+              data-member-initials="M2">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-2.jpg"
-                    alt="Membre 2 — R&D & Formulation Pâtissière"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  <img class="team-member-photo" src="images/team/membre-2.jpg" alt="Membre 2 — R&D & Formulation"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m2.role">R&D & Formulation</span>
                 <h4 class="team-member-name" data-i18n="team.m2.name">Membre 2</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <!-- Membre 03 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">03</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-3.jpg"
+              data-member-initials="M3">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-3.jpg"
-                    alt="Membre 3 — Nutrition & Sciences Alimentaires"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  <img class="team-member-photo" src="images/team/membre-3.jpg" alt="Membre 3 — Nutrition & Sciences"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m3.role">Nutrition & Sciences</span>
                 <h4 class="team-member-name" data-i18n="team.m3.name">Membre 3</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <!-- Membre 04 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">04</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-4.jpg"
+              data-member-initials="M4">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-4.jpg"
-                    alt="Membre 4 — Qualité, Procédés & Conservation"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  <img class="team-member-photo" src="images/team/membre-4.jpg" alt="Membre 4 — Qualité & Procédés"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m4.role">Qualité & Procédés</span>
                 <h4 class="team-member-name" data-i18n="team.m4.name">Membre 4</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <!-- Membre 05 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">05</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-5.jpg"
+              data-member-initials="M5">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-5.jpg"
-                    alt="Membre 5 — Sourcing & Économie Circulaire"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  <img class="team-member-photo" src="images/team/membre-5.jpg" alt="Membre 5 — Sourcing & Filières"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m5.role">Sourcing & Filières</span>
                 <h4 class="team-member-name" data-i18n="team.m5.name">Membre 5</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
             <!-- Membre 06 -->
-            <article class="team-member-card" data-scroll-reveal>
-              <span class="team-member-index" aria-hidden="true">06</span>
+            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-6.jpg"
+              data-member-initials="GJ">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
                   <img class="team-member-photo" src="images/team/membre-6.jpg"
-                    alt="Membre 6 — Design, Digital & Communication"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                  <svg class="team-member-placeholder-svg" style="display:none;" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                    alt="Gabriel Jagueneau — Design & Digital"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <span class="team-member-fallback" style="display:none;">
+                    <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </span>
                 </div>
               </div>
               <div class="team-member-body">
                 <span class="team-member-role-badge" data-i18n="team.m6.role">Design & Digital</span>
                 <h4 class="team-member-name" data-i18n="team.m6.name">Gabriel Jagueneau</h4>
+                <div class="team-member-socials">
+                  <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="9" width="4" height="12"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </a>
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="team-social-btn"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                  </a>
+                  <a href="mailto:corfovia@gmail.com" class="team-social-btn" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
 
@@ -438,7 +611,7 @@
               <h4 data-i18n="inno.invite.title">Notre création : le muffin Abadakor</h4>
               <p data-i18n="inno.invite.desc">90–100 g • Chocolat, Oligofructose & 30 g de protéines animales non valorisées.</p>
             </div>
-            <a href="products/muffin-vitalite/" class="btn-clay btn-clay-primary">
+            <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-primary">
               <span data-i18n="inno.invite.btn">Voir la recette & le produit →</span>
             </a>
           </div>
@@ -552,7 +725,7 @@
               </div>
 
               <div class="hero-cta-group">
-                <a href="products/muffin-vitalite/" class="btn-clay btn-clay-primary">
+                <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-primary">
                   <span data-i18n="routine.btn">Voir le produit →</span>
                 </a>
                 <button type="button" class="btn-clay btn-clay-secondary" data-open-sources-modal>
@@ -593,18 +766,29 @@
 
               <!-- Direct Follow & Contact Box -->
               <div class="social-cta-box">
-                <h4 data-i18n="comm.cta.title">Direct sur Instagram</h4>
-                <p><span data-i18n="comm.desc">Coulisses du projet, essais pâtissiers et échanges en message privé.</span></p>
+                <h4 data-i18n="comm.cta.title">Direct sur Instagram & Email</h4>
+                <p><span data-i18n="comm.desc">Coulisses du projet, essais pâtissiers et échanges directs avec l'équipe.</span></p>
 
-                <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                  <span data-i18n="comm.btn">Nous contacter sur @corfovia</span>
-                </a>
+                <div class="social-cta-buttons">
+                  <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span data-i18n="comm.btn">Nous contacter sur @corfovia</span>
+                  </a>
+
+                  <a href="mailto:corfovia@gmail.com" class="btn-clay-email">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>corfovia@gmail.com</span>
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -623,8 +807,8 @@
 
           <!-- Brand Info -->
           <div class="footer-brand-col">
-            <a href="./" class="nav-brand" aria-label="Corfovia Accueil">
-              <img class="nav-brand-logo" src="images/logo-horizontal-corfovia.png" alt="Corfovia"
+            <a href="/" class="nav-brand" aria-label="Corfovia Accueil">
+              <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia"
                 style="height: 40px;">
             </a>
             <p class="footer-brand-baseline">
@@ -650,6 +834,7 @@
               <li><a href="#creation" data-i18n="nav.innovation">Notre Équipe</a></li>
               <li><a href="#routine" data-i18n="nav.science">Notre Science</a></li>
               <li><a href="#communaute" data-i18n="footer.link.contact">Nous Contacter</a></li>
+              <li><a href="mailto:corfovia@gmail.com">corfovia@gmail.com</a></li>
             </ul>
           </div>
 
@@ -657,8 +842,8 @@
           <div class="footer-col">
             <h5 data-i18n="footer.col2.title">Produit</h5>
             <ul>
-              <li><a href="products/muffin-vitalite/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
-              <li><a href="products/muffin-vitalite/#recette-details" data-i18n="footer.link.recipe">Composition &
+              <li><a href="/products/muffin-vitalite/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
+              <li><a href="/products/muffin-vitalite/#recette-details" data-i18n="footer.link.recipe">Composition &
                   Recette</a></li>
               <li><a href="#routine" data-open-sources-modal data-i18n="footer.link.sources">Sources Documentaires</a>
               </li>

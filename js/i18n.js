@@ -100,8 +100,8 @@
       'comm.title': 'Échanger avec',
       'comm.title.span': "l'équipe Corfovia",
       'comm.subtitle': 'Une question sur notre projet ou le muffin Abadakor ? Écrivez-nous directement.',
-      'comm.cta.title': 'Direct sur Instagram',
-      'comm.desc': 'Coulisses du projet, essais pâtissiers et échanges en message privé.',
+      'comm.cta.title': 'Direct sur Instagram & Email',
+      'comm.desc': "Coulisses du projet, essais pâtissiers et échanges directs avec l'équipe.",
       'comm.qr': 'Scannez le QR Code',
       'comm.btn': 'Nous contacter sur @corfovia',
 
@@ -156,7 +156,16 @@
       'product.acc2.title': 'Intérêt Nutritionnel Documenté (ANSES / EFSA)',
       'product.acc2.content': "• <strong>Fer héminique & Vitamine B12 :</strong> selon la table ANSES-Ciqual, ces protéines animales non valorisées sont naturellement riches en fer héminique (biodisponibilité de 15 à 35 % selon Hurrell & Egli, 2010) et en vitamine B12.<br>• <strong>Réduction de la réponse glycémique :</strong> le remplacement des sucres par l'oligofructose dans les aliments induit une hausse plus faible de la glycémie postprandiale (Avis EFSA Journal 2014;12(1):3513).",
       'product.acc3.title': 'Démarche Anti-Gaspillage Alimentaire',
-      'product.acc3.content': "Bien que très riches sur le plan nutritionnel, ces protéines animales non valorisées sont aujourd'hui délaissées. Abadakor les intègre directement au sein d'une matrice pâtissière au chocolat familière et gourmande afin de les revaloriser sans compromis sur le plaisir."
+      'product.acc3.content': "Bien que très riches sur le plan nutritionnel, ces protéines animales non valorisées sont aujourd'hui délaissées. Abadakor les intègre directement au sein d'une matrice pâtissière au chocolat familière et gourmande afin de les revaloriser sans compromis sur le plaisir.",
+
+      // Page 404
+      'error404.badge': 'Erreur 404 • Hors Recette',
+      'error404.title': 'Aucune miette',
+      'error404.title.span': 'à cette adresse.',
+      'error404.desc': 'Chez Corfovia, rien ne se perd… sauf peut-être cette page. Elle a été déplacée, revalorisée ailleurs ou n’a jamais existé.',
+      'error404.btn.home': 'Retourner à l’accueil →',
+      'error404.btn.product': 'Découvrir le muffin Abadakor',
+      'error404.links.label': 'Accès directs :'
     },
 
     en: {
@@ -249,8 +258,8 @@
       'comm.title': 'Connect with',
       'comm.title.span': 'the Corfovia team',
       'comm.subtitle': 'Have a question about our project or the Abadakor muffin? Message us directly.',
-      'comm.cta.title': 'Direct on Instagram',
-      'comm.desc': 'Behind the scenes, baking trials and direct messages.',
+      'comm.cta.title': 'Direct on Instagram & Email',
+      'comm.desc': 'Behind the scenes, baking trials and direct messages with our team.',
       'comm.qr': 'Scan the QR Code',
       'comm.btn': 'Contact us on @corfovia',
 
@@ -305,7 +314,16 @@
       'product.acc2.title': 'Documented Nutritional Interest (ANSES / EFSA)',
       'product.acc2.content': '• <strong>Heme iron & Vitamin B12:</strong> according to the ANSES-Ciqual database, these unvalued animal proteins are naturally rich in heme iron (15–35% bioavailability according to Hurrell & Egli, 2010) and vitamin B12.<br>• <strong>Lower glycemic response:</strong> replacing sugars with oligofructose in foods induces a lower post-prandial blood glucose rise (EFSA Journal 2014;12(1):3513).',
       'product.acc3.title': 'Anti-Food-Waste Approach',
-      'product.acc3.content': 'Although nutritionally dense, these unvalued animal proteins are often overlooked today. Abadakor incorporates them directly into a familiar, indulgent chocolate muffin matrix to upcycle them without compromising on taste.'
+      'product.acc3.content': 'Although nutritionally dense, these unvalued animal proteins are often overlooked today. Abadakor incorporates them directly into a familiar, indulgent chocolate muffin matrix to upcycle them without compromising on taste.',
+
+      // Page 404
+      'error404.badge': 'Error 404 • Off Recipe',
+      'error404.title': 'Not a single crumb',
+      'error404.title.span': 'at this address.',
+      'error404.desc': 'At Corfovia, nothing goes to waste… except maybe this page. It may have been moved, upcycled elsewhere, or never existed.',
+      'error404.btn.home': 'Back to homepage →',
+      'error404.btn.product': 'Discover the Abadakor muffin',
+      'error404.links.label': 'Quick links:'
     }
   };
 
@@ -363,10 +381,27 @@
         pagePath = pathSegments.join('/');
       }
 
-      // Construit l'URL propre : /fr/ ou /en/ ou /fr/products/muffin-vitalite/
+      // Construit l'URL propre : /fr/ ou /en/ ou /fr/products/muffin-vitalite/ (et supprime tout ?lang= éventuel)
       const newUrl = '/' + langCode + '/' + (pagePath ? pagePath + '/' : '');
-      if (window.location.pathname !== newUrl) {
-        window.history.replaceState(null, document.title, newUrl + window.location.search + window.location.hash);
+      const params = new URLSearchParams(window.location.search);
+      params.delete('lang');
+      const cleanSearch = params.toString() ? '?' + params.toString() : '';
+
+      // Si un hash de section est présent au chargement initial, on le mémorise pour le scroll automatique
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace(/^#/, '');
+        if (hashId) {
+          try {
+            sessionStorage.setItem('corfovia_pending_scroll', hashId);
+          } catch (_) {}
+        }
+      }
+
+      const targetFullUrl = newUrl + cleanSearch;
+      const currentFullUrl = window.location.pathname + window.location.search + window.location.hash;
+
+      if (currentFullUrl !== targetFullUrl) {
+        window.history.replaceState(null, document.title, targetFullUrl);
       }
     }
 

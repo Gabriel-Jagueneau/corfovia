@@ -1,31 +1,197 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
-  <title>Corfovia</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>404 — Page introuvable | Corfovia</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#faf5ef">
+
   <script>
-    // GitHub Pages Single Page Application (SPA) Redirect for /fr/ and /en/
-    (function() {
+    // Redirection transparente uniquement pour les routes de langue connues (/fr/ et /en/) sur GitHub Pages
+    (function () {
       var l = window.location;
       var pathSegments = l.pathname.split('/').filter(Boolean);
-      
-      // Si l'utilisateur accède à /fr, /fr/, /en, ou /en/
+
       if (pathSegments.length > 0 && (pathSegments[0] === 'fr' || pathSegments[0] === 'en')) {
         var lang = pathSegments[0];
+        var subPath = pathSegments.slice(1).join('/').replace(/\/+$/, '');
+        var knownRoutes = ['', 'index.html', 'products/muffin-vitalite', 'products/muffin-vitalite/index.html'];
+
         localStorage.setItem('corfovia_language', lang);
-        
-        var subPath = pathSegments.slice(1).join('/');
-        var target = '/' + (subPath ? subPath + '/' : '');
-        
-        // Redirection vers la page avec mémorisation de la langue
-        window.location.replace(l.protocol + '//' + l.host + target + (target.indexOf('?') === -1 ? '?' : '&') + 'lang=' + lang + (l.hash || ''));
-      } else {
-        // Redirection vers l'accueil
-        window.location.replace('/');
+
+        if (knownRoutes.indexOf(subPath) !== -1) {
+          var cleanSub = subPath.replace(/index\.html$/, '').replace(/\/+$/, '');
+          var target = '/' + (cleanSub ? cleanSub + '/' : '');
+          if (l.hash) {
+            try {
+              sessionStorage.setItem('corfovia_pending_scroll', l.hash.replace(/^#/, ''));
+            } catch (_) {}
+          }
+          window.location.replace(l.protocol + '//' + l.host + target + (l.search || '') + (l.hash || ''));
+          return;
+        }
       }
     })();
   </script>
+
+  <!-- Préconnexions Réseau -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/corfovia-meta.png">
+
+  <!-- Feuilles de Style -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
 </head>
+
 <body>
+
+  <!-- FLOATING MORPHING HEADER -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand" aria-label="Corfovia Accueil">
+        <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia">
+      </a>
+
+      <div class="nav-current-badge">
+        <span class="nav-current-dot"></span>
+        <span class="nav-current-label">404</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/#vision" class="nav-link" data-i18n="nav.vision">La Vision</a></li>
+        <li><a href="/#creation" class="nav-link" data-i18n="nav.innovation">Notre Équipe</a></li>
+        <li><a href="/#routine" class="nav-link" data-i18n="nav.science">Notre Science</a></li>
+
+        <li class="nav-dropdown-wrapper">
+          <button class="nav-link nav-dropdown-btn" id="navProductsTrigger" aria-expanded="false" aria-haspopup="true">
+            <span data-i18n="nav.products">Produit</span>
+            <svg class="nav-chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
+            <div class="nav-dropdown-items">
+              <a href="/products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
+                <div class="nav-dropdown-icon-wrap">
+                  <img src="/images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
+                </div>
+                <div class="nav-dropdown-item-info">
+                  <div class="nav-dropdown-item-top">
+                    <span class="nav-dropdown-item-title">Abadakor</span>
+                    <span class="nav-dropdown-item-badge" data-i18n="nav.badge.abadakor">90 – 100 g</span>
+                  </div>
+                  <p class="nav-dropdown-item-desc" data-i18n="nav.dropdown.desc">Découvrez le muffin au chocolat, sa
+                    composition complète et ses différents points de vue.</p>
+                </div>
+                <svg class="nav-dropdown-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="lang-switcher-wrapper">
+          <div class="lang-switcher" role="group" aria-label="Choix de la langue">
+            <button class="lang-switcher-btn active" data-lang="fr" aria-pressed="true">FR</button>
+            <button class="lang-switcher-btn" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="site-wrapper">
+    <main>
+      <section class="error-404-section">
+        <div class="container">
+          <div class="error-404-card">
+            <div class="error-404-watermark" aria-hidden="true">404</div>
+
+            <!-- Ornement vague signature -->
+            <div class="section-scroll-ornament" aria-hidden="true">
+              <svg class="section-wave-svg" viewBox="0 0 180 28" fill="none">
+                <path class="scroll-draw-path" d="M 8 14 C 38 2, 68 26, 90 14 C 112 2, 142 26, 172 14" />
+              </svg>
+            </div>
+
+            <!-- Visuel 4 [Muffin] 4 -->
+            <div class="error-404-visual" aria-hidden="true">
+              <span class="error-404-digit">4</span>
+              <div class="error-404-muffin-zero">
+                <svg class="error-404-muffin-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Dôme chocolaté du muffin -->
+                  <path d="M12 31C10 21 18.5 13 32 13C45.5 13 54 21 52 31C53.5 31.8 54 34.5 51.5 36H12.5C10 34.5 10.5 31.8 12 31Z"
+                    fill="#7a142e" fill-opacity="0.14" stroke="#7a142e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                  <!-- Caissette plissée pâtissière -->
+                  <path d="M15.5 36L19.5 51C20 52.8 21.6 54 23.5 54H40.5C42.4 54 44 52.8 44.5 51L48.5 36"
+                    stroke="#7a142e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                  <!-- Plis de la caissette -->
+                  <line x1="25.5" y1="36" x2="27" y2="53.5" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="32" y1="36" x2="32" y2="54" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="38.5" y1="36" x2="37" y2="53.5" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <!-- Pépites de chocolat -->
+                  <circle cx="24" cy="24" r="2.2" fill="#7a142e" />
+                  <circle cx="33" cy="20" r="2.4" fill="#7a142e" />
+                  <circle cx="40.5" cy="25.5" r="2.1" fill="#7a142e" />
+                  <circle cx="29" cy="28.5" r="1.9" fill="#7a142e" />
+                </svg>
+              </div>
+              <span class="error-404-digit">4</span>
+            </div>
+
+            <div>
+              <span class="error-404-badge">
+                <span class="error-404-badge-dot"></span>
+                <span data-i18n="error404.badge">Erreur 404 • Hors Recette</span>
+              </span>
+            </div>
+
+            <h1 class="error-404-title">
+              <span data-i18n="error404.title">Aucune miette</span>
+              <span data-i18n="error404.title.span">à cette adresse.</span>
+            </h1>
+
+            <p class="error-404-desc" data-i18n="error404.desc">
+              Chez Corfovia, rien ne se perd… sauf peut-être cette page. Elle a été déplacée, revalorisée ailleurs ou
+              n’a jamais existé.
+            </p>
+
+            <div class="error-404-actions">
+              <a href="/" class="btn-clay btn-clay-primary" data-i18n="error404.btn.home">
+                Retourner à l’accueil →
+              </a>
+              <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-secondary" data-i18n="error404.btn.product">
+                Découvrir le muffin Abadakor
+              </a>
+            </div>
+
+            <div class="error-404-quicklinks">
+              <span class="error-404-quicklinks-label" data-i18n="error404.links.label">Accès directs :</span>
+              <a href="/#vision" data-i18n="nav.vision">La Vision</a>
+              <a href="/#creation" data-i18n="nav.innovation">Notre Équipe</a>
+              <a href="/#routine" data-i18n="nav.science">Notre Science</a>
+              <a href="/#communaute" data-i18n="footer.link.contact">Nous Contacter</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/i18n.js"></script>
+  <script src="/js/main.js"></script>
 </body>
+
 </html>

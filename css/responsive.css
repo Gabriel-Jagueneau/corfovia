@@ -21,14 +21,9 @@
   }
 
   .team-members-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px 16px;
     margin-bottom: 36px;
-  }
-
-  .team-members-grid .team-member-card:nth-child(3n + 2).is-visible,
-  .team-members-grid .team-member-card:nth-child(3n + 2).is-visible:hover {
-    transform: translate3d(0, 0, 0);
   }
 
   .recipe-ingredients-grid {
@@ -133,10 +128,18 @@
     display: none;
   }
 
-  .pillars-deck-grid,
-  .team-members-grid {
+  .pillars-deck-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .team-members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 14px;
+  }
+
+  .social-cta-buttons {
+    align-items: center;
   }
 
   .recipe-showcase-card {
@@ -244,5 +247,34 @@
 
   .footer-brand-col {
     grid-column: span 1;
+  }
+
+  .error-404-section {
+    padding: 115px 0 60px 0;
+  }
+
+  .error-404-card {
+    padding: 36px 22px 30px;
+    border-radius: 24px;
+  }
+
+  .error-404-muffin-zero {
+    width: 68px;
+    height: 68px;
+  }
+
+  .error-404-muffin-zero img,
+  .error-404-muffin-svg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .error-404-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .team-members-grid {
+    grid-template-columns: 1fr;
   }
 }
