@@ -346,9 +346,29 @@
     return VALID_LANGS.includes(browserLang) ? browserLang : 'fr';
   };
 
-  const setLanguage = (langCode) => {
+  /**
+   * Change la langue active et synchronise l'URL (/fr/... ou /en/...)
+   */
+  const setLanguage = (langCode, syncUrl = true) => {
     if (!VALID_LANGS.includes(langCode)) return;
     localStorage.setItem(STORAGE_KEY, langCode);
+
+    if (syncUrl && typeof window !== 'undefined' && window.history && window.history.replaceState) {
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      let pagePath = '';
+
+      if (pathSegments.length > 0 && VALID_LANGS.includes(pathSegments[0])) {
+        pagePath = pathSegments.slice(1).join('/');
+      } else {
+        pagePath = pathSegments.join('/');
+      }
+
+      // Construit l'URL propre : /fr/ ou /en/ ou /fr/products/muffin-vitalite/
+      const newUrl = '/' + langCode + '/' + (pagePath ? pagePath + '/' : '');
+      if (window.location.pathname !== newUrl) {
+        window.history.replaceState(null, document.title, newUrl + window.location.search + window.location.hash);
+      }
+    }
 
     applyTranslations(langCode);
     updateLanguageButtons(langCode);
