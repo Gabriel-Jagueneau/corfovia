@@ -53,10 +53,13 @@
     align-items: center;
     padding: 100px 0 140px 0;
     box-sizing: border-box;
-    background-image: 
-      linear-gradient(180deg, 
-        rgba(250, 245, 239, 0.97) 0%, 
-        rgba(250, 245, 239, 0.94) 55%, 
+  }
+
+  .hero-glorious::before {
+    background-image:
+      linear-gradient(180deg,
+        rgba(250, 245, 239, 0.97) 0%,
+        rgba(250, 245, 239, 0.94) 55%,
         rgba(243, 235, 225, 0.9) 100%),
       url('../images/hero-muffins.jpg');
     background-position: center bottom;

@@ -40,8 +40,57 @@
     let spreadRightLength = 0;
     let heroBottomY = 0;
     let targetPathProgress = 0;
+    let pathYTable = [];
+    let pathEndY = 0;
+    const smoothStep01 = (t) => { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); };
     let smoothedPathProgress = 0;
     let pathRafId = null;
+
+    // Vagues ornementales : 6 dessins paramétriques très lissés, tous différents,
+    // distribués dans un ordre aléatoire (sans doublon) à chaque chargement
+    const R = (lo, hi) => lo + Math.random() * (hi - lo);
+    const ornamentDesigns = [
+      // Houle douce (fréquence et phase variables)
+      () => { const f = R(2, 3.6), ph = R(0, Math.PI * 2); return (t) => [t, Math.sin(t * Math.PI * f + ph)]; },
+      // Onde qui s'amortit
+      () => { const f = R(3, 5), ph = R(0, 1.2), dec = R(0.6, 0.9); return (t) => [t, Math.sin(t * Math.PI * f + ph) * (1 - t * dec)]; },
+      // Une boucle (position et taille variables)
+      () => { const k = R(1.5, 2.1), c = R(0.3, 0.7), w = R(0.9, 1.3), flip = Math.random() < 0.5 ? 1 : -1;
+        return (t) => { const u = (t - c) * Math.PI * 2 * w; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; }; },
+      // Deux boucles
+      () => { const k = R(1.4, 1.9), flip = Math.random() < 0.5 ? 1 : -1;
+        return (t) => { const u = t * Math.PI * 4; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; }; },
+      // Onde qui grandit ou qui diminue
+      () => { const f = R(2.5, 4), ph = R(0, Math.PI * 2), grow = Math.random() < 0.5;
+        return (t) => [t, Math.sin(t * Math.PI * f + ph) * (grow ? 0.25 + t * 0.75 : 1 - t * 0.75)]; },
+      // Deux fréquences superposées
+      () => { const a1 = R(0.55, 0.85), a2 = R(0.25, 0.45), f1 = R(1.5, 2.5), f2 = R(4, 6), ph = R(0, Math.PI * 2);
+        return (t) => [t, a1 * Math.sin(t * Math.PI * f1 + ph) + a2 * Math.sin(t * Math.PI * f2 + ph * 0.5)]; }
+    ];
+    const buildOrnament = (design) => {
+      const N = 90;
+      const raw = [];
+      const fn = design();
+      for (let i = 0; i <= N; i++) raw.push(fn(i / N));
+      const xs = raw.map((p) => p[0]);
+      const ys = raw.map((p) => p[1]);
+      const x0 = Math.min(...xs), x1 = Math.max(...xs);
+      const y0 = Math.min(...ys), y1 = Math.max(...ys);
+      const sx = 168 / Math.max(1e-6, x1 - x0);
+      const sy = Math.min(sx, 20 / Math.max(1e-6, y1 - y0));
+      const pts = raw.map((p) => [6 + (p[0] - x0) * sx, 14 + (p[1] - (y0 + y1) / 2) * sy]);
+      const f = (n) => n.toFixed(2);
+      let d = `M ${f(pts[0][0])} ${f(pts[0][1])}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+        d += ` C ${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)}, ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)}, ${f(p2[0])} ${f(p2[1])}`;
+      }
+      return d;
+    };
+    const shuffledDesigns = ornamentDesigns.slice().sort(() => Math.random() - 0.5);
+    document.querySelectorAll('.section-scroll-ornament .scroll-draw-path').forEach((path, i) => {
+      path.setAttribute('d', buildOrnament(shuffledDesigns[i % shuffledDesigns.length]));
+    });
 
     // Initialisation des petites vagues animées au-dessus des sections
     const drawPathMeta = sectionDrawPaths.map((path) => {
@@ -105,32 +154,60 @@
         y2 = Math.round(routineEl.offsetTop + 260);
       }
 
-      const R = Math.round(Math.min(185, Math.max(105, W * 0.13)));
-      const dy = 145;
-      const cy = 265;
-      const k = 0.92; // Tangentes longues alignées C1 pour une courbure ultra-lissée
-      const tx = Math.round(R * k);
-      const ty = Math.round((cy + dy) * k);
-
-      const d = [
-        // Départ juste en dessous du Hero (y = y0)
-        `M ${xStart} ${y0}`,
-        // Courbe initiale ultra‑douce
-        `C ${xStart + 5} ${Math.round(y0 + (y1 - dy - y0) * 0.1)}, ${xRight + tx} ${y1 - dy - ty}, ${xRight} ${y1 - dy}`,
-        // Boucle #1 très ronde et ouverte (vers la gauche)
-        `C ${xRight - R} ${y1 + cy}, ${xRight - R} ${y1 - cy}, ${xRight} ${y1 + dy}`,
-        // Longue traversée fluide en S derrière les cartes Équipe vers la Boucle #2 (côté gauche)
-        `C ${xRight + tx} ${y1 + dy + ty}, ${xLeft - tx} ${y2 - dy - ty}, ${xLeft} ${y2 - dy}`,
-        // Boucle #2 très ronde et ouverte (vers la droite, sous les cartes Science)
-        `C ${xLeft + R} ${y2 + cy}, ${xLeft + R} ${y2 - cy}, ${xLeft} ${y2 + dy}`,
-        // Arrivée verticale ultra-douce pile contre la bordure supérieure du Footer (y = yEnd)
-        `C ${xLeft - tx} ${y2 + dy + ty}, ${xEnd} ${yEnd - 220}, ${xEnd} ${yEnd}`
-      ].join(' ');
+      // Tracé harmonieux : onde sinusoïdale ample + 2 boucles élégantes (C1, échantillonné puis Catmull-Rom)
+      const sc1 = y1 - y0;
+      const sc2 = Math.max(sc1 + 500, y2 - y0);
+      const lambda = 2 * (sc2 - sc1);
+      const amp = W * 0.17;
+      const xm = W * 0.5;
+      const R = Math.round(Math.min(95, Math.max(60, W * 0.065)));
+      const halfW = Math.min(190, (sc2 - sc1) * 0.4);
+      const smooth = (t) => { t = Math.min(1, Math.max(0, t)); return t * t * (3 - 2 * t); };
+      const loopExtra = (s, sc, dirX) => {
+        const u = (s - sc) / halfW;
+        if (u <= -1 || u >= 1) return null;
+        const phi = 2 * Math.PI * smooth((u + 1) / 2);
+        return { x: dirX * R * (1 - Math.cos(phi)), y: R * Math.sin(phi) };
+      };
+      const pointAt = (s) => {
+        const env = smooth(s / (spanH * 0.12)) * (1 - smooth((s - spanH * 0.82) / (spanH * 0.18)));
+        let x = xm + amp * env * Math.cos((2 * Math.PI * (s - sc1)) / lambda);
+        // Départ (s=0) aligné doucement sur xStart
+        x += (xStart - xm) * (1 - smooth(s / (spanH * 0.14))) * (1 - env * 0);
+        let y = y0 + s;
+        const e1 = loopExtra(s, sc1, -1);
+        const e2 = loopExtra(s, sc2, 1);
+        if (e1) { x += e1.x; y += e1.y; }
+        if (e2) { x += e2.x; y += e2.y; }
+        return [x, y];
+      };
+      const step = 20;
+      const pts = [];
+      for (let s = 0; s < spanH - 40; s += step) pts.push(pointAt(s));
+      pts.push([xEnd, yEnd - 1]);
+      let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+        const c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+        const c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+        d += ` C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+      }
 
       mainScrollPath.setAttribute('d', d);
 
       if (typeof mainScrollPath.getTotalLength === 'function') {
         mainPathLength = mainScrollPath.getTotalLength();
+        // Table longueur -> y (maximum cumulé) pour caler le front du tracé sur le centre de l'écran
+        pathYTable = [];
+        const samples = 600;
+        let runMax = -Infinity;
+        for (let i = 0; i <= samples; i++) {
+          const len = (mainPathLength * i) / samples;
+          const pt = mainScrollPath.getPointAtLength(len);
+          runMax = Math.max(runMax, pt.y);
+          pathYTable.push({ len, y: runMax });
+        }
+        pathEndY = yEnd;
         mainScrollPath.style.strokeDasharray = `${mainPathLength}`;
       }
 
@@ -139,7 +216,7 @@
       const xSpreadRight = W;
 
       if (spreadLeftPath) {
-        spreadLeftPath.setAttribute('d', `M ${xEnd} ${yEnd} L ${xSpreadLeft} ${yEnd}`);
+        spreadLeftPath.setAttribute('d', `M ${xEnd} ${yEnd - 1} L ${xSpreadLeft} ${yEnd - 1}`);
         if (typeof spreadLeftPath.getTotalLength === 'function') {
           spreadLeftLength = spreadLeftPath.getTotalLength();
           spreadLeftPath.style.strokeDasharray = `${spreadLeftLength}`;
@@ -147,7 +224,7 @@
       }
 
       if (spreadRightPath) {
-        spreadRightPath.setAttribute('d', `M ${xEnd} ${yEnd} L ${xSpreadRight} ${yEnd}`);
+        spreadRightPath.setAttribute('d', `M ${xEnd} ${yEnd - 1} L ${xSpreadRight} ${yEnd - 1}`);
         if (typeof spreadRightPath.getTotalLength === 'function') {
           spreadRightLength = spreadRightPath.getTotalLength();
           spreadRightPath.style.strokeDasharray = `${spreadRightLength}`;
@@ -184,7 +261,7 @@
       }
       const diff = targetPathProgress - smoothedPathProgress;
       if (Math.abs(diff) > 0.0005) {
-        smoothedPathProgress += diff * 0.32;
+        smoothedPathProgress += diff * 0.22;
         const clamped = Math.min(1, Math.max(0, smoothedPathProgress));
         applyPathProgress(clamped);
         pathRafId = requestAnimationFrame(animatePathLerp);
@@ -227,10 +304,38 @@
 
       // B. Fil conducteur SVG principal (commence sous le Hero, rythme très doux et progressif)
       if (mainScrollPath && mainPathLength > 0 && !prefersReducedMotion()) {
-        const scrollStart = Math.max(0, heroBottomY - winH * 0.6);
-        const postHeroRange = Math.max(1, docHeight - scrollStart);
-        const rawProg = Math.min(1, Math.max(0, (scrollY - scrollStart) / postHeroRange));
-        targetPathProgress = Math.pow(rawProg, 1.38);
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
+        const splitPoint = 0.84;
+        // Le front suit le centre de l'écran, puis ralentit/accélère LINÉAIREMENT sur ~2200px
+        // pour toucher le footer exactement 220px avant la fin du scroll (arrivée progressive).
+        const spreadStart = Math.max(0, maxScroll - 220);
+        const easeStart = Math.max(0, spreadStart - 2200);
+        const f0 = Math.min(pathEndY, easeStart + winH * 0.5);
+        let frontY = scrollY + winH * 0.5;
+        if (scrollY > easeStart) {
+          const t = Math.min(1, (scrollY - easeStart) / Math.max(1, spreadStart - easeStart));
+          frontY = f0 + (pathEndY - f0) * t;
+        }
+        let lenAtCenter = 0;
+        if (pathYTable.length) {
+          lenAtCenter = mainPathLength;
+          for (let i = 0; i < pathYTable.length; i++) {
+            if (pathYTable[i].y >= frontY) {
+              const prev = pathYTable[Math.max(0, i - 1)];
+              const cur = pathYTable[i];
+              const t = cur.y > prev.y ? (frontY - prev.y) / (cur.y - prev.y) : 0;
+              lenAtCenter = prev.len + (cur.len - prev.len) * Math.min(1, Math.max(0, t));
+              break;
+            }
+          }
+        }
+        const mainFrac = Math.min(1, Math.max(0, lenAtCenter / mainPathLength));
+        let prog = mainFrac * splitPoint;
+        if (mainFrac >= 1) {
+          const spreadFrac = Math.min(1, Math.max(0, (scrollY - spreadStart) / Math.max(1, maxScroll - spreadStart)));
+          prog = splitPoint + (1 - splitPoint) * smoothStep01(spreadFrac);
+        }
+        targetPathProgress = prog;
         if (!pathRafId) {
           pathRafId = requestAnimationFrame(animatePathLerp);
         }
@@ -633,7 +738,7 @@
           // Changement de page : mémorise la section cible pour scroller dès l'arrivée sur la nouvelle page
           try {
             sessionStorage.setItem('corfovia_pending_scroll', targetId);
-          } catch (_) {}
+          } catch (_) { }
         }
       });
     });
@@ -653,7 +758,7 @@
         if (!pendingTarget) pendingTarget = storedTarget;
         sessionStorage.removeItem('corfovia_pending_scroll');
       }
-    } catch (_) {}
+    } catch (_) { }
 
     if (window.history && window.history.replaceState) {
       if (loc.pathname.endsWith('index.html') || loc.hash) {
@@ -676,7 +781,28 @@
   // =========================================================================
   // BOOTSTRAP
   // =========================================================================
+  // Découpe le titre du hero en mots (animation d'ouverture mot par mot, sans coupe ni saccade)
+  const splitHeroTitle = () => {
+    const title = document.querySelector('.hero-glorious-title');
+    if (!title || prefersReducedMotion()) return;
+    let idx = 0;
+    title.querySelectorAll(':scope > *').forEach((el) => {
+      const words = (el.textContent || '').trim().split(/\s+/).filter(Boolean);
+      if (!words.length) return;
+      el.textContent = '';
+      words.forEach((w, i) => {
+        const span = document.createElement('span');
+        span.className = 'hero-word';
+        span.style.setProperty('--i', String(idx++));
+        span.textContent = w;
+        el.appendChild(span);
+        if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+      });
+    });
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
+    splitHeroTitle();
     initScrollEngine();
     initScrollReveal();
     initSourcesModal();
