@@ -115,8 +115,8 @@
       const d = [
         // Départ juste en dessous du Hero (y = y0)
         `M ${xStart} ${y0}`,
-        // Descente ample et ultra-lissée vers la Boucle #1 (côté droit, sous les cartes Piliers)
-        `C ${xStart + 25} ${Math.round(y0 + (y1 - dy - y0) * 0.45)}, ${xRight + tx} ${y1 - dy - ty}, ${xRight} ${y1 - dy}`,
+        // Courbe initiale ultra‑douce
+        `C ${xStart + 5} ${Math.round(y0 + (y1 - dy - y0) * 0.1)}, ${xRight + tx} ${y1 - dy - ty}, ${xRight} ${y1 - dy}`,
         // Boucle #1 très ronde et ouverte (vers la gauche)
         `C ${xRight - R} ${y1 + cy}, ${xRight - R} ${y1 - cy}, ${xRight} ${y1 + dy}`,
         // Longue traversée fluide en S derrière les cartes Équipe vers la Boucle #2 (côté gauche)

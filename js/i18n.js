@@ -118,8 +118,8 @@
       'footer.exigence2': 'Démarche Anti-Gaspillage',
       'footer.exigence3': 'Savoir-Faire Pâtissier',
       'footer.exigence4': 'Sources Scientifiques',
-      'footer.copy': "© 2026 Corfovia. Tous droits réservés. Projet d'innovation alimentaire & anti-gaspillage.",
-      'footer.mention': 'Démarche transparente & sources scientifiques documentées.',
+      'footer.copy': "© 2026 Corfovia. Tous droits réservés.",
+      'footer.mention': `Projet d'innovation alimentaire & anti - gaspillage.`,
 
       // Page Produit Abadakor (Composition réservée à cette page + Points de vue)
       'product.breadcrumb.home': 'Accueil',
@@ -276,8 +276,8 @@
       'footer.exigence2': 'Anti-Waste Approach',
       'footer.exigence3': 'Pastry Craftsmanship',
       'footer.exigence4': 'Scientific Sources',
-      'footer.copy': '© 2026 Corfovia. All rights reserved. Food innovation & anti-waste project.',
-      'footer.mention': 'Transparent approach & documented scientific sources.',
+      'footer.copy': '© 2026 Corfovia. All rights reserved.',
+      'footer.mention': 'Food innovation & anti-waste project.',
 
       // Page Produit Abadakor (Composition réservée à cette page + Points de vue)
       'product.breadcrumb.home': 'Home',
@@ -358,8 +358,8 @@
       return stored;
     }
 
-    const browserLang = (typeof navigator !== 'undefined' && navigator.language) 
-      ? navigator.language.split('-')[0].toLowerCase() 
+    const browserLang = (typeof navigator !== 'undefined' && navigator.language)
+      ? navigator.language.split('-')[0].toLowerCase()
       : 'fr';
     return VALID_LANGS.includes(browserLang) ? browserLang : 'fr';
   };
@@ -393,7 +393,7 @@
         if (hashId) {
           try {
             sessionStorage.setItem('corfovia_pending_scroll', hashId);
-          } catch (_) {}
+          } catch (_) { }
         }
       }
 
