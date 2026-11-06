@@ -55,17 +55,25 @@
       // Onde qui s'amortit
       () => { const f = R(3, 5), ph = R(0, 1.2), dec = R(0.6, 0.9); return (t) => [t, Math.sin(t * Math.PI * f + ph) * (1 - t * dec)]; },
       // Une boucle (position et taille variables)
-      () => { const k = R(1.5, 2.1), c = R(0.3, 0.7), w = R(0.9, 1.3), flip = Math.random() < 0.5 ? 1 : -1;
-        return (t) => { const u = (t - c) * Math.PI * 2 * w; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; }; },
+      () => {
+        const k = R(1.5, 2.1), c = R(0.3, 0.7), w = R(0.9, 1.3), flip = Math.random() < 0.5 ? 1 : -1;
+        return (t) => { const u = (t - c) * Math.PI * 2 * w; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; };
+      },
       // Deux boucles
-      () => { const k = R(1.4, 1.9), flip = Math.random() < 0.5 ? 1 : -1;
-        return (t) => { const u = t * Math.PI * 4; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; }; },
+      () => {
+        const k = R(1.4, 1.9), flip = Math.random() < 0.5 ? 1 : -1;
+        return (t) => { const u = t * Math.PI * 4; return [u - k * Math.sin(u), flip * -k * Math.cos(u)]; };
+      },
       // Onde qui grandit ou qui diminue
-      () => { const f = R(2.5, 4), ph = R(0, Math.PI * 2), grow = Math.random() < 0.5;
-        return (t) => [t, Math.sin(t * Math.PI * f + ph) * (grow ? 0.25 + t * 0.75 : 1 - t * 0.75)]; },
+      () => {
+        const f = R(2.5, 4), ph = R(0, Math.PI * 2), grow = Math.random() < 0.5;
+        return (t) => [t, Math.sin(t * Math.PI * f + ph) * (grow ? 0.25 + t * 0.75 : 1 - t * 0.75)];
+      },
       // Deux fréquences superposées
-      () => { const a1 = R(0.55, 0.85), a2 = R(0.25, 0.45), f1 = R(1.5, 2.5), f2 = R(4, 6), ph = R(0, Math.PI * 2);
-        return (t) => [t, a1 * Math.sin(t * Math.PI * f1 + ph) + a2 * Math.sin(t * Math.PI * f2 + ph * 0.5)]; }
+      () => {
+        const a1 = R(0.55, 0.85), a2 = R(0.25, 0.45), f1 = R(1.5, 2.5), f2 = R(4, 6), ph = R(0, Math.PI * 2);
+        return (t) => [t, a1 * Math.sin(t * Math.PI * f1 + ph) + a2 * Math.sin(t * Math.PI * f2 + ph * 0.5)];
+      }
     ];
     const buildOrnament = (design) => {
       const N = 90;
@@ -437,29 +445,78 @@
   // 2. SCROLL REVEAL OBSERVER
   // =========================================================================
   const initScrollReveal = () => {
-    const revealEls = document.querySelectorAll('[data-scroll-reveal]');
+    const revealEls = Array.from(document.querySelectorAll('[data-scroll-reveal]'));
     if (!revealEls.length) return;
 
-    if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
-      revealEls.forEach((el) => el.classList.add('is-visible'));
+    if (prefersReducedMotion()) {
+      revealEls.forEach((el) => el.style.setProperty('--rp', '1'));
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    revealEls.forEach((el, idx) => {
-      el.style.transitionDelay = `${(idx % 4) * 55}ms`;
-      observer.observe(el);
+    // Nombre de mots par titre (pour caler la cascade des mots sur la progression)
+    document.querySelectorAll('h2').forEach((h2) => {
+      const n = h2.querySelectorAll('.title-word').length;
+      if (n) h2.style.setProperty('--n', String(n));
     });
+
+    const clamp01 = (v) => Math.min(1, Math.max(0, v));
+    const last = new Map();
+    let ticking = false;
+
+    // Éléments frères dans un même conteneur : ils apparaissent l'un après l'autre
+    const groups = new Map();
+    revealEls.forEach((el) => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      if (!groups.has(parent)) groups.set(parent, []);
+      groups.get(parent).push(el);
+    });
+    const groupInfo = new Map(); // el -> { parent, index, count }
+    groups.forEach((list, parent) => {
+      if (list.length < 2) return;
+      list.forEach((el, index) => groupInfo.set(el, { parent, index, count: list.length, lastEl: list[list.length - 1] }));
+    });
+
+    // Progression 0 -> 1 liée directement à la position à l'écran :
+    // seul -> basée sur son propre haut ; en groupe -> progression du conteneur répartie en cascade.
+    const update = () => {
+      ticking = false;
+      const H = window.innerHeight || 800;
+      const start = H * 0.98;       // l'élément commence à apparaître en entrant par le bas
+      const end = H * 0.70;         // et est entièrement visible à 25% du bas de l'écran au plus tard
+      const range = start - end;
+      revealEls.forEach((el) => {
+        let p;
+        const g = groupInfo.get(el);
+        if (g) {
+          // Groupe : tous les éléments sont complets quand le DERNIER atteint la ligne des 25%
+          const top = g.parent.getBoundingClientRect().top;
+          const lastTop = g.lastEl.getBoundingClientRect().top;
+          const span = range + Math.max(0, lastTop - top);
+          const gp = clamp01((start - top) / span);
+          const overlap = 1.6;
+          p = clamp01((gp * (g.count - 1 + overlap) - g.index) / overlap);
+        } else {
+          p = clamp01((start - el.getBoundingClientRect().top) / range);
+        }
+        p = Math.round(p * 1000) / 1000;
+        if (last.get(el) !== p) {
+          last.set(el, p);
+          el.style.setProperty('--rp', String(p));
+        }
+      });
+    };
+
+    const request = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    update();
   };
 
   // =========================================================================
@@ -781,23 +838,42 @@
   // =========================================================================
   // BOOTSTRAP
   // =========================================================================
-  // Découpe le titre du hero en mots (animation d'ouverture mot par mot, sans coupe ni saccade)
-  const splitHeroTitle = () => {
-    const title = document.querySelector('.hero-glorious-title');
-    if (!title || prefersReducedMotion()) return;
+  // Découpe un titre en mots (chaque mot reçoit --i pour la cascade ; la classe donne l'animation)
+  const splitIntoWords = (title, className) => {
     let idx = 0;
-    title.querySelectorAll(':scope > *').forEach((el) => {
-      const words = (el.textContent || '').trim().split(/\s+/).filter(Boolean);
-      if (!words.length) return;
-      el.textContent = '';
-      words.forEach((w, i) => {
-        const span = document.createElement('span');
-        span.className = 'hero-word';
-        span.style.setProperty('--i', String(idx++));
-        span.textContent = w;
-        el.appendChild(span);
-        if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((child) => {
+        if (child.nodeType === 3) {
+          const parts = child.textContent.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+          parts.forEach((part) => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = className;
+              span.style.setProperty('--i', String(idx++));
+              span.textContent = part;
+              frag.appendChild(span);
+            }
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1) {
+          walk(child);
+        }
       });
+    };
+    walk(title);
+  };
+
+  // Titre du hero : animation d'ouverture ; titres de sections : même animation au scroll
+  const splitHeroTitle = () => {
+    if (prefersReducedMotion()) return;
+    const hero = document.querySelector('.hero-glorious-title');
+    if (hero) splitIntoWords(hero, 'hero-word');
+    document.querySelectorAll('h2').forEach((h2) => {
+      if (h2.closest('[data-scroll-reveal]')) splitIntoWords(h2, 'title-word');
     });
   };
 

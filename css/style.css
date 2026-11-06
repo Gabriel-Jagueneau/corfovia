@@ -189,18 +189,36 @@ body {
   will-change: stroke-dashoffset;
 }
 
-/* Scroll reveal items */
+/* Scroll reveal : progression --rp (0 -> 1) pilotée par le scroll (voir initScrollReveal) */
 [data-scroll-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 28px, 0);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  --rp: 1;
+  opacity: var(--rp);
+  transform: translate3d(0, calc((1 - var(--rp)) * 36px), 0);
+  transition: none;
 }
 
-[data-scroll-reveal].is-visible {
+/* En-têtes de section : les mots du titre avancent avec le scroll (même effet que le hero) */
+.section-title-wrap[data-scroll-reveal] {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: none;
+}
+
+.section-title-wrap[data-scroll-reveal] > .section-scroll-ornament,
+.section-title-wrap[data-scroll-reveal] > .section-serif-sub,
+.section-title-wrap[data-scroll-reveal] > p {
+  --sp: clamp(0, calc((var(--rp) - 0.45) * 2.2), 1);
+  opacity: var(--sp);
+  transform: translate3d(0, calc((1 - var(--sp)) * 18px), 0);
+}
+
+.title-word {
+  --wp: clamp(0, calc((var(--rp, 1) * (var(--n, 4) + 3) - var(--i, 0)) / 3), 1);
+  display: inline-block;
+  padding: 0.1em 0.14em;
+  margin: -0.1em -0.14em;
+  opacity: var(--wp);
+  transform: translate3d(0, calc((1 - var(--wp)) * 0.55em), 0);
+  filter: blur(calc((1 - var(--wp)) * 9px));
 }
 
 [data-scroll-parallax] {
@@ -2692,6 +2710,7 @@ body {
   .site-nav .nav-current-badge,
   .site-nav .nav-links>li,
   .hero-word,
+  .title-word,
   .hero-glorious-p,
   .hero-cta-group,
   .hero-trust-bar,
