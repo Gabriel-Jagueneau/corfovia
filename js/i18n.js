@@ -16,7 +16,7 @@
       'nav.innovation': 'Notre Équipe',
       'nav.science': 'Notre Science',
       'nav.products': 'Produit',
-      'nav.badge.abadakor': '90 – 100 g',
+      'nav.badge.abadakor': '90 g',
       'nav.dropdown.desc': 'Découvrez le muffin au chocolat, sa composition complète et ses différents points de vue.',
 
       // Hero (Présentation de Corfovia & Vision)
@@ -40,9 +40,9 @@
       'pillar3.kpi': 'Fer & Vitamine B12',
       'pillar3.title': 'Haute Biodisponibilité',
       'pillar3.desc': 'Privilégier le fer héminique naturellement assimilable (15–35 %).',
-      'pillar4.kpi': 'Zéro Frein Gustatif',
-      'pillar4.title': 'Acceptabilité Gourmande',
-      'pillar4.desc': 'Intégrer des nutriments délaissés sans jamais altérer le goût.',
+      'pillar4.kpi': 'Énergie & Vitalité',
+      'pillar4.title': 'Bienfaits Nutritionnels',
+      'pillar4.desc': '11,2 g de protéines, 13,1 g de fibres et des minéraux essentiels pour une satiété saine et durable.',
 
       // Notre Équipe (6 Membres & 6 Rôles — Épuré)
       'inno.title': "L'Équipe",
@@ -61,8 +61,8 @@
       'team.m6.role': 'Design & Digital',
       'team.m6.name': 'Gabriel Jagueneau',
       'inno.invite.title': 'Notre création : le muffin Abadakor',
-      'inno.invite.desc': '90–100 g • Chocolat, Oligofructose & 30 g de protéines animales non valorisées.',
-      'inno.invite.btn': 'Voir la recette & le produit →',
+      'inno.invite.desc': '90 g • Chocolat, Oligofructose & 28 g de protéines animales non valorisées.',
+      'inno.invite.btn': 'Voir le produit →',
 
       // Science & Jauges (UI réduite & visuelle)
       'science.header.title': 'Biodisponibilité du Fer',
@@ -92,7 +92,7 @@
       'routine.p2.title': 'Substitut aux Collations Trop Sucrées',
       'routine.p2.desc': 'Oligofructose : pic glycémique réduit après le repas (EFSA, 2014).',
       'routine.p3.title': 'Protéines Animales Valorisées',
-      'routine.p3.desc': "Intégrées au cœur d'un muffin au chocolat moelleux de 90–100 g.",
+      'routine.p3.desc': "Intégrées au centre d'un muffin au chocolat moelleux de 90 g.",
       'routine.btn': 'Voir le produit →',
       'routine.btn.sources': 'Sources scientifiques (4)',
 
@@ -128,18 +128,18 @@
       'product.pill.dessus': 'Vue de dessus',
       'product.pill.coupe': 'Vue en coupe',
       'product.pill.profil': 'Vue de profil',
-      'product.view.face.title': 'Vue de Face • Dôme Pâtissier Généreux (90–100 g)',
+      'product.view.face.title': 'Vue de Face • Dôme Pâtissier Généreux (90 g)',
       'product.view.face.sub': "Silhouette traditionnelle d'un muffin au chocolat fraîchement sorti du four",
       'product.view.dessus.title': 'Vue de Dessus • Croûte Chocolatée Craquelée',
       'product.view.dessus.sub': 'Aspect gourmand obtenu grâce à la cuisson de la pâte au chocolat et au beurre',
       'product.view.coupe.title': 'Vue en Coupe • Mie Moelleuse & Homogène',
-      'product.view.coupe.sub': 'Intégration fine des 30 g de protéines animales non valorisées au sein de la mie',
-      'product.view.profil.title': 'Vue de Profil • Format Individuel 90 à 100 g',
+      'product.view.coupe.sub': 'Intégration fine des 28 g de protéines animales non valorisées au sein de la mie',
+      'product.view.profil.title': 'Vue de Profil • Format Individuel 90 g',
       'product.view.profil.sub': 'Une portion généreuse pensée pour allier plaisir pâtissier et densité nutritionnelle',
-      'product.weight.badge': 'Muffin total : 90 à 100 g • 30 g de protéines animales non valorisées',
-      'product.desc': "« Valoriser 30 g de protéines animales non valorisées dans un vrai muffin pâtissier au chocolat ? » Dès la première bouchée : <em>« Ah bah d'accord ! »</em> Une recette gourmande où l'oligofructose remplace le sucre raffiné.",
+      'product.weight.badge': 'Muffin total : 90 g • 28 g de protéines animales non valorisées',
+      'product.desc': "« Utiliser 28 g de protéines animales non valorisées dans un vrai muffin pâtissier au chocolat ? » Dès la première bouchée : <em>« Ah bah d'accord ! »</em> Une recette gourmande où l'oligofructose remplace le sucre raffiné.",
       'product.recipe.box.title': 'La Recette du Muffin',
-      'product.tag.protein': 'Protéines animales non valorisées (30 g / muffin)',
+      'product.tag.protein': 'Protéines animales non valorisées (28 g / muffin)',
       'product.tag.beneo': 'Oligofructose',
       'product.tag.choc': 'Chocolat',
       'product.tag.butter': 'Beurre',
@@ -151,8 +151,8 @@
       'product.contact.desc': "Ce produit est présenté dans le cadre du projet Corfovia. Pour toute question, dégustation ou demande d'information, contactez notre équipe :",
       'product.btn.contact': 'Nous contacter sur @corfovia →',
       'product.btn.science': 'Voir les sources documentaires',
-      'product.acc1.title': 'Recette & Composition (Muffin de 90 à 100 g)',
-      'product.acc1.content': '• <strong>Oligofructose :</strong> fibre prébiotique issue de la racine de chicorée qui remplace le sucre.<br>• <strong>Protéines animales non valorisées :</strong> 30 g par muffin.<br>• <strong>Ingrédients pâtissiers :</strong> Beurre, levure chimique, farine, œufs, sel, lait, chocolat.<br>• <strong>Poids total :</strong> 90 à 100 g par muffin.',
+      'product.acc1.title': 'Recette & Composition (Muffin de 90 g)',
+      'product.acc1.content': '• <strong>Oligofructose :</strong> fibre prébiotique issue de la racine de chicorée qui remplace le sucre.<br>• <strong>Protéines animales non valorisées :</strong> 28 g par muffin.<br>• <strong>Ingrédients pâtissiers :</strong> Beurre, levure chimique, farine, œufs, sel, lait, chocolat.<br>• <strong>Poids total :</strong> 90 g par muffin (pour 1 muffin de 90 g).<br>• <strong>Énergie :</strong> ~233 kcal.<br>• <strong>Protéines :</strong> ~11,2 g (9,2 g issus des protéines animales non valorisées + 2,0 g issus de la farine, du lait et du chocolat).<br>• <strong>Lipides :</strong> ~11,4 g (chocolat à 85 %, beurre et protéines animales non valorisées).<br>• <strong>Glucides nets :</strong> ~16,3 g (principalement l\'amidon de la farine de blé).<br>• <strong>Fibres :</strong> ~13,1 g (10 g d\'oligofructose + fibres du chocolat noir).',
       'product.acc2.title': 'Intérêt Nutritionnel Documenté (ANSES / EFSA)',
       'product.acc2.content': "• <strong>Fer héminique & Vitamine B12 :</strong> selon la table ANSES-Ciqual, ces protéines animales non valorisées sont naturellement riches en fer héminique (biodisponibilité de 15 à 35 % selon Hurrell & Egli, 2010) et en vitamine B12.<br>• <strong>Réduction de la réponse glycémique :</strong> le remplacement des sucres par l'oligofructose dans les aliments induit une hausse plus faible de la glycémie postprandiale (Avis EFSA Journal 2014;12(1):3513).",
       'product.acc3.title': 'Démarche Anti-Gaspillage Alimentaire',
@@ -174,7 +174,7 @@
       'nav.innovation': 'Our Team',
       'nav.science': 'Our Science',
       'nav.products': 'Product',
-      'nav.badge.abadakor': '90 – 100 g',
+      'nav.badge.abadakor': '90 g',
       'nav.dropdown.desc': 'Discover the chocolate muffin, its full recipe composition and its different angles.',
 
       // Hero
@@ -198,9 +198,9 @@
       'pillar3.kpi': 'Iron & Vitamin B12',
       'pillar3.title': 'High Bioavailability',
       'pillar3.desc': 'Prioritizing naturally absorbable heme iron (15–35% absorbed).',
-      'pillar4.kpi': 'Zero Taste Barrier',
-      'pillar4.title': 'Gourmet Acceptability',
-      'pillar4.desc': 'Integrating overlooked nutrients without ever compromising on taste.',
+      'pillar4.kpi': 'Energy & Vitality',
+      'pillar4.title': 'Nutritional Benefits',
+      'pillar4.desc': '11.2 g of protein, 13.1 g of fibre, and essential minerals for healthy, lasting satiety.',
 
       // Our Team (6 Members & 6 Roles)
       'inno.title': 'The Corfovia',
@@ -219,8 +219,8 @@
       'team.m6.role': 'Design & Digital',
       'team.m6.name': 'Gabriel Jagueneau',
       'inno.invite.title': 'Our creation: the Abadakor muffin',
-      'inno.invite.desc': '90–100 g • Chocolate, Oligofructose & 30 g unvalued animal proteins.',
-      'inno.invite.btn': 'View recipe & product →',
+      'inno.invite.desc': '90 g • Chocolate, Oligofructose & 28 g unvalued animal proteins.',
+      'inno.invite.btn': 'View product →',
 
       // Science & Jauges
       'science.header.title': 'Iron Bioavailability',
@@ -250,7 +250,7 @@
       'routine.p2.title': 'Substitute for Overly Sugary Snacks',
       'routine.p2.desc': 'Oligofructose: lower blood glucose rise after meals (EFSA, 2014).',
       'routine.p3.title': 'Upcycled Animal Proteins',
-      'routine.p3.desc': 'Integrated at the heart of a soft 90–100 g chocolate muffin.',
+      'routine.p3.desc': 'Integrated at the heart of a soft 90 g chocolate muffin.',
       'routine.btn': 'View product →',
       'routine.btn.sources': 'Scientific sources (4)',
 
@@ -286,18 +286,18 @@
       'product.pill.dessus': 'Top view',
       'product.pill.coupe': 'Cross-section',
       'product.pill.profil': 'Side view',
-      'product.view.face.title': 'Front View • Generous Bakery Dome (90–100 g)',
+      'product.view.face.title': 'Front View • Generous Bakery Dome (90 g)',
       'product.view.face.sub': 'Traditional silhouette of a freshly baked chocolate muffin',
       'product.view.dessus.title': 'Top View • Cracked Chocolate Crust',
       'product.view.dessus.sub': 'Gourmet appearance achieved by baking the rich chocolate and butter batter',
       'product.view.coupe.title': 'Cross-Section • Soft & Homogeneous Crumb',
-      'product.view.coupe.sub': 'Fine integration of 30 g of unvalued animal proteins inside the crumb',
-      'product.view.profil.title': 'Side View • Individual 90 to 100 g Portion',
+      'product.view.coupe.sub': 'Fine integration of 28 g of unvalued animal proteins inside the crumb',
+      'product.view.profil.title': 'Side View • Individual 90 g Portion',
       'product.view.profil.sub': 'A generous portion designed to combine pastry indulgence with nutritional density',
-      'product.weight.badge': 'Total muffin: 90 to 100 g • 30 g unvalued animal proteins',
-      'product.desc': '“Upcycling 30 g of unvalued animal proteins in a real chocolate bakery muffin?” From the first bite: <em>“Ah, got it!”</em> A gourmet recipe where oligofructose replaces refined sugar.',
+      'product.weight.badge': 'Total muffin: 90 g • 28 g unvalued animal proteins',
+      'product.desc': '“Upcycling 28 g of unvalued animal proteins in a real chocolate bakery muffin?” From the first bite: <em>“Ah, got it!”</em> A gourmet recipe where oligofructose replaces refined sugar.',
       'product.recipe.box.title': 'The Muffin Recipe',
-      'product.tag.protein': 'Unvalued animal proteins (30 g / muffin)',
+      'product.tag.protein': 'Unvalued animal proteins (28 g / muffin)',
       'product.tag.beneo': 'Oligofructose',
       'product.tag.choc': 'Chocolate',
       'product.tag.butter': 'Butter',
@@ -309,8 +309,8 @@
       'product.contact.desc': 'This product is presented as part of the Corfovia project. For any questions, tasting inquiries or information, contact our team:',
       'product.btn.contact': 'Contact us on @corfovia →',
       'product.btn.science': 'View documentary sources',
-      'product.acc1.title': 'Recipe & Composition (90 to 100 g Muffin)',
-      'product.acc1.content': '• <strong>Oligofructose:</strong> prebiotic fiber from chicory root replacing refined sugar.<br>• <strong>Unvalued animal proteins:</strong> 30 g per muffin.<br>• <strong>Pastry ingredients:</strong> Butter, baking powder, flour, eggs, salt, milk, chocolate.<br>• <strong>Total weight:</strong> 90 to 100 g per muffin.',
+      'product.acc1.title': 'Recipe & Composition (90 g Muffin)',
+      'product.acc1.content': '• <strong>Oligofructose:</strong> prebiotic fiber from chicory root replacing refined sugar.<br>• <strong>Unvalued animal proteins:</strong> 28 g per muffin.<br>• <strong>Pastry ingredients:</strong> Butter, baking powder, flour, eggs, salt, milk, chocolate.<br>• <strong>Total weight:</strong> 90 g per muffin (values per 90 g muffin).<br>• <strong>Energy:</strong> ~233 kcal.<br>• <strong>Protein:</strong> ~11.2 g (9.2 g from the unvalued animal proteins + 2.0 g from flour, milk and chocolate).<br>• <strong>Fat:</strong> ~11.4 g (85% chocolate, butter and unvalued animal proteins).<br>• <strong>Net carbohydrates:</strong> ~16.3 g (mainly wheat flour starch).<br>• <strong>Fibre:</strong> ~13.1 g (10 g of oligofructose + dark chocolate fibre).',
       'product.acc2.title': 'Documented Nutritional Interest (ANSES / EFSA)',
       'product.acc2.content': '• <strong>Heme iron & Vitamin B12:</strong> according to the ANSES-Ciqual database, these unvalued animal proteins are naturally rich in heme iron (15–35% bioavailability according to Hurrell & Egli, 2010) and vitamin B12.<br>• <strong>Lower glycemic response:</strong> replacing sugars with oligofructose in foods induces a lower post-prandial blood glucose rise (EFSA Journal 2014;12(1):3513).',
       'product.acc3.title': 'Anti-Food-Waste Approach',
@@ -367,7 +367,7 @@
   /**
    * Change la langue active et synchronise l'URL (/fr/... ou /en/...)
    */
-  const setLanguage = (langCode, syncUrl = true) => {
+  const setLanguage = (langCode, syncUrl = true, isUserClick = false) => {
     if (!VALID_LANGS.includes(langCode)) return;
     localStorage.setItem(STORAGE_KEY, langCode);
 
@@ -405,28 +405,40 @@
       }
     }
 
-    applyTranslations(langCode);
+    applyTranslations(langCode, isUserClick);
     updateLanguageButtons(langCode);
     document.documentElement.lang = langCode;
-    window.dispatchEvent(new CustomEvent('corfoviaLanguageChange', { detail: { lang: langCode } }));
+    window.dispatchEvent(new CustomEvent('corfoviaLanguageChange', { detail: { lang: langCode, isUserClick: !!isUserClick } }));
   };
 
-  const applyTranslations = (langCode) => {
+  const applyTranslations = (langCode, animate = false) => {
     const dict = translations[langCode] || translations.fr;
+    let animIdx = 0;
 
-    document.querySelectorAll('[data-i18n]').forEach((el) => {
-      const key = el.getAttribute('data-i18n');
-      if (dict[key]) {
+    const translateEl = (el, isHtml) => {
+      const key = el.getAttribute(isHtml ? 'data-i18n-html' : 'data-i18n');
+      if (!dict[key]) return;
+      if (isHtml) {
+        el.innerHTML = dict[key];
+      } else {
         el.textContent = dict[key];
       }
-    });
 
-    document.querySelectorAll('[data-i18n-html]').forEach((el) => {
-      const key = el.getAttribute('data-i18n-html');
-      if (dict[key]) {
-        el.innerHTML = dict[key];
+      // Animation douce et fluide (flou + élévation) sur TOUS les textes et titres lors du changement de langue
+      if (animate) {
+        el.classList.remove('i18n-reveal');
+        void el.offsetWidth; // force reflow pour relancer l'animation
+        el.style.animationDelay = `${(animIdx++ % 14) * 35}ms`;
+        el.classList.add('i18n-reveal');
+        setTimeout(() => {
+          el.classList.remove('i18n-reveal');
+          el.style.animationDelay = '';
+        }, 1200);
       }
-    });
+    };
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => translateEl(el, false));
+    document.querySelectorAll('[data-i18n-html]').forEach((el) => translateEl(el, true));
   };
 
   const updateLanguageButtons = (langCode) => {
@@ -448,7 +460,7 @@
         e.preventDefault();
         const targetLang = btn.getAttribute('data-lang');
         if (targetLang) {
-          setLanguage(targetLang, true);
+          setLanguage(targetLang, true, true);
         }
       });
     });

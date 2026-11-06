@@ -153,6 +153,10 @@
     grid-template-columns: 1fr;
   }
 
+  .vitality-gauges-showcase {
+    order: 2;
+  }
+
   .gauges-micro-comparison {
     grid-template-columns: 1fr;
   }

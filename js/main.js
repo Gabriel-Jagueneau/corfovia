@@ -119,12 +119,25 @@
       const H = Math.max(1200, siteWrapper.scrollHeight || document.documentElement.scrollHeight || 3600);
 
       svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svgEl.setAttribute('preserveAspectRatio', 'none');
 
-      // Départ juste en dessous de la section Hero et arrêt au sommet du Footer
-      const y0 = heroEl ? Math.round(heroEl.offsetTop + heroEl.offsetHeight) : 0;
-      const yEnd = footerEl ? Math.round(footerEl.offsetTop) : H;
+      // Helper pour calculer la position Y exacte non-transformée par CSS au sein de siteWrapper
+      const getUntransformedTop = (el) => {
+        let top = 0;
+        let curr = el;
+        while (curr && curr !== siteWrapper && curr !== document.body) {
+          top += curr.offsetTop;
+          curr = curr.offsetParent;
+        }
+        return top;
+      };
+
+      // Départ juste en dessous du Hero et jonction au sommet exact du Footer
+      const y0 = heroEl ? Math.round(getUntransformedTop(heroEl) + heroEl.offsetHeight) : 0;
+      const yEnd = footerEl ? Math.round(getUntransformedTop(footerEl)) : H;
       heroBottomY = y0;
-      const spanH = Math.max(700, yEnd - y0);
+      const yFooterLine = Math.round(yEnd - 1.5);
+      const spanH = Math.max(700, yFooterLine - y0);
 
       // Amplitude horizontale ultra-douce pour éviter tout virage brusque
       const xStart = Math.round(W * 0.62);
@@ -132,21 +145,36 @@
       const xLeft = Math.round(W * 0.34);
       const xEnd = Math.round(W * 0.50);
 
-      // Calage des dégradés (fondu au départ sous le Hero + étalement horizontal sur le Footer)
+      // Positionnées au cœur des grilles de cartes (et non sur les titres de sections)
+      const creationEl = document.getElementById('creation');
+      const routineEl = document.getElementById('routine');
+      const communauteEl = document.getElementById('communaute');
+      const cardEl = communauteEl ? communauteEl.querySelector('.subscribe-card-glorious') : null;
+
+      // Calage des dégradés (fondu au départ sous le Hero, trait blanc crème au contact exact de la boîte, étalement horizontal sur le Footer)
       if (threadGradient) {
         threadGradient.setAttribute('y1', `${y0}`);
-        threadGradient.setAttribute('y2', `${yEnd}`);
+        threadGradient.setAttribute('y2', `${yFooterLine}`);
+        if (cardEl) {
+          const cardTop = getUntransformedTop(cardEl);
+          const cardBottom = cardTop + cardEl.offsetHeight;
+          const pIn = Math.max(0, Math.min(100, ((cardTop - y0) / spanH) * 100));
+          const pOut = Math.max(0, Math.min(100, ((cardBottom - y0) / spanH) * 100));
+          threadGradient.innerHTML = `
+            <stop offset="0%" stop-color="#8e1937" stop-opacity="0" />
+            <stop offset="5%" stop-color="#7a142e" stop-opacity="1" />
+            <stop offset="${pIn.toFixed(2)}%" stop-color="#7a142e" stop-opacity="1" />
+            <stop offset="${pIn.toFixed(2)}%" stop-color="#fcf9f5" stop-opacity="1" />
+            <stop offset="${pOut.toFixed(2)}%" stop-color="#fcf9f5" stop-opacity="1" />
+            <stop offset="${pOut.toFixed(2)}%" stop-color="#7a142e" stop-opacity="1" />
+            <stop offset="100%" stop-color="#7a142e" stop-opacity="1" />
+          `;
+        }
       }
       if (spreadGradient) {
         spreadGradient.setAttribute('x1', '0');
         spreadGradient.setAttribute('x2', `${W}`);
       }
-
-      // 2 grandes boucles ultra-lissées (continuité C1 stricte, rayon ample, zéro cassure)
-      // Positionnées au cœur des grilles de cartes (et non sur les titres de sections)
-      const creationEl = document.getElementById('creation');
-      const routineEl = document.getElementById('routine');
-      const communauteEl = document.getElementById('communaute');
 
       // Boucle #1 : placée sous les cartes des 4 Piliers, bien avant le titre de Notre Équipe
       let y1 = Math.round(y0 + spanH * 0.19);
@@ -191,8 +219,8 @@
       };
       const step = 20;
       const pts = [];
-      for (let s = 0; s < spanH - 40; s += step) pts.push(pointAt(s));
-      pts.push([xEnd, yEnd - 1]);
+      for (let s = 0; s < spanH - 12; s += step) pts.push(pointAt(s));
+      pts.push([xEnd, yFooterLine]);
       let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
       for (let i = 0; i < pts.length - 1; i++) {
         const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
@@ -205,17 +233,31 @@
 
       if (typeof mainScrollPath.getTotalLength === 'function') {
         mainPathLength = mainScrollPath.getTotalLength();
-        // Table longueur -> y (maximum cumulé) pour caler le front du tracé sur le centre de l'écran
+        // Table longueur -> progression scroll strictement fluide et continue :
+        // Alloue une distance de scroll dédiée aux boucles (au lieu d'un plateau y qui se débloquait d'un coup)
         pathYTable = [];
-        const samples = 600;
-        let runMax = -Infinity;
+        const samples = 800;
+        const rawPoints = [];
         for (let i = 0; i <= samples; i++) {
           const len = (mainPathLength * i) / samples;
-          const pt = mainScrollPath.getPointAtLength(len);
-          runMax = Math.max(runMax, pt.y);
-          pathYTable.push({ len, y: runMax });
+          rawPoints.push({ len, pt: mainScrollPath.getPointAtLength(len) });
         }
-        pathEndY = yEnd;
+        const virtualY = [y0];
+        for (let i = 1; i <= samples; i++) {
+          const dlen = rawPoints[i].len - rawPoints[i - 1].len;
+          const dy = rawPoints[i].pt.y - rawPoints[i - 1].pt.y;
+          // Dans les boucles (où dy devient nul ou négatif), on alloue une vitesse de défilement constante
+          // pour que le dessin tourne posément sans aucune précipitation ni à-coup
+          const stepScroll = Math.max(dy, dlen * 0.48);
+          virtualY.push(virtualY[i - 1] + stepScroll);
+        }
+        const totalVirtualSpan = virtualY[samples] - y0;
+        const targetSpan = Math.max(1, yFooterLine - y0);
+        for (let i = 0; i <= samples; i++) {
+          const scaledY = y0 + ((virtualY[i] - y0) / totalVirtualSpan) * targetSpan;
+          pathYTable.push({ len: rawPoints[i].len, y: scaledY });
+        }
+        pathEndY = yFooterLine;
         mainScrollPath.style.strokeDasharray = `${mainPathLength}`;
       }
 
@@ -224,7 +266,7 @@
       const xSpreadRight = W;
 
       if (spreadLeftPath) {
-        spreadLeftPath.setAttribute('d', `M ${xEnd} ${yEnd - 1} L ${xSpreadLeft} ${yEnd - 1}`);
+        spreadLeftPath.setAttribute('d', `M ${xEnd} ${yFooterLine} L ${xSpreadLeft} ${yFooterLine}`);
         if (typeof spreadLeftPath.getTotalLength === 'function') {
           spreadLeftLength = spreadLeftPath.getTotalLength();
           spreadLeftPath.style.strokeDasharray = `${spreadLeftLength}`;
@@ -232,7 +274,7 @@
       }
 
       if (spreadRightPath) {
-        spreadRightPath.setAttribute('d', `M ${xEnd} ${yEnd - 1} L ${xSpreadRight} ${yEnd - 1}`);
+        spreadRightPath.setAttribute('d', `M ${xEnd} ${yFooterLine} L ${xSpreadRight} ${yFooterLine}`);
         if (typeof spreadRightPath.getTotalLength === 'function') {
           spreadRightLength = spreadRightPath.getTotalLength();
           spreadRightPath.style.strokeDasharray = `${spreadRightLength}`;
@@ -314,12 +356,12 @@
       if (mainScrollPath && mainPathLength > 0 && !prefersReducedMotion()) {
         const maxScroll = Math.max(1, document.documentElement.scrollHeight - winH);
         const splitPoint = 0.84;
-        // Le front suit le centre de l'écran, puis ralentit/accélère LINÉAIREMENT sur ~2200px
-        // pour toucher le footer exactement 220px avant la fin du scroll (arrivée progressive).
-        const spreadStart = Math.max(0, maxScroll - 220);
-        const easeStart = Math.max(0, spreadStart - 2200);
-        const f0 = Math.min(pathEndY, easeStart + winH * 0.5);
-        let frontY = scrollY + winH * 0.5;
+        // Le front suit le centre/bas de l'écran avec une avance fluide pour se révéler sous la pancarte contact
+        const spreadStart = Math.max(0, maxScroll - 160);
+        const easeStart = Math.max(0, spreadStart - 2000);
+        const leadFactor = 0.62;
+        const f0 = Math.min(pathEndY, easeStart + winH * leadFactor);
+        let frontY = scrollY + winH * leadFactor;
         if (scrollY > easeStart) {
           const t = Math.min(1, (scrollY - easeStart) / Math.max(1, spreadStart - easeStart));
           frontY = f0 + (pathEndY - f0) * t;
@@ -438,6 +480,9 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
     window.addEventListener('load', onResize, { passive: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(onResize);
+    }
     updateScrollState();
   };
 
@@ -463,15 +508,17 @@
     const last = new Map();
     let ticking = false;
 
-    // Éléments frères dans un même conteneur : ils apparaissent l'un après l'autre
+    // Éléments frères dans un même conteneur de cartes (ex: piliers, équipe) : ils apparaissent l'un après l'autre
+    // Les blocs de titres (contenant un h2) restent autonomes pour piloter directement leur animation mot par mot
     const groups = new Map();
     revealEls.forEach((el) => {
+      if (el.querySelector('h2')) return; // Ne pas grouper les titres avec des éléments frères
       const parent = el.parentElement;
       if (!parent) return;
       if (!groups.has(parent)) groups.set(parent, []);
       groups.get(parent).push(el);
     });
-    const groupInfo = new Map(); // el -> { parent, index, count }
+    const groupInfo = new Map(); // el -> { parent, index, count, lastEl }
     groups.forEach((list, parent) => {
       if (list.length < 2) return;
       list.forEach((el, index) => groupInfo.set(el, { parent, index, count: list.length, lastEl: list[list.length - 1] }));
@@ -483,13 +530,14 @@
       ticking = false;
       const H = window.innerHeight || 800;
       const start = H * 0.98;       // l'élément commence à apparaître en entrant par le bas
-      const end = H * 0.70;         // et est entièrement visible à 25% du bas de l'écran au plus tard
-      const range = start - end;
+      const defaultEnd = H * 0.70;  // achèvement standard
+
       revealEls.forEach((el) => {
         let p;
         const g = groupInfo.get(el);
         if (g) {
-          // Groupe : tous les éléments sont complets quand le DERNIER atteint la ligne des 25%
+          // Groupe : tous les éléments sont complets quand le DERNIER atteint la ligne de fin
+          const range = start - defaultEnd;
           const top = g.parent.getBoundingClientRect().top;
           const lastTop = g.lastEl.getBoundingClientRect().top;
           const span = range + Math.max(0, lastTop - top);
@@ -497,7 +545,10 @@
           const overlap = 1.6;
           p = clamp01((gp * (g.count - 1 + overlap) - g.index) / overlap);
         } else {
-          p = clamp01((start - el.getBoundingClientRect().top) / range);
+          // Titres ou blocs individuels : tous suivent rigoureusement la règle (début à 0.98, achèvement à 0.70)
+          const range = start - defaultEnd;
+          const anchor = el.querySelector('h2') || el;
+          p = clamp01((start - anchor.getBoundingClientRect().top) / range);
         }
         p = Math.round(p * 1000) / 1000;
         if (last.get(el) !== p) {
@@ -516,6 +567,7 @@
 
     window.addEventListener('scroll', request, { passive: true });
     window.addEventListener('resize', request);
+    window.addEventListener('corfoviaLanguageChange', request);
     update();
   };
 
@@ -840,6 +892,12 @@
   // =========================================================================
   // Découpe un titre en mots (chaque mot reçoit --i pour la cascade ; la classe donne l'animation)
   const splitIntoWords = (title, className) => {
+    // Étape 1 : déballer les spans existants pour éviter tout double-emboîtement (qui doublait la vitesse et les transformations)
+    title.querySelectorAll('.' + className).forEach((span) => {
+      span.replaceWith(span.textContent);
+    });
+    title.normalize();
+
     let idx = 0;
     const walk = (node) => {
       Array.from(node.childNodes).forEach((child) => {
@@ -868,17 +926,35 @@
   };
 
   // Titre du hero : animation d'ouverture ; titres de sections : même animation au scroll
-  const splitHeroTitle = () => {
+  const splitTitles = () => {
     if (prefersReducedMotion()) return;
     const hero = document.querySelector('.hero-glorious-title');
-    if (hero) splitIntoWords(hero, 'hero-word');
+    if (hero) {
+      // Nettoie d'éventuels anciens spans de mots avant de redécouper
+      splitIntoWords(hero, 'hero-word');
+    }
     document.querySelectorAll('h2').forEach((h2) => {
-      if (h2.closest('[data-scroll-reveal]')) splitIntoWords(h2, 'title-word');
+      if (h2.closest('[data-scroll-reveal]')) {
+        splitIntoWords(h2, 'title-word');
+        const words = h2.querySelectorAll('.title-word');
+        const n = words.length;
+        if (n) h2.style.setProperty('--n', String(n));
+      }
     });
   };
 
+  // Réapplique le découpage des titres lors de tout changement de langue pour garder le scroll reveal synchrone
+  window.addEventListener('corfoviaLanguageChange', () => {
+    splitTitles();
+    // Recalcule la géométrie SVG au cas où la hauteur de texte ait changé les coordonnées des sections
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event('resize'));
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', () => {
-    splitHeroTitle();
+    // Note: splitTitles est déjà invoqué via l'événement corfoviaLanguageChange initial d'i18n
+    splitTitles(false);
     initScrollEngine();
     initScrollReveal();
     initSourcesModal();
