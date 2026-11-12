@@ -12,7 +12,48 @@
   }
 
   .hero-glorious {
-    padding: 110px 0 60px 0;
+    padding: 108px 0 76px 0;
+  }
+
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    min-height: 0;
+  }
+
+  .hero-content-left {
+    max-width: 660px;
+  }
+
+  .hero-news-rail {
+    position: relative;
+    min-width: 0;
+    max-width: 560px;
+    justify-self: start;
+    display: grid;
+    gap: 12px;
+  }
+
+  .hero-news-stage {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 22px;
+    -webkit-mask-image: none;
+    mask-image: none;
+    animation: none;
+  }
+
+  .hero-news-stage::before {
+    background: linear-gradient(180deg,
+        rgba(250, 245, 239, 0.14) 0%,
+        rgba(250, 245, 239, 0) 35%,
+        rgba(250, 245, 239, 0.55) 100%);
+  }
+
+  .hero-news-slide-img.is-active {
+    opacity: 1;
   }
 
   .pillars-deck-grid {
@@ -39,6 +80,26 @@
     grid-template-columns: 1fr;
     gap: 36px;
   }
+
+  .product-story-sticky-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .product-sticky-visual-container {
+    position: relative;
+    top: 0;
+    height: auto;
+    min-height: 380px;
+  }
+
+  .ingredients-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .duel-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 880px) {
@@ -47,26 +108,33 @@
   }
 
   .hero-glorious {
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: auto;
     display: flex;
     align-items: center;
-    padding: 100px 0 140px 0;
+    padding: 88px 0 64px 0;
     box-sizing: border-box;
   }
 
-  .hero-glorious::before {
-    background-image:
-      linear-gradient(180deg,
-        rgba(250, 245, 239, 0.97) 0%,
-        rgba(250, 245, 239, 0.94) 55%,
-        rgba(243, 235, 225, 0.9) 100%),
-      url('../images/hero-muffins.jpg');
-    background-position: center bottom;
+  .hero-grid {
+    gap: 22px;
   }
 
   .hero-glorious::after {
-    height: 160px;
+    height: 120px;
+  }
+
+  .hero-news-rail {
+    max-width: 100%;
+    gap: 10px;
+  }
+
+  .hero-news-stage {
+    border-radius: 18px;
+  }
+
+  .hero-news-dock {
+    border-radius: 18px;
+    padding: 12px 14px 13px;
   }
 
   .site-nav {
@@ -153,22 +221,35 @@
     grid-template-columns: 1fr;
   }
 
-  .vitality-gauges-showcase {
+  .project-story-card {
     order: 2;
-  }
-
-  .gauges-micro-comparison {
-    grid-template-columns: 1fr;
-  }
-
-  .radial-dials-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    padding: 18px;
   }
 
   .subscribe-card-glorious {
     padding: 40px 20px;
   }
+
+  .section-pillars-deck {
+    padding: 90px 0 100px 0;
+  }
+
+  .section-feature-products {
+    padding: 100px 0;
+  }
+
+  .section-routine {
+    padding: 100px 0;
+  }
+
+  .section-subscribe-banner {
+    padding: 100px 0 90px 0;
+  }
+
+  .footer-glorious {
+    padding: 70px 0 35px 0;
+  }
+
 
   .subscribe-card-glorious h3 {
     font-size: 1.85rem;
@@ -201,6 +282,54 @@
 
   .perspective-pills-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-muffin-showcase-center {
+    height: 380px;
+  }
+
+  .muffin-photo-hero-wrap {
+    width: 290px;
+    height: 290px;
+  }
+
+  .muffin-photo-frame {
+    width: 250px;
+    height: 250px;
+    border-radius: 36px;
+  }
+
+  .muffin-3d-canvas-wrap {
+    width: 290px;
+    height: 290px;
+  }
+
+  .muffin-3d-anatomy-wrap {
+    min-height: 320px;
+  }
+
+  .muffin-satellite-pill {
+    padding: 7px 12px;
+    font-size: 0.76rem;
+  }
+
+  .sat-icon-wrap {
+    width: 26px;
+    height: 26px;
+  }
+
+  .sat-pill-1 { top: 6%; left: 0; }
+  .sat-pill-2 { top: 6%; right: 0; }
+  .sat-pill-3 { bottom: 10%; left: 0; }
+  .sat-pill-4 { bottom: 10%; right: 0; }
+  .sat-pill-5 { display: none; }
+
+  .ingredients-deck-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .duel-metrics-grid {
+    grid-template-columns: 1fr;
   }
 }
 

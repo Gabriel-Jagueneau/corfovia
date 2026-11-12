@@ -88,7 +88,7 @@
         <li><a href="#vision" class="nav-link active" data-section="vision" data-i18n="nav.vision">La Vision</a></li>
         <li><a href="#creation" class="nav-link" data-section="creation" data-i18n="nav.innovation">Notre Équipe</a>
         </li>
-        <li><a href="#routine" class="nav-link" data-section="routine" data-i18n="nav.science">Notre Science</a></li>
+        <li><a href="#routine" class="nav-link" data-section="routine" data-i18n="nav.science">Le Projet</a></li>
 
         <!-- Bouton Produits avec Dropdown Apple Custom -->
         <li class="nav-dropdown-wrapper">
@@ -102,7 +102,7 @@
 
           <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
             <div class="nav-dropdown-items">
-              <a href="/products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
+              <a href="/products/abadakor/" class="nav-dropdown-item" role="menuitem">
                 <div class="nav-dropdown-icon-wrap">
                   <img src="/images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
                 </div>
@@ -111,8 +111,7 @@
                     <span class="nav-dropdown-item-title">Abadakor</span>
                     <span class="nav-dropdown-item-badge" data-i18n="nav.badge.abadakor">90 g</span>
                   </div>
-                  <p class="nav-dropdown-item-desc" data-i18n="nav.dropdown.desc">Découvrez le muffin au chocolat, sa
-                    composition complète et ses différents points de vue.</p>
+                  <p class="nav-dropdown-item-desc" data-i18n="nav.dropdown.desc">Muffin chocolat 90 g, composition et points de vue.</p>
                 </div>
                 <svg class="nav-dropdown-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -142,15 +141,15 @@
         <defs>
           <!-- Petit fondu au départ (sous le Hero), opacité gérée au niveau du groupe pour zéro tache au point de contact -->
           <linearGradient id="threadGradient" gradientUnits="userSpaceOnUse" x1="0" y1="680" x2="0" y2="3200">
-            <stop offset="0%" stop-color="#8e1937" stop-opacity="0" />
-            <stop offset="6%" stop-color="#7a142e" stop-opacity="1" />
-            <stop offset="100%" stop-color="#7a142e" stop-opacity="1" />
+            <stop offset="0%" stop-color="#e94b4b" stop-opacity="0" />
+            <stop offset="6%" stop-color="#c41818" stop-opacity="1" />
+            <stop offset="100%" stop-color="#c41818" stop-opacity="1" />
           </linearGradient>
           <!-- Dégradé horizontal en fondu total du centre jusqu'aux bords de l'écran -->
           <linearGradient id="spreadGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1440" y2="0">
-            <stop offset="0%" stop-color="#7a142e" stop-opacity="0" />
-            <stop offset="50%" stop-color="#7a142e" stop-opacity="1" />
-            <stop offset="100%" stop-color="#7a142e" stop-opacity="0" />
+            <stop offset="0%" stop-color="#c41818" stop-opacity="0" />
+            <stop offset="50%" stop-color="#c41818" stop-opacity="1" />
+            <stop offset="100%" stop-color="#c41818" stop-opacity="0" />
           </linearGradient>
         </defs>
 
@@ -170,32 +169,106 @@
     <main>
 
       <!-- ==========================================================================
-           HERO SECTION — LA VISION CORFOVIA (Sans la pill du haut)
+           HERO SECTION — LA VISION CORFOVIA (Chaleureux, Ludique & Orienté Parents / Enfants)
            ========================================================================== -->
       <section class="hero-glorious" id="vision">
+        <!-- Formes SVG ludiques flottantes en arrière-plan (étoiles, pépites, cœurs, gouttes de lait) -->
+        <div class="playful-bg-shapes" aria-hidden="true">
+          <svg class="floating-doodle doodle-star-1" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L28.5 17.5L42 22L28.5 26.5L24 40L19.5 26.5L6 22L19.5 17.5L24 4Z" fill="var(--honey-gold)" fill-opacity="0.26" stroke="var(--honey-gold)" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <svg class="floating-doodle doodle-heart-1" viewBox="0 0 48 48" fill="none">
+            <path d="M24 39C24 39 8 28.5 8 17.5C8 11.5 12.8 7 18.5 7C21.8 7 24 9.2 24 9.2C24 9.2 26.2 7 29.5 7C35.2 7 40 11.5 40 17.5C40 28.5 24 39 24 39Z" fill="var(--accent-light)" fill-opacity="0.18" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg class="floating-doodle doodle-choco-1" viewBox="0 0 48 48" fill="none">
+            <path d="M12 32C12 22 22 10 25 10C28 10 36 22 36 32C36 37.5 30.6 41 24 41C17.4 41 12 37.5 12 32Z" fill="var(--cocoa-warm)" fill-opacity="0.22" stroke="var(--cocoa-warm)" stroke-width="2"/>
+          </svg>
+          <svg class="floating-doodle doodle-swirl-1" viewBox="0 0 64 64" fill="none">
+            <path d="M12 38C18 18 36 16 42 28C46 36 36 46 28 40C22 35 28 24 38 26" stroke="var(--chicory-green)" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.4"/>
+          </svg>
+        </div>
+
         <div class="container">
-          <div class="hero-content-left" data-scroll-parallax="-0.08">
+          <div class="hero-grid">
+            <div class="hero-content-left" data-scroll-parallax="-0.08">
 
-            <h1 class="hero-glorious-title">
-              <em data-i18n="hero.title.em">Corfovia :</em> <span data-i18n="hero.title.after">la gourmandise
-                engagée,</span>
-              <span class="hero-highlight" data-i18n="hero.title.highlight">sans l'excès de sucre.</span>
-            </h1>
+              <h1 class="hero-glorious-title">
+                <em data-i18n="hero.title.em">Corfovia :</em> <span data-i18n="hero.title.after">le goûter
+                  gourmand,</span>
+                <span class="hero-highlight" data-i18n="hero.title.highlight">sans excès de sucre.</span>
+              </h1>
 
-            <p class="hero-glorious-p">
-              <span data-i18n="hero.subtitle">Substituer les collations trop sucrées et revaloriser des protéines
-                animales non valorisées à haute densité nutritionnelle au sein de la pâtisserie gourmande.</span>
-            </p>
+              <p class="hero-glorious-p">
+                <span data-i18n="hero.subtitle">Un muffin au chocolat moelleux, riche en protéines et en fer, rassasiant pour les enfants.</span>
+              </p>
 
-            <div class="hero-cta-group">
-              <a href="#creation" class="btn-clay btn-clay-primary" data-i18n="hero.cta.discover">
-                Découvrir notre équipe →
-              </a>
-              <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-secondary" data-i18n="hero.cta.science">
-                Voir notre création Abadakor
-              </a>
+              <div class="hero-cta-group">
+                <a href="/products/abadakor/" class="btn-clay btn-clay-primary" data-i18n="hero.cta.science">
+                  Découvrir Abadakor
+                </a>
+                <a href="#creation" class="btn-clay btn-clay-secondary" data-i18n="hero.cta.discover">
+                  L’équipe →
+                </a>
+              </div>
+
             </div>
 
+            <!-- Carrousel d'actualités intégré au fond hero (alimenté par js/actualites.js) -->
+            <div class="hero-news-rail" id="heroNewsCarousel" aria-roledescription="carousel"
+              aria-label="Actualités Corfovia">
+              <div class="hero-news-stage" id="heroNewsStage" aria-hidden="true">
+                <img class="hero-news-slide-img is-active" src="/images/hero-muffins.jpg"
+                  alt="Abadakor 90 g, le premier muffin Corfovia" style="object-position: 50% 58%;" />
+              </div>
+
+              <article class="hero-news-dock">
+                <div class="hero-news-dock-bar" id="heroNewsFooter">
+                  <div class="hero-news-indicators" id="heroNewsIndicators" role="tablist"
+                    aria-label="Choisir une actualité">
+                    <button type="button" class="hero-news-dot is-active" role="tab" aria-selected="true"
+                      aria-label="Actualité 1">
+                      <span class="hero-news-dot-fill"></span>
+                    </button>
+                  </div>
+
+                  <div class="hero-news-arrows" id="heroNewsArrows">
+                    <button type="button" class="hero-news-arrow-btn" id="heroNewsPrev" aria-label="Actualité précédente">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m15 18-6-6 6-6" />
+                      </svg>
+                    </button>
+                    <button type="button" class="hero-news-arrow-btn" id="heroNewsNext" aria-label="Actualité suivante">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="hero-news-meta">
+                  <span class="hero-news-tag" id="heroNewsTag">Création</span>
+                  <a class="hero-news-stage-link" id="heroNewsStageLink" href="/products/abadakor/"
+                    aria-label="Abadakor 90 g, le premier muffin Corfovia">
+                    <span class="hero-news-open-pill" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 17 17 7" />
+                        <path d="M7 7h10v10" />
+                      </svg>
+                    </span>
+                  </a>
+                </div>
+
+                <div class="hero-news-captions" id="heroNewsCaptions">
+                  <div class="hero-news-caption is-active">
+                    <h3 class="hero-news-title">Abadakor 90 g, le premier muffin Corfovia</h3>
+                    <p class="hero-news-desc">Chocolat noir 85 %, chicorée prébiotique et 11,2 g de protéines valorisées sans sucre raffiné.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -213,11 +286,10 @@
                   d="M 4 18 C 40 2, 74 2, 94 14 S 142 28, 176 8" />
               </svg>
             </div>
-            <h2 class="section-serif-title"><span data-i18n="pillars.title">Les 4 Piliers</span> <span
+            <h2 class="section-serif-title"><span data-i18n="pillars.title">4 Piliers</span> <span
                 data-i18n="pillars.title.span">Corfovia</span></h2>
             <p class="section-serif-sub">
-              <span data-i18n="pillars.subtitle">Anti-gaspillage, densité nutritionnelle et gourmandise sans sucre
-                raffiné.</span>
+              <span data-i18n="pillars.subtitle">Anti-gaspi, chicorée douce et fer naturel.</span>
             </p>
           </div>
 
@@ -236,7 +308,7 @@
                 <span class="pillar-kpi-pill" data-i18n="pillar1.kpi">Anti-Gaspi</span>
               </div>
               <h4 data-i18n="pillar1.title">Économie Circulaire</h4>
-              <p data-i18n="pillar1.desc">Réintégrer dans l'alimentation des protéines animales délaissées.</p>
+              <p data-i18n="pillar1.desc">Revaloriser des protéines animales délaissées.</p>
             </div>
 
             <!-- Pillar 2 -->
@@ -247,10 +319,10 @@
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   </svg>
                 </div>
-                <span class="pillar-kpi-pill" data-i18n="pillar2.kpi">Indice Glycémique</span>
+                <span class="pillar-kpi-pill" data-i18n="pillar2.kpi">Sans Pic</span>
               </div>
-              <h4 data-i18n="pillar2.title">Substitut au Sucre</h4>
-              <p data-i18n="pillar2.desc">Remplacer les collations trop sucrées par des fibres de chicorée.</p>
+              <h4 data-i18n="pillar2.title">Chicorée Douce</h4>
+              <p data-i18n="pillar2.desc">Fibres douces à la place du sucre raffiné.</p>
             </div>
 
             <!-- Pillar 3 -->
@@ -262,10 +334,10 @@
                     <circle cx="12" cy="12" r="2"></circle>
                   </svg>
                 </div>
-                <span class="pillar-kpi-pill" data-i18n="pillar3.kpi">Fer & Vitamine B12</span>
+                <span class="pillar-kpi-pill" data-i18n="pillar3.kpi">Fer & B12</span>
               </div>
-              <h4 data-i18n="pillar3.title">Haute Biodisponibilité</h4>
-              <p data-i18n="pillar3.desc">Privilégier le fer héminique naturellement assimilable (15–35 %).</p>
+              <h4 data-i18n="pillar3.title">Assimilation ×3</h4>
+              <p data-i18n="pillar3.desc">Fer héminique naturel (15–35 % absorbé).</p>
             </div>
 
             <!-- Pillar 4 -->
@@ -277,10 +349,10 @@
                     <path d="M8 12l2.5 2.5L16 9"></path>
                   </svg>
                 </div>
-                <span class="pillar-kpi-pill" data-i18n="pillar4.kpi">Énergie & Vitalité</span>
+                <span class="pillar-kpi-pill" data-i18n="pillar4.kpi">90 g Goûter</span>
               </div>
-              <h4 data-i18n="pillar4.title">Bienfaits Nutritionnels</h4>
-              <p data-i18n="pillar4.desc">11,2 g de protéines, 13,1 g de fibres et des minéraux essentiels pour une satiété saine et durable.</p>
+              <h4 data-i18n="pillar4.title">Satiété Saine</h4>
+              <p data-i18n="pillar4.desc">11,2 g de protéines et 13,1 g de fibres.</p>
             </div>
 
           </div>
@@ -305,8 +377,7 @@
             <h2 class="section-serif-title"><span data-i18n="inno.title">L'Équipe</span> <span
                 data-i18n="inno.title.span">Corfovia</span></h2>
             <p class="section-serif-sub">
-              <span data-i18n="inno.subtitle">6 étudiants, 6 expertises complémentaires autour d'une même
-                création.</span>
+              <span data-i18n="inno.subtitle">6 étudiants, 1 création commune.</span>
             </p>
           </div>
 
@@ -314,11 +385,11 @@
           <div class="team-members-grid">
 
             <!-- Membre 01 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-1.jpg"
-              data-member-initials="M1">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/arnaud.jpg"
+              data-member-initials="AB">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-1.jpg" alt="Membre 1 — Direction & Stratégie"
+                  <img class="team-member-photo" src="/images/team/arnaud.jpg" alt="Arnaud Benzarour — Financier & administration"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -330,8 +401,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m1.role">Direction & Stratégie</span>
-                <h4 class="team-member-name" data-i18n="team.m1.name">Membre 1</h4>
+                <span class="team-member-role-badge" data-i18n="team.m1.role">Financier & administration</span>
+                <h4 class="team-member-name" data-i18n="team.m1.name">Arnaud BENZAROUR</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -363,11 +434,11 @@
             </article>
 
             <!-- Membre 02 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-2.jpg"
-              data-member-initials="M2">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/liliane.jpg"
+              data-member-initials="LC">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-2.jpg" alt="Membre 2 — R&D & Formulation"
+                  <img class="team-member-photo" src="/images/team/liliane.jpg" alt="Liliane Carole Chimou — Gestion qualité"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -379,8 +450,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m2.role">R&D & Formulation</span>
-                <h4 class="team-member-name" data-i18n="team.m2.name">Membre 2</h4>
+                <span class="team-member-role-badge" data-i18n="team.m2.role">Gestion qualité</span>
+                <h4 class="team-member-name" data-i18n="team.m2.name">Liliane Carole CHIMOU</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -412,11 +483,11 @@
             </article>
 
             <!-- Membre 03 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-3.jpg"
-              data-member-initials="M3">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/gabriel.jpg"
+              data-member-initials="GJ">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-3.jpg" alt="Membre 3 — Nutrition & Sciences"
+                  <img class="team-member-photo" src="/images/team/gabriel.jpg" alt="Gabriel Jagueneau — Développement numérique"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -428,8 +499,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m3.role">Nutrition & Sciences</span>
-                <h4 class="team-member-name" data-i18n="team.m3.name">Membre 3</h4>
+                <span class="team-member-role-badge" data-i18n="team.m3.role">Développement numérique</span>
+                <h4 class="team-member-name" data-i18n="team.m3.name">Gabriel JAGUENEAU</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -461,11 +532,11 @@
             </article>
 
             <!-- Membre 04 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-4.jpg"
-              data-member-initials="M4">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/gaspard.jpg"
+              data-member-initials="GV">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-4.jpg" alt="Membre 4 — Qualité & Procédés"
+                  <img class="team-member-photo" src="/images/team/gaspard.jpg" alt="Gaspard Vande Putte — Marketing commercial"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -477,8 +548,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m4.role">Qualité & Procédés</span>
-                <h4 class="team-member-name" data-i18n="team.m4.name">Membre 4</h4>
+                <span class="team-member-role-badge" data-i18n="team.m4.role">Marketing commercial</span>
+                <h4 class="team-member-name" data-i18n="team.m4.name">Gaspard VANDE PUTTE</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -510,11 +581,11 @@
             </article>
 
             <!-- Membre 05 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-5.jpg"
-              data-member-initials="M5">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/aurelien.jpg"
+              data-member-initials="AR">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-5.jpg" alt="Membre 5 — Sourcing & Filières"
+                  <img class="team-member-photo" src="/images/team/aurelien.jpg" alt="Aurélien Roiseux — Responsable production"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -526,8 +597,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m5.role">Sourcing & Filières</span>
-                <h4 class="team-member-name" data-i18n="team.m5.name">Membre 5</h4>
+                <span class="team-member-role-badge" data-i18n="team.m5.role">Responsable production</span>
+                <h4 class="team-member-name" data-i18n="team.m5.name">Aurélien ROISEUX</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -559,12 +630,12 @@
             </article>
 
             <!-- Membre 06 -->
-            <article class="team-member-card" data-scroll-reveal data-member-img="images/team/membre-6.jpg"
-              data-member-initials="GJ">
+            <article class="team-member-card" data-scroll-reveal data-member-img="/images/team/florian.jpg"
+              data-member-initials="FL">
               <div class="team-member-avatar-wrap">
                 <div class="team-member-avatar-inner">
-                  <img class="team-member-photo" src="images/team/membre-6.jpg"
-                    alt="Gabriel Jagueneau — Design & Digital"
+                  <img class="team-member-photo" src="/images/team/florian.jpg"
+                    alt="Florian Leclercq — Logistique"
                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                   <span class="team-member-fallback" style="display:none;">
                     <svg class="team-member-placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -576,8 +647,8 @@
                 </div>
               </div>
               <div class="team-member-body">
-                <span class="team-member-role-badge" data-i18n="team.m6.role">Design & Digital</span>
-                <h4 class="team-member-name" data-i18n="team.m6.name">Gabriel Jagueneau</h4>
+                <span class="team-member-role-badge" data-i18n="team.m6.role">Logistique</span>
+                <h4 class="team-member-name" data-i18n="team.m6.name">Florian LECLERCQ</h4>
                 <div class="team-member-socials">
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener" class="team-social-btn"
                     aria-label="LinkedIn">
@@ -613,12 +684,11 @@
           <!-- Invitation Callout Box vers la Page Produit -->
           <div class="collection-invite-box" data-scroll-reveal>
             <div class="collection-invite-text">
-              <h4 data-i18n="inno.invite.title">Notre création : le muffin Abadakor</h4>
-              <p data-i18n="inno.invite.desc">90 g • Chocolat, Oligofructose & 28 g de protéines animales non
-                valorisées.</p>
+              <h4 data-i18n="inno.invite.title">Notre création : Abadakor</h4>
+              <p data-i18n="inno.invite.desc">90 g de chocolat, chicorée & 11,2 g de protéines valorisées.</p>
             </div>
-            <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-primary">
-              <span data-i18n="inno.invite.btn">Voir la recette & le produit →</span>
+            <a href="/products/abadakor/" class="btn-clay btn-clay-primary">
+              <span data-i18n="inno.invite.btn">Voir le produit →</span>
             </a>
           </div>
 
@@ -632,115 +702,88 @@
         <div class="container">
           <div class="routine-grid">
 
-            <!-- Left : Visual Circular Radial Gauges (Épuré & Visuel) -->
-            <div class="vitality-gauges-showcase" data-scroll-reveal>
-              <div class="gauges-showcase-header">
-                <h3 data-i18n="science.header.title">Biodisponibilité du Fer</h3>
-                <span class="gauges-showcase-pill" data-i18n="science.header.badge">×3 à ×4 plus assimilé</span>
+            <!-- Left : Histoire du Projet Étudiant & Vraie Photo -->
+            <div class="project-story-card" data-scroll-reveal>
+              <div class="project-card-head">
+                <h3 data-i18n="project.card.title">Corfovia</h3>
+                <span class="project-card-badge" data-i18n="project.card.badge">Projet Étudiant</span>
               </div>
 
-              <!-- Dual Radial Dials Grid -->
-              <div class="radial-dials-grid">
-
-                <!-- Dial Heme Iron (15-35%) -->
-                <div class="dial-card dial-card-corfovia">
-                  <span class="dial-tag dial-tag-accent" data-i18n="comp.natural.badge">Corfovia</span>
-                  <div class="dial-svg-wrap">
-                    <svg class="dial-svg" viewBox="0 0 100 100">
-                      <defs>
-                        <linearGradient id="corfoviaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stop-color="#8e1937" />
-                          <stop offset="100%" stop-color="#540c1f" />
-                        </linearGradient>
-                      </defs>
-                      <circle class="dial-circle-bg" cx="50" cy="50" r="44"></circle>
-                      <circle class="dial-circle-fill-corfovia" id="dialHemeCircle" cx="50" cy="50" r="44"
-                        data-target-offset="185"></circle>
-                    </svg>
-                    <div class="dial-inner-text">
-                      <span class="dial-percent">15–35%</span>
-                      <span class="dial-percent-sub" data-i18n="science.dial.absorbed">Absorbé</span>
-                    </div>
-                  </div>
-                  <div class="dial-title" data-i18n="science.dial.corfovia.title">Fer Héminique</div>
-                  <div class="dial-desc" data-i18n="science.dial.corfovia.desc">Protéines animales valorisées</div>
-                </div>
-
-                <!-- Dial Non-Heme Iron (2-10%) -->
-                <div class="dial-card">
-                  <span class="dial-tag" data-i18n="comp.synthetic.badge">Classique</span>
-                  <div class="dial-svg-wrap">
-                    <svg class="dial-svg" viewBox="0 0 100 100">
-                      <circle class="dial-circle-bg" cx="50" cy="50" r="44"></circle>
-                      <circle class="dial-circle-fill-synthetic" id="dialNonHemeCircle" cx="50" cy="50" r="44"
-                        data-target-offset="254"></circle>
-                    </svg>
-                    <div class="dial-inner-text">
-                      <span class="dial-percent dial-percent-muted">2–10%</span>
-                      <span class="dial-percent-sub" data-i18n="science.dial.absorbed">Absorbé</span>
-                    </div>
-                  </div>
-                  <div class="dial-title" data-i18n="science.dial.synthetic.title">Fer Non-Héminique</div>
-                  <div class="dial-desc" data-i18n="science.dial.synthetic.desc">Freiné par les phytates</div>
-                </div>
-
+              <div class="project-photo-frame">
+                <img src="/images/hero-muffins.jpg" alt="Muffins Abadakor fraîchement cuits sur grille" decoding="async">
               </div>
 
-              <div class="gauges-visual-footnote">
-                <span class="gauges-footnote-dot"></span>
-                <span data-i18n="science.footnote">Absorption moyenne ~25 % vs ~5 % (Hurrell & Egli, 2010 • EFSA,
-                  2015)</span>
+              <div class="project-milestones">
+                <div class="project-milestone">
+                  <span class="project-m-idx">01</span>
+                  <div class="project-m-body">
+                    <strong data-i18n="project.m1.label">Le constat</strong>
+                    <span data-i18n="project.m1.text">Des goûters trop sucrés qui calent mal les enfants.</span>
+                  </div>
+                </div>
+                <div class="project-milestone">
+                  <span class="project-m-idx">02</span>
+                  <div class="project-m-body">
+                    <strong data-i18n="project.m2.label">La ressource</strong>
+                    <span data-i18n="project.m2.text">Des protéines animales riches trop souvent écartées.</span>
+                  </div>
+                </div>
+                <div class="project-milestone">
+                  <span class="project-m-idx">03</span>
+                  <div class="project-m-body">
+                    <strong data-i18n="project.m3.label">La réponse</strong>
+                    <span data-i18n="project.m3.text">Un vrai muffin chocolat que les enfants réclament.</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Right Editorial Content (3 repères visuels concis + 1 seul bouton Sources) -->
+            <!-- Right Editorial Content : Le Projet & Pourquoi nous sommes là -->
             <div class="routine-content" data-scroll-reveal>
-              <!-- Vague 3 : Impulsion organique asymétrique -->
               <div class="section-scroll-ornament section-scroll-ornament-left" aria-hidden="true">
                 <svg viewBox="0 0 180 28">
                   <path class="scroll-draw-path"
                     d="M 4 14 C 14 3, 24 3, 34 14 S 54 25, 64 14 S 84 3, 94 14 S 114 25, 124 14 S 144 3, 154 14 S 170 22, 176 12" />
                 </svg>
               </div>
-              <h2><span data-i18n="routine.title">La science</span> <span data-i18n="routine.title.span">en 3
-                  repères</span></h2>
+              <h2><span data-i18n="routine.title">Pourquoi</span> <span data-i18n="routine.title.span">nous sommes là</span></h2>
+              <p class="project-story-lead" data-i18n="project.lead">Six étudiants convaincus qu’on peut mieux nourrir les enfants sans gaspiller ce que nos filières produisent déjà.</p>
 
               <div class="routine-pillars">
 
                 <div class="pillar-item">
-                  <div class="pillar-icon">Fe</div>
+                  <div class="pillar-icon">01</div>
                   <div class="pillar-text">
-                    <h4 data-i18n="routine.p1.title">Fer Héminique & Vitamine B12</h4>
-                    <p data-i18n="routine.p1.desc">Transport de l'oxygène & réduction de la fatigue (UE 432/2012).</p>
+                    <h4 data-i18n="routine.p1.title">Une démarche étudiante</h4>
+                    <p data-i18n="routine.p1.desc">Née d’un projet d’école pour réconcilier plaisir sucré et vraie nutrition.</p>
                   </div>
                 </div>
 
                 <div class="pillar-item">
-                  <div class="pillar-icon">0%</div>
+                  <div class="pillar-icon">02</div>
                   <div class="pillar-text">
-                    <h4 data-i18n="routine.p2.title">Substitut aux Collations Trop Sucrées</h4>
-                    <p data-i18n="routine.p2.desc">Oligofructose : pic glycémique réduit après le repas (EFSA, 2014).
-                    </p>
+                    <h4 data-i18n="routine.p2.title">Zéro gaspillage de matière</h4>
+                    <p data-i18n="routine.p2.desc">Revaloriser des co-produits riches plutôt que les laisser de côté.</p>
                   </div>
                 </div>
 
                 <div class="pillar-item">
-                  <div class="pillar-icon">28g</div>
+                  <div class="pillar-icon">03</div>
                   <div class="pillar-text">
-                    <h4 data-i18n="routine.p3.title">Protéines Animales Valorisées</h4>
-                    <p data-i18n="routine.p3.desc">Intégrées au centre d'un muffin au chocolat moelleux de 90 g.</p>
+                    <h4 data-i18n="routine.p3.title">Pensé pour les familles</h4>
+                    <p data-i18n="routine.p3.desc">Parler vrai aux parents, régaler simplement les enfants.</p>
                   </div>
                 </div>
 
               </div>
 
               <div class="hero-cta-group">
-                <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-primary">
-                  <span data-i18n="routine.btn">Voir le produit →</span>
+                <a href="/products/abadakor/" class="btn-clay btn-clay-primary">
+                  <span data-i18n="routine.btn">Découvrir Abadakor →</span>
                 </a>
-                <button type="button" class="btn-clay btn-clay-secondary" data-open-sources-modal>
-                  <span data-i18n="routine.btn.sources">Sources scientifiques (4)</span>
-                </button>
+                <a href="#communaute" class="btn-clay btn-clay-secondary">
+                  <span data-i18n="routine.btn.contact">Échanger avec nous</span>
+                </a>
               </div>
             </div>
 
@@ -760,25 +803,23 @@
                 <path class="scroll-draw-path" d="M 6 22 C 40 22, 60 4, 90 4 C 118 4, 120 24, 100 24 C 82 24, 92 6, 124 8 C 148 10, 164 18, 176 12" />
               </svg>
             </div>
-            <h3><span data-i18n="comm.title">Échanger avec</span> <span data-i18n="comm.title.span">l'équipe
-                Corfovia</span></h3>
+            <h3><span data-i18n="comm.title">Échanger avec</span> <span data-i18n="comm.title.span">l'équipe</span></h3>
             <p class="social-sub-desc" data-i18n="comm.subtitle">
-              Une question sur notre projet ou le muffin Abadakor ? Écrivez-nous directement.
+              Une question sur le projet ou Abadakor ?
             </p>
 
             <div class="social-join-grid">
 
               <!-- QR Code Card -->
               <div class="instagram-qr-card">
-                <img class="instagram-qr-img" src="images/instagram-qr-corfovia.png" alt="QR Code Instagram @corfovia">
+                <img class="instagram-qr-img" src="/images/instagram-qr-corfovia.png" alt="QR Code Instagram @corfovia">
                 <span class="instagram-qr-hint" data-i18n="comm.qr">Scannez le QR Code</span>
               </div>
 
               <!-- Direct Follow & Contact Box -->
               <div class="social-cta-box">
-                <h4 data-i18n="comm.cta.title">Direct sur Instagram & Email</h4>
-                <p><span data-i18n="comm.desc">Coulisses du projet, essais pâtissiers et échanges directs avec
-                    l'équipe.</span></p>
+                <h4 data-i18n="comm.cta.title">Instagram & Email</h4>
+                <p><span data-i18n="comm.desc">Coulisses et échanges directs.</span></p>
 
                 <div class="social-cta-buttons">
                   <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener"
@@ -789,7 +830,7 @@
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                       <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                     </svg>
-                    <span data-i18n="comm.btn">Nous contacter sur @corfovia</span>
+                    <span data-i18n="comm.btn">@corfovia</span>
                   </a>
 
                   <a href="mailto:corfovia@gmail.com" class="btn-clay-email">
@@ -824,8 +865,7 @@
                 style="height: 40px;">
             </a>
             <p class="footer-brand-baseline">
-              <span data-i18n="footer.baseline">Projet d'innovation alimentaire revalorisant des protéines animales non
-                valorisées au sein de créations pâtissières gourmandes.</span>
+              <span data-i18n="footer.baseline">Innovation alimentaire & goûter sain pour enfants.</span>
             </p>
             <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram"
               style="padding: 10px 20px; font-size: 0.84rem;">
@@ -853,7 +893,7 @@
             <ul>
               <li><a href="#vision" data-i18n="nav.vision">La Vision</a></li>
               <li><a href="#creation" data-i18n="nav.innovation">Notre Équipe</a></li>
-              <li><a href="#routine" data-i18n="nav.science">Notre Science</a></li>
+              <li><a href="#routine" data-i18n="nav.science">Le Projet</a></li>
               <li><a href="#communaute" data-i18n="footer.link.contact">Nous Contacter</a></li>
             </ul>
           </div>
@@ -862,11 +902,9 @@
           <div class="footer-col">
             <h5 data-i18n="footer.col2.title">Produit</h5>
             <ul>
-              <li><a href="/products/muffin-vitalite/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
-              <li><a href="/products/muffin-vitalite/#recette-details" data-i18n="footer.link.recipe">Composition &
+              <li><a href="/products/abadakor/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
+              <li><a href="/products/abadakor/#recette-details" data-i18n="footer.link.recipe">Composition &
                   Recette</a></li>
-              <li><a href="#routine" data-open-sources-modal data-i18n="footer.link.sources">Sources Documentaires</a>
-              </li>
             </ul>
           </div>
 
@@ -877,7 +915,7 @@
               <li><span data-i18n="footer.exigence1">Protéines Animales Valorisées</span></li>
               <li><span data-i18n="footer.exigence2">Démarche Anti-Gaspillage</span></li>
               <li><span data-i18n="footer.exigence3">Savoir-Faire Pâtissier</span></li>
-              <li><span data-i18n="footer.exigence4">Sources Scientifiques</span></li>
+              <li><span data-i18n="footer.exigence4">Projet Étudiant</span></li>
             </ul>
           </div>
 
@@ -888,7 +926,7 @@
             © 2026 Corfovia. Tous droits réservés. Projet d'innovation alimentaire & anti-gaspillage.
           </div>
           <div class="footer-bottom-mention" data-i18n="footer.mention">
-            Démarche transparente & sources scientifiques documentées.
+            Projet étudiant d’innovation alimentaire.
           </div>
         </div>
 
@@ -897,81 +935,8 @@
 
   </div>
 
-  <!-- ==========================================================================
-       MODAL SOURCES DOCUMENTAIRES & SCIENTIFIQUES
-       ========================================================================== -->
-  <div class="modal-backdrop-glorious" id="sourcesModal" role="dialog" aria-modal="true"
-    aria-labelledby="sourcesModalTitle" aria-hidden="true">
-    <div class="modal-card-glorious">
-      <div class="modal-header-glorious">
-        <div>
-          <h3 id="sourcesModalTitle" data-i18n="science.sources.title">Sources Scientifiques & Réglementaires</h3>
-          <p data-i18n="science.sources.modal.sub">Références officielles appuyant notre démarche nutritionnelle et
-            fonctionnelle.</p>
-        </div>
-        <button type="button" class="modal-close-btn" data-close-sources-modal aria-label="Fermer">✕</button>
-      </div>
 
-      <div class="modal-sources-grid">
-        <div class="modal-source-item">
-          <div class="modal-source-top">
-            <span class="modal-source-author">EFSA NDA Panel (2015)</span>
-            <span class="modal-source-tag">Biodisponibilité du Fer</span>
-          </div>
-          <p class="modal-source-desc" data-i18n="science.source1.text">
-            Scientific Opinion on Dietary Reference Values for iron. EFSA Journal 2015;13(10):4254. Documente les
-            différences d'absorption entre le fer héminique d'origine animale et le fer non-héminique.
-          </p>
-          <a href="https://doi.org/10.2903/j.efsa.2015.4254" target="_blank" rel="noopener" class="modal-source-link">
-            Consulter la publication (DOI: 10.2903/j.efsa.2015.4254) →
-          </a>
-        </div>
-
-        <div class="modal-source-item">
-          <div class="modal-source-top">
-            <span class="modal-source-author">Hurrell R. & Egli I. (2010)</span>
-            <span class="modal-source-tag">American Journal of Clinical Nutrition</span>
-          </div>
-          <p class="modal-source-desc" data-i18n="science.source2.text">
-            Iron bioavailability and dietary reference values. Am J Clin Nutr, 91(5), 1461S–1467S. Établit un taux
-            d'absorption de 15 % à 35 % pour le fer héminique contre 2 % à 10 % pour le fer non-héminique.
-          </p>
-          <a href="https://pubmed.ncbi.nlm.nih.gov/20200263/" target="_blank" rel="noopener" class="modal-source-link">
-            Consulter sur PubMed (PMID: 20200263) →
-          </a>
-        </div>
-
-        <div class="modal-source-item">
-          <div class="modal-source-top">
-            <span class="modal-source-author">EFSA NDA Panel (2014)</span>
-            <span class="modal-source-tag">Oligofructose & Glycémie</span>
-          </div>
-          <p class="modal-source-desc" data-i18n="science.source3.text">
-            Scientific Opinion on the substantiation of a health claim related to non-digestible carbohydrates
-            (oligofructose) and a reduction of post-prandial glycaemic responses. EFSA Journal 2014;12(1):3513.
-          </p>
-          <a href="https://doi.org/10.2903/j.efsa.2014.3513" target="_blank" rel="noopener" class="modal-source-link">
-            Consulter l'avis EFSA (DOI: 10.2903/j.efsa.2014.3513) →
-          </a>
-        </div>
-
-        <div class="modal-source-item">
-          <div class="modal-source-top">
-            <span class="modal-source-author">ANSES — Table Ciqual</span>
-            <span class="modal-source-tag">Données Nutritionnelles</span>
-          </div>
-          <p class="modal-source-desc" data-i18n="science.source4.text">
-            Base de données de référence sur la composition nutritionnelle des aliments en France, détaillant les
-            teneurs naturelles des protéines animales en fer héminique et en vitamine B12.
-          </p>
-          <a href="https://ciqual.anses.fr/" target="_blank" rel="noopener" class="modal-source-link">
-            Consulter la table ANSES-Ciqual (ciqual.anses.fr) →
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <script src="js/actualites.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
 </body>

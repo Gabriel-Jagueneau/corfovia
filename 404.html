@@ -18,7 +18,7 @@
       if (pathSegments.length > 0 && (pathSegments[0] === 'fr' || pathSegments[0] === 'en')) {
         var lang = pathSegments[0];
         var subPath = pathSegments.slice(1).join('/').replace(/\/+$/, '');
-        var knownRoutes = ['', 'index.html', 'products/muffin-vitalite', 'products/muffin-vitalite/index.html'];
+        var knownRoutes = ['', 'index.html', 'products/abadakor', 'products/abadakor/index.html'];
 
         localStorage.setItem('corfovia_language', lang);
 
@@ -70,7 +70,7 @@
       <ul class="nav-links">
         <li><a href="/#vision" class="nav-link" data-i18n="nav.vision">La Vision</a></li>
         <li><a href="/#creation" class="nav-link" data-i18n="nav.innovation">Notre Équipe</a></li>
-        <li><a href="/#routine" class="nav-link" data-i18n="nav.science">Notre Science</a></li>
+        <li><a href="/#routine" class="nav-link" data-i18n="nav.science">Le Projet</a></li>
 
         <li class="nav-dropdown-wrapper">
           <button class="nav-link nav-dropdown-btn" id="navProductsTrigger" aria-expanded="false" aria-haspopup="true">
@@ -83,7 +83,7 @@
 
           <div class="nav-dropdown-menu" id="navProductsMenu" role="menu" aria-labelledby="navProductsTrigger">
             <div class="nav-dropdown-items">
-              <a href="/products/muffin-vitalite/" class="nav-dropdown-item" role="menuitem">
+              <a href="/products/abadakor/" class="nav-dropdown-item" role="menuitem">
                 <div class="nav-dropdown-icon-wrap">
                   <img src="/images/logo-horizontal-corfovia.png" alt="Abadakor" class="nav-dropdown-item-thumb">
                 </div>
@@ -135,19 +135,19 @@
                 <svg class="error-404-muffin-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <!-- Dôme chocolaté du muffin -->
                   <path d="M12 31C10 21 18.5 13 32 13C45.5 13 54 21 52 31C53.5 31.8 54 34.5 51.5 36H12.5C10 34.5 10.5 31.8 12 31Z"
-                    fill="#7a142e" fill-opacity="0.14" stroke="#7a142e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    fill="#c41818" fill-opacity="0.16" stroke="#c41818" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                   <!-- Caissette plissée pâtissière -->
                   <path d="M15.5 36L19.5 51C20 52.8 21.6 54 23.5 54H40.5C42.4 54 44 52.8 44.5 51L48.5 36"
-                    stroke="#7a142e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    stroke="#c41818" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                   <!-- Plis de la caissette -->
-                  <line x1="25.5" y1="36" x2="27" y2="53.5" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
-                  <line x1="32" y1="36" x2="32" y2="54" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
-                  <line x1="38.5" y1="36" x2="37" y2="53.5" stroke="#7a142e" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="25.5" y1="36" x2="27" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="32" y1="36" x2="32" y2="54" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="38.5" y1="36" x2="37" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
                   <!-- Pépites de chocolat -->
-                  <circle cx="24" cy="24" r="2.2" fill="#7a142e" />
-                  <circle cx="33" cy="20" r="2.4" fill="#7a142e" />
-                  <circle cx="40.5" cy="25.5" r="2.1" fill="#7a142e" />
-                  <circle cx="29" cy="28.5" r="1.9" fill="#7a142e" />
+                  <circle cx="24" cy="24" r="2.2" fill="#c41818" />
+                  <circle cx="33" cy="20" r="2.4" fill="#c41818" />
+                  <circle cx="40.5" cy="25.5" r="2.1" fill="#c41818" />
+                  <circle cx="29" cy="28.5" r="1.9" fill="#c41818" />
                 </svg>
               </div>
               <span class="error-404-digit">4</span>
@@ -156,7 +156,7 @@
             <div>
               <span class="error-404-badge">
                 <span class="error-404-badge-dot"></span>
-                <span data-i18n="error404.badge">Erreur 404 • Hors Recette</span>
+                <span data-i18n="error404.badge">Erreur 404</span>
               </span>
             </div>
 
@@ -174,7 +174,7 @@
               <a href="/" class="btn-clay btn-clay-primary" data-i18n="error404.btn.home">
                 Retourner à l’accueil →
               </a>
-              <a href="/products/muffin-vitalite/" class="btn-clay btn-clay-secondary" data-i18n="error404.btn.product">
+              <a href="/products/abadakor/" class="btn-clay btn-clay-secondary" data-i18n="error404.btn.product">
                 Découvrir le muffin Abadakor
               </a>
             </div>
@@ -183,7 +183,7 @@
               <span class="error-404-quicklinks-label" data-i18n="error404.links.label">Accès directs :</span>
               <a href="/#vision" data-i18n="nav.vision">La Vision</a>
               <a href="/#creation" data-i18n="nav.innovation">Notre Équipe</a>
-              <a href="/#routine" data-i18n="nav.science">Notre Science</a>
+              <a href="/#routine" data-i18n="nav.science">Le Projet</a>
               <a href="/#communaute" data-i18n="footer.link.contact">Nous Contacter</a>
             </div>
           </div>
