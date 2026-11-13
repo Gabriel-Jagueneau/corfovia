@@ -20,7 +20,7 @@ window.CORFOVIA_NEWS_DURATION_MS = 5500;
 
 window.CORFOVIA_NEWS = [
   {
-    image: '/images/hero-muffins.jpg',
+    image: '/products/abadakor/images/hero-muffins.jpg',
     tag: 'Création',
     tagEn: 'Creation',
     title: 'Abadakor 90 g, le premier muffin Corfovia',
@@ -31,7 +31,7 @@ window.CORFOVIA_NEWS = [
     imagePos: '50% 58%'
   },
   {
-    image: '/images/corfovia-meta.jpg',
+    image: '/images/brand/corfovia-meta.jpg',
     tag: 'Le Projet',
     tagEn: 'The Project',
     title: 'Six étudiants réunis contre le gaspillage',
@@ -42,7 +42,7 @@ window.CORFOVIA_NEWS = [
     imagePos: '50% 50%'
   },
   {
-    image: '/images/hero-muffins.jpg',
+    image: '/products/abadakor/images/hero-muffins.jpg',
     tag: 'Fournée R&D',
     tagEn: 'R&D Batch',
     title: '6 ingrédients simples et 100 % transparents',
