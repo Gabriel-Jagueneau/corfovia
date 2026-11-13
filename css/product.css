@@ -741,23 +741,62 @@ html,
   display: block;
   width: 100%;
   height: 100%;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: visible;
+  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .p-story-sticky[data-step="1"] .p-bg-muffin svg { transform: scale(1.06) rotate(4deg); }
 .p-story-sticky[data-step="2"] .p-bg-muffin svg { transform: scale(1.08) rotate(-4deg); }
 .p-story-sticky[data-step="3"] .p-bg-muffin svg { transform: scale(1.04) rotate(2deg); }
 
-.p-bg-muffin use {
-  opacity: 0;
-  transition: opacity 0.42s ease;
+.p-bg-muffin path {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill-opacity 0.42s ease, stroke-opacity 0.42s ease;
 }
 
-.p-story-sticky[data-step="0"] .p-bg-muffin .v0,
-.p-story-sticky[data-step="1"] .p-bg-muffin .v1,
-.p-story-sticky[data-step="2"] .p-bg-muffin .v2,
-.p-story-sticky[data-step="3"] .p-bg-muffin .v3 {
-  opacity: 1;
+.p-bg-muffin .mf-cup {
+  fill: currentColor;
+  fill-opacity: 0.13;
+  stroke-width: 2;
+}
+
+.p-bg-muffin .mf-dome {
+  fill: currentColor;
+  fill-opacity: 0.22;
+  stroke-width: 2;
+}
+
+.p-bg-muffin .mf-ribs {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-opacity: 0.52;
+}
+
+.p-bg-muffin .mf-emblem {
+  fill: currentColor;
+  fill-opacity: 0.25;
+  stroke-width: 1.85;
+}
+
+.p-story-sticky[data-step="0"] .p-bg-muffin .mf-emblem,
+.p-story-sticky[data-step="3"] .p-bg-muffin .mf-emblem {
+  fill-opacity: 0;
+}
+
+.p-story-sticky[data-step="3"] .p-bg-muffin .mf-emblem {
+  stroke-opacity: 0;
+}
+
+.p-bg-muffin .mf-detail {
+  fill: none;
+  stroke-width: 1.75;
+  stroke-opacity: 0.92;
+}
+
+.p-story-sticky[data-step="0"] .p-bg-muffin .mf-detail {
+  stroke-opacity: 0;
 }
 
 /* Scène centrale toujours lisible et centrée */

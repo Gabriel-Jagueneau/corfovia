@@ -14,10 +14,10 @@
       // Header & Navigation
       'nav.vision': 'Vision',
       'nav.innovation': 'Équipe',
-      'nav.science': 'Le Projet',
+      'nav.science': 'Projet',
       'nav.products': 'Produit',
-      'nav.badge.abadakor': '90 g',
-      'nav.dropdown.desc': 'Muffin chocolat 90 g, composition et points de vue.',
+      'nav.badge.abadakor': 'Prot & fibres',
+      'nav.dropdown.desc': `Le premier muffin qui met tout le monde d'accord`,
 
       // Hero
       'hero.pill': 'Goûter Malin, Moins de Sucre',
@@ -284,6 +284,8 @@
       'nav.products': 'Product',
       'nav.badge.abadakor': '90 g',
       'nav.dropdown.desc': '90 g chocolate muffin, recipe & views.',
+      'nav.badge.abadakor': 'Prot & fiber',
+      'nav.dropdown.desc': `The first muffin that everyone can agree on`,
 
       // Hero
       'hero.pill': 'Smart Snack, Low Sugar',

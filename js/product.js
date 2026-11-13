@@ -151,6 +151,7 @@
 
     let pos = 0.5;
     let targetPos = 0.5;
+    let posVel = 0;
     let appliedPos = -1;
     let appliedBend = 0;
     let scale = 0.84;
@@ -204,8 +205,28 @@
       if (changed) syncGlider();
     };
 
+    const SPLIT_MIN = 0.06;
+    const SPLIT_MAX = 0.94;
+    const SPLIT_OVERSHOOT = 0.1;
     const CURVE_STEPS = 20;
-    const computeBend = (val, vel) => (prefersReducedMotion ? 0 : clamp((val - 0.5) * 0.09 + vel * 0.12, -0.055, 0.055));
+
+    const rubberBandSplit = (rawVal) => {
+      if (rawVal < SPLIT_MIN) {
+        const excess = SPLIT_MIN - rawVal;
+        return Math.max(0.036, SPLIT_MIN - SPLIT_OVERSHOOT * (1 - Math.exp(-excess / 0.16)));
+      }
+      if (rawVal > SPLIT_MAX) {
+        const excess = rawVal - SPLIT_MAX;
+        return Math.min(0.964, SPLIT_MAX + SPLIT_OVERSHOOT * (1 - Math.exp(-excess / 0.16)));
+      }
+      return rawVal;
+    };
+
+    const computeBend = (val, vel) => {
+      if (prefersReducedMotion) return 0;
+      const edgePull = val < SPLIT_MIN ? (val - SPLIT_MIN) * 0.22 : (val > SPLIT_MAX ? (val - SPLIT_MAX) * 0.22 : 0);
+      return clamp((val - 0.5) * 0.09 + vel * 0.12 + edgePull, -0.058, 0.058);
+    };
 
     const applySplit = (val, vel = 0) => {
       const bend = computeBend(val, vel);
@@ -272,11 +293,13 @@
     const updateFromClientX = (clientX) => {
       const sr = stage.getBoundingClientRect();
       const rectW = Math.max(1, sr.width);
-      targetPos = clamp((clientX - sr.left) / rectW, 0.06, 0.94);
+      const rawRatio = (clientX - sr.left) / rectW;
+      targetPos = rubberBandSplit(rawRatio);
+      const clampedTarget = clamp(rawRatio, SPLIT_MIN, SPLIT_MAX);
       const curScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      userDelta = targetPos - getAutoPos(curScrollY);
+      userDelta = clampedTarget - getAutoPos(curScrollY);
       lastInteractScrollY = curScrollY;
-      syncPresetButtons(targetPos);
+      syncPresetButtons(clampedTarget);
       wakeRaf();
     };
 
@@ -300,6 +323,10 @@
       if (stage.releasePointerCapture && e.pointerId !== undefined) {
         try { stage.releasePointerCapture(e.pointerId); } catch (_) { }
       }
+      targetPos = clamp(targetPos, SPLIT_MIN, SPLIT_MAX);
+      const curScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      userDelta = targetPos - getAutoPos(curScrollY);
+      lastInteractScrollY = curScrollY;
       wakeRaf();
     };
 
@@ -350,26 +377,37 @@
 
       if (prefersReducedMotion) {
         pos = targetPos;
+        posVel = 0;
         scale = targetScale;
         handoffS = targetHandoffS;
         handoffY = targetHandoffY;
         handoffOp = targetHandoffOp;
       } else {
         const prevPos = pos;
-        pos = lerp(pos, targetPos, isDragging ? 0.44 : 0.24);
+        if (isDragging) {
+          pos = lerp(pos, targetPos, 0.44);
+          posVel = (pos - prevPos) * 0.35;
+        } else {
+          // Très léger ressort amorti au relâchement des bords
+          posVel = posVel * 0.56 + (targetPos - pos) * 0.22;
+          pos += posVel;
+        }
         const vel = pos - prevPos;
         scale = lerp(scale, targetScale, smoothK(0.28));
         handoffS = lerp(handoffS, targetHandoffS, smoothK(0.28));
         handoffY = lerp(handoffY, targetHandoffY, smoothK(0.28));
         handoffOp = lerp(handoffOp, targetHandoffOp, smoothK(0.28));
 
-        const posMoving = Math.abs(pos - targetPos) > 0.0007;
+        const posMoving = Math.abs(pos - targetPos) > 0.0006 || Math.abs(posVel) > 0.0005;
         const scaleMoving = Math.abs(scale - targetScale) > 0.0005;
         const handoffMoving =
           Math.abs(handoffS - targetHandoffS) > 0.0005 ||
           Math.abs(handoffY - targetHandoffY) > 0.08 ||
           Math.abs(handoffOp - targetHandoffOp) > 0.002;
-        if (!posMoving) pos = targetPos;
+        if (!posMoving) {
+          pos = targetPos;
+          posVel = 0;
+        }
         if (!scaleMoving) scale = targetScale;
         if (!handoffMoving) {
           handoffS = targetHandoffS;
@@ -450,6 +488,124 @@
       buildPhotoTransform(416, 384, 1.00)  // 04 Caissette 90 g vue d'ensemble
     ];
 
+    // Table des paths SVG normalisés (même structure de commandes par couche) pour morphing rapide
+    const MORPH_SHAPES = {
+      cup: [
+        'M 16 34 C 17.4 40.2 18.8 46.3 20.2 52.5 C 20.5 53.7 21.3 54.4 22.5 54.4 C 28.8 54.4 35.2 54.4 41.5 54.4 C 42.7 54.4 43.5 53.7 43.8 52.5 C 45.2 46.3 46.6 40.2 48 34 Z',
+        'M 16 35 C 17.4 41 18.8 47 20.2 53 C 20.5 54.2 21.3 54.9 22.5 54.9 C 28.8 54.9 35.2 54.9 41.5 54.9 C 42.7 54.9 43.5 54.2 43.8 53 C 45.2 47 46.6 41 48 35 Z',
+        'M 16 34 C 17.4 40.2 18.8 46.3 20.2 52.5 C 20.5 53.7 21.3 54.4 22.5 54.4 C 28.8 54.4 35.2 54.4 41.5 54.4 C 42.7 54.4 43.5 53.7 43.8 52.5 C 45.2 46.3 46.6 40.2 48 34 Z',
+        'M 19.5 32 C 20.4 36.2 21.3 40.3 22.2 44.5 C 22.4 45.5 23.1 46 24.2 46 C 29.4 46 34.6 46 39.8 46 C 40.9 46 41.6 45.5 41.8 44.5 C 42.7 40.3 43.6 36.2 44.5 32 Z'
+      ],
+      dome: [
+        'M 12.5 34 C 11.9 24.5 19.5 14.5 32 14.5 C 44.5 14.5 52.1 24.5 51.5 34 Z',
+        'M 12.5 35 C 11.9 25.8 19.5 16.2 32 16.2 C 44.5 16.2 52.1 25.8 51.5 35 Z',
+        'M 12.5 34 C 11.9 24.5 19.5 14.5 32 14.5 C 44.5 14.5 52.1 24.5 51.5 34 Z',
+        'M 17 32 C 16.5 24.8 22.4 18 32 18 C 41.6 18 47.5 24.8 47 32 Z'
+      ],
+      ribs: [
+        'M 24.5 34.5 L 26 54 M 32 34.5 L 32 54 M 39.5 34.5 L 38 54',
+        'M 24.5 35.5 L 26 54.5 M 32 35.5 L 32 54.5 M 39.5 35.5 L 38 54.5',
+        'M 24.5 34.5 L 26 54 M 32 34.5 L 32 54 M 39.5 34.5 L 38 54',
+        'M 26.2 32.5 L 27.3 45.6 M 32 32.5 L 32 45.6 M 37.8 32.5 L 36.7 45.6'
+      ],
+      emblem: [
+        'M 23.5 22.5 C 26.3 24.2 29.2 25.8 32 27.5 C 34.8 25.8 37.7 24.2 40.5 22.5 C 38.5 23.5 36.5 24.5 34.8 25.5 C 33.8 26.2 32.9 26.8 32 27.5 C 29.2 25.8 26.3 24.2 23.5 22.5 Z',
+        'M 32 16 C 32.1 13.3 33.2 10.9 35.1 9.1 C 36.9 7.5 39.2 6.8 41.8 6.8 C 41.6 9.5 40.5 11.9 38.6 13.7 C 36.9 15.3 34.6 16 32 16 C 32 16 32 16 32 16 Z',
+        'M 32 19 C 33.8 20 35.4 21 37.2 22 C 37.2 24 37.2 26 37.2 28 C 35.4 29 33.8 30 32 31 C 30.2 30 28.6 29 26.8 28 C 26.8 26 26.8 24 26.8 22 Z',
+        'M 32 19 C 32 19 32 19 32 19 C 32 19 32 19 32 19 C 32 19 32 19 32 19 C 32 19 32 19 32 19 C 32 19 32 19 32 19 Z'
+      ],
+      detail: [
+        'M 32 22.5 C 32 22.5 32 22.5 32 22.5 C 32 22.5 32 22.5 32 22.5 M 32 22.5 L 32 22.5 L 32 22.5 M 32 22.5 C 32 22.5 32 22.5 32 22.5 C 32 22.5 32 22.5 32 22.5 M 32 22.5 L 32 22.5 L 32 22.5',
+        'M 32 16 C 33 15 34.1 14 35.1 13 C 36.1 12 37.2 11 38.2 10 M 38.2 10 L 38.2 10 L 38.2 10 M 32 16 C 32 16 32 16 32 16 C 32 16 32 16 32 16 M 32 16 L 32 16 L 32 16',
+        'M 29.5 23.5 C 30.3 24 31.2 24.5 32 25 C 32.8 24.5 33.7 24 34.5 23.5 M 29.5 23.5 L 32 25 L 34.5 23.5 M 32 25 C 32 25.5 32 26.1 32 26.6 C 32 27.1 32 27.7 32 28.2 M 32 25 L 32 26.6 L 32 28.2',
+        'M 9.5 32 C 9.5 19.6 19.6 9.5 32 9.5 C 39.1 9.5 45.4 12.8 49.7 18.2 M 45.5 17.8 L 49.7 18.2 L 49.8 13.6 M 54.5 32 C 54.5 44.4 44.4 54.5 32 54.5 C 24.9 54.5 18.6 51.2 14.3 45.8 M 18.5 46.2 L 14.3 45.8 L 14.2 50.4'
+      ]
+    };
+
+    const parsePathTokens = (d) => {
+      const tokens = d.trim().split(/\s+/);
+      const nums = [];
+      const template = tokens.map((tok) => {
+        const val = Number(tok);
+        if (!Number.isNaN(val) && tok !== '') {
+          nums.push(val);
+          return null;
+        }
+        return tok;
+      });
+      return { template, nums };
+    };
+
+    const parsedMorph = {};
+    Object.keys(MORPH_SHAPES).forEach((key) => {
+      parsedMorph[key] = MORPH_SHAPES[key].map(parsePathTokens);
+    });
+
+    const morphPathEls = {
+      cup: Array.from(document.querySelectorAll('.p-bg-muffin [data-morph="cup"]')),
+      dome: Array.from(document.querySelectorAll('.p-bg-muffin [data-morph="dome"]')),
+      ribs: Array.from(document.querySelectorAll('.p-bg-muffin [data-morph="ribs"]')),
+      emblem: Array.from(document.querySelectorAll('.p-bg-muffin [data-morph="emblem"]')),
+      detail: Array.from(document.querySelectorAll('.p-bg-muffin [data-morph="detail"]'))
+    };
+
+    const interpolatePath = (key, idxA, idxB, t) => {
+      const list = parsedMorph[key];
+      const a = list[idxA];
+      const b = list[idxB];
+      if (!a || !b) return '';
+      if (t <= 0.001) return MORPH_SHAPES[key][idxA];
+      if (t >= 0.999) return MORPH_SHAPES[key][idxB];
+      let numIdx = 0;
+      return a.template
+        .map((cmd) => {
+          if (cmd !== null) return cmd;
+          const v = lerp(a.nums[numIdx], b.nums[numIdx], t);
+          numIdx++;
+          return v.toFixed(2);
+        })
+        .join(' ');
+    };
+
+    let lastMorphKey = '';
+    const applyMorphProgress = (chapterP) => {
+      // 4 chapitres : la transition ne s'effectue que sur les 10 derniers % d'un chapitre
+      // et les 10 premiers % du suivant (autour des frontières 0.25, 0.50, 0.75)
+      const u = clamp(chapterP * 4, 0, 4);
+      let idxA = 0;
+      let idxB = 0;
+      let rawT = 0;
+
+      if (u < 0.9) {
+        idxA = 0; idxB = 0; rawT = 0;
+      } else if (u < 1.1) {
+        idxA = 0; idxB = 1; rawT = (u - 0.9) / 0.2;
+      } else if (u < 1.9) {
+        idxA = 1; idxB = 1; rawT = 0;
+      } else if (u < 2.1) {
+        idxA = 1; idxB = 2; rawT = (u - 1.9) / 0.2;
+      } else if (u < 2.9) {
+        idxA = 2; idxB = 2; rawT = 0;
+      } else if (u < 3.1) {
+        idxA = 2; idxB = 3; rawT = (u - 2.9) / 0.2;
+      } else {
+        idxA = 3; idxB = 3; rawT = 0;
+      }
+
+      const smoothT = easeInOutCubic(clamp(rawT, 0, 1));
+      const morphKey = `${idxA}|${idxB}|${smoothT.toFixed(3)}`;
+      if (morphKey === lastMorphKey) return;
+      lastMorphKey = morphKey;
+
+      Object.keys(morphPathEls).forEach((key) => {
+        const d = idxA === idxB ? MORPH_SHAPES[key][idxA] : interpolatePath(key, idxA, idxB, smoothT);
+        const els = morphPathEls[key];
+        for (let i = 0; i < els.length; i++) {
+          els[i].setAttribute('d', d);
+        }
+      });
+    };
+
     let trackTop = 0;
     let scrollSpan = 1;
     let activeIdx = -1;
@@ -476,6 +632,7 @@
     const renderProgress = (p) => {
       const chapterP = clamp(p / 0.86, 0, 1);
       if (bgEl) bgEl.style.setProperty('--sp', chapterP.toFixed(4));
+      applyMorphProgress(chapterP);
       segs.forEach((seg, i) => {
         const local = clamp(chapterP * 4 - i, 0, 1);
         seg.style.setProperty('--seg-fill', local.toFixed(3));
