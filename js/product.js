@@ -12,11 +12,14 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
   const lerp = (a, b, t) => a + (b - a) * t;
+  // Safari fait défiler sur le thread compositeur : l'inertie JS (lerp) y est décalée et fait trembler les éléments sticky
+  const isSafari = /^((?!chrome|chromium|android|crios|fxios|edg).)*safari/i.test(navigator.userAgent);
+  const smoothK = (k) => (isSafari ? 1 : k);
   const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
   const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
   // Réveil paresseux du moteur RAF (dort à 0% CPU quand rien ne bouge)
-  let wakeRaf = () => {};
+  let wakeRaf = () => { };
 
   // Transform exacte d'un plan 800x707 pour cadrer [fx, fy] dans viewBox 520x408
   const buildPhotoTransform = (fx, fy, zoom) => {
@@ -116,7 +119,7 @@
       }
       const diff = targetP - curP;
       if (Math.abs(diff) > 0.0005) {
-        curP = lerp(curP, targetP, 0.28);
+        curP = lerp(curP, targetP, smoothK(0.28));
         render(curP);
         return true;
       }
@@ -138,14 +141,18 @@
     const inner = document.getElementById('pSplitInner');
     const expandWrap = document.getElementById('pSplitExpand');
     const stage = document.getElementById('pSplitStage');
-    const blade = document.getElementById('pSplitBlade');
+    const frontLayer = document.getElementById('pSplitFront');
+    const bladePath = document.getElementById('pSplitBladePath');
     const handle = document.getElementById('pSplitHandle');
+    const controlsEl = document.getElementById('pSplitControls');
+    const glider = document.getElementById('pSplitGlider');
     const presetBtns = Array.from(document.querySelectorAll('.p-split-preset-btn'));
     if (!stage || !track || !expandWrap) return null;
 
     let pos = 0.5;
     let targetPos = 0.5;
     let appliedPos = -1;
+    let appliedBend = 0;
     let scale = 0.84;
     let targetScale = 0.84;
     let appliedScale = -1;
@@ -157,41 +164,118 @@
     let targetHandoffOp = 1;
     let appliedHandoffKey = '';
     let isDragging = false;
-    let userLocked = false;
-    let stageW = Math.max(1, stage.offsetWidth);
-    let stageLeft = stage.getBoundingClientRect().left;
+    let userDelta = 0;
+    let lastInteractScrollY = window.scrollY || 0;
+    let stageW = Math.max(1, stage.clientWidth || stage.offsetWidth);
+    let stageH = Math.max(1, stage.clientHeight || stage.offsetHeight);
     let trackTop = 0;
     let trackSpan = 1;
 
-    const syncPresetButtons = (val) => {
-      presetBtns.forEach((btn) => {
-        const target = parseFloat(btn.getAttribute('data-split-target') || '0.5');
-        btn.classList.toggle('is-active', Math.abs(val - target) < 0.08);
-      });
+    const getAutoPos = (scrollY) => {
+      const winH = window.innerHeight || 900;
+      const animStart = trackTop - winH * 0.70;
+      const animSpan = Math.max(1, trackSpan + winH * 0.90);
+      const scrollP = clamp((scrollY - animStart) / animSpan, 0, 1);
+      return 0.50 + Math.sin((scrollP - 0.5) * Math.PI * 1.35) * 0.32;
     };
 
-    const applySplit = (val) => {
-      stage.style.setProperty('--split', val.toFixed(4));
+    const syncGlider = () => {
+      if (!controlsEl || !glider || !presetBtns.length) return;
+      const activeBtn = presetBtns.find((b) => b.classList.contains('is-active')) || presetBtns[1] || presetBtns[0];
+      if (!activeBtn) return;
+      const padLeft = controlsEl.clientWidth > 0 ? parseFloat(getComputedStyle(controlsEl).paddingLeft) || 6 : 6;
+      glider.style.width = `${activeBtn.offsetWidth}px`;
+      glider.style.transform = `translate3d(${(activeBtn.offsetLeft - padLeft).toFixed(1)}px, 0, 0)`;
+    };
+
+    const syncPresetButtons = (val) => {
+      const mode = val > 0.62 ? 'kid' : (val < 0.38 ? 'parent' : 'mid');
+      if (controlsEl && controlsEl.getAttribute('data-active-mode') !== mode) {
+        controlsEl.setAttribute('data-active-mode', mode);
+      }
+      let changed = false;
+      presetBtns.forEach((btn) => {
+        const shouldActive = btn.getAttribute('data-mode') === mode;
+        if (btn.classList.contains('is-active') !== shouldActive) {
+          btn.classList.toggle('is-active', shouldActive);
+          changed = true;
+        }
+      });
+      if (changed) syncGlider();
+    };
+
+    const CURVE_STEPS = 20;
+    const computeBend = (val, vel) => (prefersReducedMotion ? 0 : clamp((val - 0.5) * 0.09 + vel * 0.12, -0.055, 0.055));
+
+    const applySplit = (val, vel = 0) => {
+      const bend = computeBend(val, vel);
+      const xEdge = clamp(val - bend, 0, 1);
+      const xCtrl = 2 * val - xEdge;
+
+      if (bladePath) {
+        const gapT = clamp(22 / Math.max(1, stageH), 0.02, 0.12);
+        const t1 = 0.5 - gapT;
+        const t2 = 0.5 + gapT;
+        const bezX = (t) => {
+          const mt = 1 - t;
+          return mt * mt * xEdge + 2 * mt * t * xCtrl + t * t * xEdge;
+        };
+        const p0x = xEdge * 1000;
+        const q1x = lerp(xEdge, xCtrl, t1) * 1000;
+        const q1y = lerp(0, 0.5, t1) * 1000;
+        const q2x = bezX(t1) * 1000;
+        const q2y = t1 * 1000;
+
+        const r0x = bezX(t2) * 1000;
+        const r0y = t2 * 1000;
+        const r1x = lerp(xCtrl, xEdge, t2) * 1000;
+        const r1y = lerp(0.5, 1, t2) * 1000;
+
+        bladePath.setAttribute(
+          'd',
+          `M ${p0x.toFixed(1)} 0 Q ${q1x.toFixed(1)} ${q1y.toFixed(1)} ${q2x.toFixed(1)} ${q2y.toFixed(1)} ` +
+          `M ${r0x.toFixed(1)} ${r0y.toFixed(1)} Q ${r1x.toFixed(1)} ${r1y.toFixed(1)} ${p0x.toFixed(1)} 1000`
+        );
+      }
+
+      if (frontLayer) {
+        const pts = ['0% 0%'];
+        for (let i = 0; i <= CURVE_STEPS; i++) {
+          const t = i / CURVE_STEPS;
+          const mt = 1 - t;
+          const x = mt * mt * xEdge + 2 * mt * t * xCtrl + t * t * xEdge;
+          pts.push(`${(clamp(x, 0, 1) * 100).toFixed(2)}% ${(t * 100).toFixed(1)}%`);
+        }
+        pts.push('0% 100%');
+        const poly = `polygon(${pts.join(', ')})`;
+        frontLayer.style.clipPath = poly;
+        frontLayer.style.webkitClipPath = poly;
+      }
+
       const xPx = val * stageW;
-      if (blade) blade.style.transform = `translate3d(${(xPx - 1.25).toFixed(2)}px, 0, 0)`;
-      if (handle) handle.style.transform = `translate3d(${xPx.toFixed(2)}px, -50%, 0)`;
+      if (handle) {
+        handle.style.transform = `translate3d(${xPx.toFixed(2)}px, -50%, 0) rotate(${(-bend * 18).toFixed(2)}deg)`;
+      }
+      appliedBend = bend;
     };
 
     const measure = () => {
-      const sr = stage.getBoundingClientRect();
-      stageW = Math.max(1, stage.offsetWidth);
-      stageLeft = sr.left;
+      stageW = Math.max(1, stage.clientWidth || stage.offsetWidth);
+      stageH = Math.max(1, stage.clientHeight || stage.offsetHeight);
       const tr = track.getBoundingClientRect();
       trackTop = tr.top + window.scrollY;
       trackSpan = Math.max(1, track.offsetHeight - window.innerHeight);
       applySplit(pos);
+      syncGlider();
     };
 
     const updateFromClientX = (clientX) => {
       const sr = stage.getBoundingClientRect();
-      stageLeft = sr.left;
-      stageW = Math.max(1, sr.width);
-      targetPos = clamp((clientX - stageLeft) / stageW, 0.06, 0.94);
+      const rectW = Math.max(1, sr.width);
+      targetPos = clamp((clientX - sr.left) / rectW, 0.06, 0.94);
+      const curScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      userDelta = targetPos - getAutoPos(curScrollY);
+      lastInteractScrollY = curScrollY;
       syncPresetButtons(targetPos);
       wakeRaf();
     };
@@ -199,7 +283,6 @@
     stage.addEventListener('pointerdown', (e) => {
       e.preventDefault();
       isDragging = true;
-      userLocked = true;
       stage.classList.add('is-dragging');
       if (stage.setPointerCapture) stage.setPointerCapture(e.pointerId);
       updateFromClientX(e.clientX);
@@ -215,7 +298,7 @@
       isDragging = false;
       stage.classList.remove('is-dragging');
       if (stage.releasePointerCapture && e.pointerId !== undefined) {
-        try { stage.releasePointerCapture(e.pointerId); } catch (_) {}
+        try { stage.releasePointerCapture(e.pointerId); } catch (_) { }
       }
       wakeRaf();
     };
@@ -225,8 +308,10 @@
 
     presetBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        userLocked = true;
         targetPos = parseFloat(btn.getAttribute('data-split-target') || '0.5');
+        const curScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        userDelta = targetPos - getAutoPos(curScrollY);
+        lastInteractScrollY = curScrollY;
         syncPresetButtons(targetPos);
         wakeRaf();
       });
@@ -236,8 +321,9 @@
       const winH = window.innerHeight || 900;
 
       if (!tickOnly) {
-        const startY = trackTop - winH * 0.86;
-        const endY = trackTop - 16;
+        // Même règle que la home : début à 98 % de la hauteur d'écran, achèvement à 70 %
+        const startY = trackTop - winH * 0.98;
+        const endY = trackTop - winH * 0.70;
         const enterP = clamp((scrollY - startY) / Math.max(1, endY - startY), 0, 1);
         const ee = easeOutCubic(enterP);
         const minScale = window.innerWidth <= 960 ? 0.90 : 0.84;
@@ -250,9 +336,14 @@
         targetHandoffY = prefersReducedMotion ? 0 : lerp(lerp(34, 0, ee), -26, exitP);
         targetHandoffOp = prefersReducedMotion ? 1 : lerp(lerp(0.18, 1, ee), 0.2, exitP);
 
-        if (!userLocked && !prefersReducedMotion) {
-          const activeStickyP = clamp(stickyP / 0.80, 0, 1);
-          targetPos = 0.50 + Math.sin((activeStickyP - 0.5) * Math.PI * 1.15) * 0.16;
+        if (!isDragging && !prefersReducedMotion) {
+          const dY = Math.abs(scrollY - lastInteractScrollY);
+          lastInteractScrollY = scrollY;
+          if (userDelta !== 0) {
+            userDelta *= Math.exp(-dY / 150);
+            if (Math.abs(userDelta) < 0.002) userDelta = 0;
+          }
+          targetPos = clamp(getAutoPos(scrollY) + userDelta, 0.06, 0.94);
           syncPresetButtons(targetPos);
         }
       }
@@ -264,25 +355,50 @@
         handoffY = targetHandoffY;
         handoffOp = targetHandoffOp;
       } else {
+        const prevPos = pos;
         pos = lerp(pos, targetPos, isDragging ? 0.44 : 0.24);
-        scale = lerp(scale, targetScale, 0.28);
-        handoffS = lerp(handoffS, targetHandoffS, 0.28);
-        handoffY = lerp(handoffY, targetHandoffY, 0.28);
-        handoffOp = lerp(handoffOp, targetHandoffOp, 0.28);
-      }
+        const vel = pos - prevPos;
+        scale = lerp(scale, targetScale, smoothK(0.28));
+        handoffS = lerp(handoffS, targetHandoffS, smoothK(0.28));
+        handoffY = lerp(handoffY, targetHandoffY, smoothK(0.28));
+        handoffOp = lerp(handoffOp, targetHandoffOp, smoothK(0.28));
 
-      const posMoving = Math.abs(pos - targetPos) > 0.0007;
-      const scaleMoving = Math.abs(scale - targetScale) > 0.0005;
-      const handoffMoving =
-        Math.abs(handoffS - targetHandoffS) > 0.0005 ||
-        Math.abs(handoffY - targetHandoffY) > 0.08 ||
-        Math.abs(handoffOp - targetHandoffOp) > 0.002;
-      if (!posMoving) pos = targetPos;
-      if (!scaleMoving) scale = targetScale;
-      if (!handoffMoving) {
-        handoffS = targetHandoffS;
-        handoffY = targetHandoffY;
-        handoffOp = targetHandoffOp;
+        const posMoving = Math.abs(pos - targetPos) > 0.0007;
+        const scaleMoving = Math.abs(scale - targetScale) > 0.0005;
+        const handoffMoving =
+          Math.abs(handoffS - targetHandoffS) > 0.0005 ||
+          Math.abs(handoffY - targetHandoffY) > 0.08 ||
+          Math.abs(handoffOp - targetHandoffOp) > 0.002;
+        if (!posMoving) pos = targetPos;
+        if (!scaleMoving) scale = targetScale;
+        if (!handoffMoving) {
+          handoffS = targetHandoffS;
+          handoffY = targetHandoffY;
+          handoffOp = targetHandoffOp;
+        }
+
+        if (Math.abs(scale - appliedScale) > 0.0003) {
+          appliedScale = scale;
+          expandWrap.style.transform = `scale3d(${scale.toFixed(4)}, ${scale.toFixed(4)}, 1)`;
+        }
+
+        if (inner) {
+          const key = `${handoffS.toFixed(4)}|${handoffY.toFixed(1)}|${handoffOp.toFixed(3)}`;
+          if (key !== appliedHandoffKey) {
+            appliedHandoffKey = key;
+            inner.style.transform = `translate3d(0, ${handoffY.toFixed(1)}px, 0) scale3d(${handoffS.toFixed(4)}, ${handoffS.toFixed(4)}, 1)`;
+            inner.style.opacity = handoffOp.toFixed(3);
+          }
+        }
+
+        const expectedBend = computeBend(pos, vel);
+        const bendSettling = Math.abs(expectedBend - appliedBend) > 0.0008;
+        if (Math.abs(pos - appliedPos) > 0.0004 || bendSettling) {
+          appliedPos = pos;
+          applySplit(pos, vel);
+        }
+
+        return posMoving || scaleMoving || handoffMoving || bendSettling;
       }
 
       if (Math.abs(scale - appliedScale) > 0.0003) {
@@ -301,13 +417,15 @@
 
       if (Math.abs(pos - appliedPos) > 0.0004) {
         appliedPos = pos;
-        applySplit(pos);
+        applySplit(pos, 0);
       }
 
-      return posMoving || scaleMoving || handoffMoving;
+      return false;
     };
 
     applySplit(0.5);
+    syncPresetButtons(0.5);
+    syncGlider();
     return { measure, update };
   };
 
@@ -387,7 +505,7 @@
         const idx = Math.min(3, Math.floor(chapterP * 3.99));
         applyStep(idx);
 
-        const enterP = clamp((scrollY - (trackTop - winH * 0.85)) / Math.max(1, winH * 0.85 - 16), 0, 1);
+        const enterP = clamp((scrollY - (trackTop - winH * 0.98)) / Math.max(1, winH * 0.28), 0, 1);
         const ee = easeOutCubic(enterP);
         const exitP = prefersReducedMotion ? 0 : easeInOutCubic(clamp((targetP - 0.88) / 0.12, 0, 1));
 
@@ -402,10 +520,10 @@
         panelY = targetPanelY;
         panelOp = targetPanelOp;
       } else {
-        curP = curP < 0 ? targetP : lerp(curP, targetP, 0.24);
-        panelS = lerp(panelS, targetPanelS, 0.28);
-        panelY = lerp(panelY, targetPanelY, 0.28);
-        panelOp = lerp(panelOp, targetPanelOp, 0.28);
+        curP = curP < 0 ? targetP : lerp(curP, targetP, smoothK(0.24));
+        panelS = lerp(panelS, targetPanelS, smoothK(0.28));
+        panelY = lerp(panelY, targetPanelY, smoothK(0.28));
+        panelOp = lerp(panelOp, targetPanelOp, smoothK(0.28));
       }
 
       const progMoving = Math.abs(targetP - curP) > 0.0006;
@@ -450,7 +568,6 @@
       top: 0,
       lastProg: -1
     }));
-    const duelCards = Array.from(document.querySelectorAll('.p-duel-card'));
 
     ingCards.forEach((card) => {
       card.addEventListener('pointermove', (e) => {
@@ -459,25 +576,6 @@
         card.style.setProperty('--my', `${(e.clientY - r.top).toFixed(0)}px`);
       });
     });
-
-    if (duelCards.length) {
-      if (prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
-        duelCards.forEach((c) => c.classList.add('is-visible'));
-      } else {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.16, rootMargin: '0px 0px -6% 0px' }
-        );
-        duelCards.forEach((c) => io.observe(c));
-      }
-    }
 
     const measure = () => {
       drawPaths.forEach((item) => {
@@ -493,26 +591,15 @@
       const winH = window.innerHeight || 900;
 
       drawPaths.forEach((item) => {
-        const startY = winH * 0.94;
+        const startY = winH * 0.98;
         const progress = prefersReducedMotion
           ? 1
-          : clamp((scrollY + startY - item.top) / (winH * 0.14), 0, 1);
+          : clamp((scrollY + startY - item.top) / (winH * 0.28), 0, 1);
         if (Math.abs(progress - item.lastProg) > 0.005) {
           item.lastProg = progress;
           item.el.style.strokeDashoffset = `${(item.len * (1 - progress)).toFixed(1)}`;
         }
       });
-
-      if (!prefersReducedMotion) {
-        duelCards.forEach((card) => {
-          if (!card.classList.contains('is-visible')) {
-            const r = card.getBoundingClientRect();
-            if (r.top < winH * 0.92 && r.bottom > 0) {
-              card.classList.add('is-visible');
-            }
-          }
-        });
-      }
     };
 
     return { measure, update };
@@ -650,6 +737,51 @@
     };
 
     window.addEventListener('scroll', wakeRaf, { passive: true });
+
+    // Safari : `position: sticky` est déplacé par le thread compositeur alors que le JS (transforms) est mis à jour
+    // une frame plus tard → tremblements. On épingle donc les blocs en `position: fixed` (immobiles à l'écran).
+    if (isSafari) {
+      const pins = Array.from(document.querySelectorAll('.p-hero-track, .p-split-track, .p-story-track'))
+        .map((track) => ({
+          track,
+          el: Array.from(track.children).find((c) => /-sticky\b/.test(c.className)),
+          mode: ''
+        }))
+        .filter((p) => p.el);
+
+      const applyPin = (pin, mode) => {
+        if (pin.mode === mode) return;
+        pin.mode = mode;
+        const s = pin.el.style;
+        s.left = '0';
+        s.width = '100%';
+        if (mode === 'fixed') {
+          s.position = 'fixed';
+          s.top = '0';
+          s.bottom = 'auto';
+        } else if (mode === 'after') {
+          s.position = 'absolute';
+          s.top = 'auto';
+          s.bottom = '0';
+        } else {
+          s.position = 'absolute';
+          s.top = '0';
+          s.bottom = 'auto';
+        }
+      };
+
+      const updatePins = () => {
+        const vh = window.innerHeight;
+        pins.forEach((pin) => {
+          const r = pin.track.getBoundingClientRect();
+          applyPin(pin, r.top > 0 ? 'before' : (r.bottom < vh ? 'after' : 'fixed'));
+        });
+      };
+
+      updatePins();
+      window.addEventListener('scroll', updatePins, { passive: true });
+      window.addEventListener('resize', updatePins, { passive: true });
+    }
     window.addEventListener('resize', onResize, { passive: true });
     window.addEventListener('corfoviaLanguageChange', measureAll);
 

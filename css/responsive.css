@@ -29,17 +29,22 @@
     position: relative;
     min-width: 0;
     max-width: 560px;
-    justify-self: start;
+    justify-self: stretch;
     display: grid;
-    gap: 12px;
+    gap: 0;
+    background: rgba(252, 249, 245, 0.92);
+    border: 1px solid rgba(181, 21, 39, 0.14);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px -14px rgba(84, 12, 31, 0.16);
   }
 
   .hero-news-stage {
     position: relative;
     inset: auto;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 22px;
+    aspect-ratio: 16 / 10;
+    border-radius: 0;
     -webkit-mask-image: none;
     mask-image: none;
     animation: none;
@@ -47,24 +52,46 @@
 
   .hero-news-stage::before {
     background: linear-gradient(180deg,
-        rgba(250, 245, 239, 0.14) 0%,
-        rgba(250, 245, 239, 0) 35%,
-        rgba(250, 245, 239, 0.55) 100%);
+        rgba(45, 20, 8, 0.04) 0%,
+        rgba(45, 20, 8, 0) 65%,
+        rgba(45, 20, 8, 0.14) 100%);
   }
 
   .hero-news-slide-img.is-active {
     opacity: 1;
   }
 
+  .hero-news-dock {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 14px 16px 16px;
+  }
+
   .pillars-deck-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
 
   .team-members-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px 16px;
+    gap: 60px 16px;
+    margin-top: 28px;
     margin-bottom: 36px;
+  }
+
+  .team-member-card {
+    margin-top: 44px;
+    padding: 54px 12px 16px;
+  }
+
+  .team-member-avatar-wrap {
+    top: -54px;
+    width: 96px;
+    height: 96px;
   }
 
   .recipe-ingredients-grid {
@@ -111,30 +138,25 @@
     min-height: auto;
     display: flex;
     align-items: center;
-    padding: 88px 0 64px 0;
+    padding: 92px 0 48px 0;
     box-sizing: border-box;
   }
 
   .hero-grid {
-    gap: 22px;
+    gap: 24px;
   }
 
   .hero-glorious::after {
-    height: 120px;
+    height: 80px;
   }
 
   .hero-news-rail {
     max-width: 100%;
-    gap: 10px;
-  }
-
-  .hero-news-stage {
-    border-radius: 18px;
+    border-radius: 22px;
   }
 
   .hero-news-dock {
-    border-radius: 18px;
-    padding: 12px 14px 13px;
+    padding: 12px 15px 15px;
   }
 
   .site-nav {
@@ -144,7 +166,7 @@
 
   .nav-inner {
     height: 58px;
-    padding: 0 16px;
+    padding: 0 14px 0 16px;
   }
 
   .nav-brand-logo {
@@ -152,21 +174,101 @@
   }
 
   .nav-links {
+    position: fixed;
+    top: 78px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px;
+    background: rgba(252, 249, 245, 0.96);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--accent-border-strong);
+    border-radius: 22px;
+    box-shadow: 0 22px 48px rgba(84, 12, 31, 0.16), 0 4px 12px rgba(84, 12, 31, 0.06);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, -10px, 0) scale(0.98);
+    transform-origin: top center;
+    transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.24s;
+    z-index: 999;
+  }
+
+  .site-nav.is-scrolled .nav-links {
+    top: 66px;
+  }
+
+  .site-nav.is-mobile-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .nav-links .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 11px 14px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+  }
+
+  .nav-dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid var(--accent-border);
+  }
+
+  .nav-dropdown-btn {
     display: none;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    width: 100%;
+    max-width: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .nav-dropdown-item {
+    background: rgba(181, 21, 39, 0.05);
+    border: 1px solid var(--accent-border);
+    padding: 10px 12px;
+  }
+
+  .lang-switcher-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid var(--accent-border);
+  }
+
+  .lang-switcher {
+    margin-left: 0;
   }
 
   .nav-current-badge {
     display: inline-flex;
-  }
-
-  .nav-dropdown-menu {
-    position: fixed;
-    top: 75px;
-    left: 16px;
-    right: 16px;
-    width: auto;
-    max-width: none;
-    transform-origin: top center;
   }
 
   .site-nav.is-scrolled {
@@ -200,13 +302,43 @@
   }
 
   .pillars-deck-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .pillar-deck-card {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .pillar-deck-card h4 {
+    font-size: 1rem;
+  }
+
+  .pillar-deck-card p {
+    font-size: 0.8rem;
   }
 
   .team-members-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px 14px;
+    gap: 50px 12px;
+    margin-top: 22px;
+  }
+
+  .team-member-card {
+    margin-top: 38px;
+    padding: 46px 10px 14px;
+    border-radius: 18px;
+  }
+
+  .team-member-avatar-wrap {
+    top: -42px;
+    width: 82px;
+    height: 82px;
+  }
+
+  .team-member-name {
+    font-size: 0.94rem;
   }
 
   .social-cta-buttons {
@@ -227,29 +359,29 @@
   }
 
   .subscribe-card-glorious {
-    padding: 40px 20px;
+    padding: 36px 20px;
+    border-radius: 26px;
   }
 
   .section-pillars-deck {
-    padding: 90px 0 100px 0;
+    padding: 64px 0 72px 0;
   }
 
   .section-feature-products {
-    padding: 100px 0;
+    padding: 72px 0;
   }
 
   .section-routine {
-    padding: 100px 0;
+    padding: 72px 0;
   }
 
   .section-subscribe-banner {
-    padding: 100px 0 90px 0;
+    padding: 68px 0 64px 0;
   }
 
   .footer-glorious {
-    padding: 70px 0 35px 0;
+    padding: 40px 0 26px 0;
   }
-
 
   .subscribe-card-glorious h3 {
     font-size: 1.85rem;
@@ -257,7 +389,7 @@
 
   .social-join-grid {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .social-cta-box {
@@ -265,19 +397,21 @@
     text-align: center;
   }
 
-  .footer-glorious-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+  .footer-main-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 22px;
   }
 
-  .footer-brand-col {
-    grid-column: span 2;
+  .footer-nav-links {
+    gap: 10px 18px;
   }
 
   .footer-bottom-bar {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 8px;
   }
 
   .perspective-pills-row {
@@ -376,15 +510,6 @@
     width: 140px;
   }
 
-  .footer-glorious-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .footer-brand-col {
-    grid-column: span 1;
-  }
-
   .error-404-section {
     padding: 115px 0 60px 0;
   }
@@ -411,6 +536,7 @@
   }
 
   .team-members-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px 10px;
   }
 }

@@ -62,10 +62,15 @@
         <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia">
       </a>
 
-      <div class="nav-current-badge">
+      <button type="button" class="nav-current-badge" id="navMobileTrigger" aria-expanded="false"
+        aria-label="Menu de navigation">
         <span class="nav-current-dot"></span>
         <span class="nav-current-label">404</span>
-      </div>
+        <svg class="nav-mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
 
       <ul class="nav-links">
         <li><a href="/#vision" class="nav-link" data-i18n="nav.vision">La Vision</a></li>

@@ -69,7 +69,7 @@
       'project.card.title': 'Corfovia',
       'project.card.badge': 'Projet Étudiant',
       'project.m1.label': 'Le constat',
-      'project.m1.text': 'Des goûters trop sucrés qui calent mal les enfants.',
+      'project.m1.text': 'Des goûters trop sucrés qui nourissent mal les enfants.', // Des goûters trop sucrés et peu nutritif.
       'project.m2.label': 'La ressource',
       'project.m2.text': 'Des protéines animales riches trop souvent écartées.',
       'project.m3.label': 'La réponse',
@@ -109,7 +109,7 @@
       'footer.exigence2': 'Anti-Gaspillage',
       'footer.exigence3': 'Moins de Sucre',
       'footer.exigence4': 'Projet Étudiant',
-      'footer.copy': '© 2026 Corfovia. Tous droits réservés.',
+      'footer.copy': '© 2026 Corfovia — Projet étudiant d’innovation alimentaire.',
       'footer.mention': 'Projet étudiant d’innovation alimentaire.',
 
       // Page Produit Abadakor
@@ -335,7 +335,7 @@
       'project.card.title': 'Corfovia',
       'project.card.badge': 'Student Project',
       'project.m1.label': 'The observation',
-      'project.m1.text': 'Overly sweet snacks that leave children hungry.',
+      'project.m1.text': 'Snacks that are too sugary and provide poor nutrition for children.',
       'project.m2.label': 'The resource',
       'project.m2.text': 'Rich animal proteins left aside in food chains.',
       'project.m3.label': 'The answer',
@@ -375,7 +375,7 @@
       'footer.exigence2': 'Anti-Waste',
       'footer.exigence3': 'Low Sugar',
       'footer.exigence4': 'Student Project',
-      'footer.copy': '© 2026 Corfovia. All rights reserved.',
+      'footer.copy': '© 2026 Corfovia — Student food innovation project.',
       'footer.mention': 'Student food-innovation project.',
 
       // Page Produit Abadakor

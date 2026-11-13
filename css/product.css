@@ -85,9 +85,7 @@ html,
   display: flex;
   align-items: center;
   overflow: hidden;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  contain: layout style paint;
+  contain: layout paint;
 }
 
 .p-hero-sticky > .container {
@@ -309,9 +307,7 @@ html,
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  contain: layout style paint;
+  contain: layout paint;
 }
 
 .p-split-inner {
@@ -496,19 +492,23 @@ html,
   -webkit-clip-path: inset(0 calc((1 - var(--split, 0.5)) * 100%) 0 0);
 }
 
-/* Blade et handle pilotés par translate3d GPU en pixels exacts */
+/* Blade SVG courbée et handle pilotés par le scroll et le glisser */
 .p-split-blade {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2.5px;
-  transform: translate3d(calc(50% - 1.25px), 0, 0);
-  background: rgba(255, 249, 242, 0.96);
-  box-shadow: 0 0 10px rgba(45, 18, 18, 0.45);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 4;
-  will-change: transform;
+  overflow: visible;
+}
+
+.p-split-blade path {
+  fill: none;
+  stroke: rgba(255, 249, 242, 0.96);
+  stroke-width: 2.8px;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(45, 18, 18, 0.45));
 }
 
 .p-split-handle {
@@ -521,7 +521,7 @@ html,
   height: 48px;
   margin-left: -24px;
   border-radius: 50%;
-  background: rgba(255, 249, 242, 0.96);
+  background: #FFF9F2;
   border: 1px solid rgba(255, 255, 255, 0.98);
   color: var(--accent);
   box-shadow: 0 10px 26px rgba(45, 18, 18, 0.28);
@@ -533,31 +533,82 @@ html,
 }
 
 .p-split-controls {
-  margin-top: 14px;
+  position: relative;
   display: flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
+  padding: 6px;
+  margin: 16px auto 0;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 249, 242, 0.92);
+  border: 1px solid var(--accent-border-strong);
+  box-shadow: 0 14px 32px rgba(45, 18, 18, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.p-split-glider {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  border-radius: var(--radius-pill);
+  z-index: 1;
+  background: linear-gradient(90deg, #3B1A0B 0%, #650C16 50%, #B51527 100%);
+  box-shadow: 0 8px 18px rgba(101, 12, 22, 0.28);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+.p-split-controls[data-active-mode="kid"] .p-split-glider {
+  background: linear-gradient(135deg, #4A2210 0%, #2D1408 100%);
+  box-shadow: 0 8px 18px rgba(45, 20, 8, 0.32);
+}
+
+.p-split-controls[data-active-mode="mid"] .p-split-glider {
+  background: linear-gradient(90deg, #3B1A0B 0%, #650C16 50%, #B51527 100%);
+  box-shadow: 0 8px 18px rgba(101, 12, 22, 0.28);
+}
+
+.p-split-controls[data-active-mode="parent"] .p-split-glider {
+  background: linear-gradient(135deg, #B51527 0%, #7A0E1B 100%);
+  box-shadow: 0 8px 18px rgba(181, 21, 39, 0.30);
 }
 
 .p-split-preset-btn {
+  position: relative;
+  z-index: 2;
   appearance: none;
-  border: 1px solid var(--accent-border);
-  background: var(--bg-surface);
+  border: none;
+  background: transparent;
   color: var(--text-main);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 700;
-  padding: 9px 18px;
+  padding: 10px 20px;
   border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
   touch-action: manipulation;
-  box-shadow: 0 8px 20px rgba(101, 12, 22, 0.08);
-  transition: transform 0.14s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  transition: color 0.22s ease, transform 0.14s ease;
+}
+
+.p-split-btn-icon {
+  flex-shrink: 0;
+  opacity: 0.86;
+  transition: opacity 0.22s ease, transform 0.22s ease;
 }
 
 .p-split-preset-btn:hover {
-  border-color: var(--accent-border-strong);
-  box-shadow: 0 10px 24px rgba(101, 12, 22, 0.12);
+  color: var(--text-title);
 }
 
 .p-split-preset-btn:active {
@@ -565,10 +616,11 @@ html,
 }
 
 .p-split-preset-btn.is-active {
-  background: var(--accent);
   color: #ffffff;
-  border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(181, 21, 39, 0.26);
+}
+
+.p-split-preset-btn.is-active .p-split-btn-icon {
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -592,9 +644,7 @@ html,
   height: 100svh;
   overflow: hidden;
   background: var(--bg-cream);
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  contain: layout style paint;
+  contain: layout paint;
 }
 
 .p-story-panel {
@@ -1043,18 +1093,6 @@ html,
   display: flex;
   flex-direction: column;
   gap: 14px;
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  filter: blur(7px);
-  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.p-duel-card.is-visible {
-  opacity: 1;
-  transform: none;
-  filter: blur(0);
 }
 
 .p-duel-card.is-good-green {
@@ -1349,17 +1387,17 @@ html,
   }
 
   .p-hero-sticky {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .p-hero-sticky > .container {
-    padding-top: 90px;
-    padding-bottom: 18px;
+    padding-top: 84px;
+    padding-bottom: 16px;
   }
 
   .p-hero-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
   }
 
   .p-hero-copy .hero-glorious-p {
@@ -1369,6 +1407,12 @@ html,
   .p-hero-trust-strip {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .p-hero-photo-slot {
+    aspect-ratio: 16 / 10;
+    max-height: 36svh;
+    border-radius: 26px;
   }
 
   .p-split-track {
@@ -1413,36 +1457,87 @@ html,
 }
 
 @media (max-width: 600px) {
+  .p-hero-sticky > .container {
+    padding-top: 78px;
+    padding-bottom: 14px;
+  }
+
+  .p-hero-grid {
+    gap: 14px;
+  }
+
+  .p-hero-tagline {
+    font-size: 0.78rem;
+    margin-bottom: 8px;
+    padding-left: 10px;
+  }
+
+  .p-hero-copy .hero-glorious-title {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+    margin-bottom: 8px;
+  }
+
+  .p-hero-copy .hero-glorious-p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+
   .p-hero-trust-strip {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 0;
-    padding: 6px 14px;
+    padding: 8px 6px;
+    border-radius: 16px;
   }
 
   .p-hero-metric {
-    padding: 10px;
-    border-right: none;
-  }
-
-  .p-hero-metric:nth-child(odd) {
+    padding: 4px 4px;
+    align-items: center;
+    text-align: center;
     border-right: 1px solid var(--accent-border);
   }
 
-  .p-hero-metric:nth-child(-n+2) {
-    border-bottom: 1px solid var(--accent-border);
+  .p-hero-metric:last-child {
+    border-right: none;
+  }
+
+  .p-hero-metric strong {
+    font-size: 1.05rem;
+  }
+
+  .p-hero-metric span {
+    font-size: 0.62rem;
+    line-height: 1.15;
+  }
+
+  .p-hero-scroll-cta {
+    display: none;
+  }
+
+  .p-hero-photo-slot {
+    aspect-ratio: 16 / 10;
+    max-height: 29svh;
+    border-radius: 22px;
   }
 
   .p-split-stage {
-    height: clamp(275px, 43svh, 360px);
+    height: clamp(310px, 48svh, 400px);
+    border-radius: 24px;
+  }
+
+  .p-split-handle {
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
   }
 
   .p-split-copy-box {
-    max-width: 42%;
+    max-width: 45%;
   }
 
   .p-split-layer h3 {
-    font-size: clamp(1rem, 4.3vw, 1.3rem);
+    font-size: clamp(1.05rem, 4.4vw, 1.35rem);
     margin-bottom: 4px;
   }
 
@@ -1452,7 +1547,7 @@ html,
   }
 
   .p-split-parent-top {
-    max-width: 48%;
+    max-width: 50%;
   }
 
   .p-split-spec-line {
@@ -1469,7 +1564,8 @@ html,
   }
 
   .p-story-photo-stage {
-    width: min(86vw, 320px);
+    width: min(88vw, 350px);
+    border-radius: 22px;
   }
 
   .p-bg-muffin:nth-child(4),
@@ -1478,20 +1574,32 @@ html,
     display: none;
   }
 
+  .p-ing-grid {
+    gap: 10px;
+  }
+
   .p-ing-card {
-    min-height: 132px;
-    padding: 16px;
+    min-height: 120px;
+    padding: 16px 14px;
+    border-radius: 18px;
   }
 
   .p-ing-bg {
-    width: 54px;
-    height: 54px;
+    width: 42px;
+    height: 42px;
+    top: 12px;
     right: 12px;
+    transform: none;
   }
 
-  .p-ing-qty,
+  .p-ing-qty {
+    font-size: 1.25rem;
+    padding-right: 46px;
+  }
+
   .p-ing-card h3 {
-    padding-right: 62px;
+    font-size: 0.96rem;
+    padding-right: 0;
   }
 
   .p-duel-row.is-classic {
@@ -1506,13 +1614,56 @@ html,
     font-size: 1.55rem;
   }
 
+  .p-gallery-stage {
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .p-gallery-frame {
+    border-radius: 18px;
+    margin-bottom: 12px;
+  }
+
   .p-macro-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .p-macro-item {
+    padding: 11px 12px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+  }
+
+  .p-macro-item strong {
+    font-size: 0.96rem;
   }
 
   .p-angle-btn {
-    padding: 7px 11px;
-    font-size: 0.76rem;
+    padding: 7px 10px;
+    font-size: 0.74rem;
+  }
+
+  .p-split-controls {
+    padding: 5px;
+    gap: 2px;
+  }
+
+  .p-split-glider {
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+  }
+
+  .p-split-preset-btn {
+    padding: 8px 11px;
+    font-size: 0.74rem;
+    gap: 5px;
+  }
+
+  .p-split-btn-icon {
+    width: 13px;
+    height: 13px;
   }
 }
 

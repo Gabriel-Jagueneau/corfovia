@@ -78,11 +78,16 @@
         <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia">
       </a>
 
-      <!-- Indicateur dynamique de position sur mobile -->
-      <div class="nav-current-badge">
+      <!-- Indicateur dynamique de position / Menu mobile dropdown -->
+      <button type="button" class="nav-current-badge" id="navMobileTrigger" aria-expanded="false"
+        aria-label="Menu de navigation">
         <span class="nav-current-dot"></span>
         <span class="nav-current-label">La Vision</span>
-      </div>
+        <svg class="nav-mobile-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
 
       <ul class="nav-links">
         <li><a href="#vision" class="nav-link active" data-section="vision" data-i18n="nav.vision">La Vision</a></li>
@@ -852,84 +857,51 @@
 
     </main>
 
-    <!-- FOOTER RAFFINÉ -->
+    <!-- FOOTER ÉPURÉ -->
     <footer class="footer-glorious">
       <div class="container">
-
-        <div class="footer-glorious-grid">
-
-          <!-- Brand Info -->
+        <div class="footer-main-row">
           <div class="footer-brand-col">
             <a href="/" class="nav-brand" aria-label="Corfovia Accueil">
-              <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia"
-                style="height: 40px;">
+              <img class="nav-brand-logo" src="/images/logo-horizontal-corfovia.png" alt="Corfovia">
             </a>
-            <p class="footer-brand-baseline">
-              <span data-i18n="footer.baseline">Innovation alimentaire & goûter sain pour enfants.</span>
+            <p class="footer-brand-baseline" data-i18n="footer.baseline">
+              Innovation alimentaire & goûter sain pour enfants.
             </p>
-            <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="btn-clay-instagram"
-              style="padding: 10px 20px; font-size: 0.84rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          </div>
+
+          <nav class="footer-nav-links" aria-label="Liens du pied de page">
+            <a href="#vision" data-i18n="nav.vision">La Vision</a>
+            <a href="#creation" data-i18n="nav.innovation">Notre Équipe</a>
+            <a href="#routine" data-i18n="nav.science">Le Projet</a>
+            <a href="/products/abadakor/" data-i18n="footer.link.abadakor">Abadakor 90 g</a>
+          </nav>
+
+          <div class="footer-social-icons">
+            <a href="https://www.instagram.com/corfovia" target="_blank" rel="noopener" class="footer-social-btn"
+              aria-label="Instagram @corfovia">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
               </svg>
-              <span>@corfovia</span>
             </a>
-            <a href="mailto:corfovia@gmail.com" target="_blank" rel="noopener" class="btn-clay-instagram"
-              style="padding: 10px 20px; font-size: 0.84rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round">
+            <a href="mailto:corfovia@gmail.com" class="footer-social-btn" aria-label="Email corfovia@gmail.com">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span>corfovia@gmail.com</span>
             </a>
           </div>
-
-          <!-- Col 1 : Projet -->
-          <div class="footer-col">
-            <h5 data-i18n="footer.col1.title">Maison Corfovia</h5>
-            <ul>
-              <li><a href="#vision" data-i18n="nav.vision">La Vision</a></li>
-              <li><a href="#creation" data-i18n="nav.innovation">Notre Équipe</a></li>
-              <li><a href="#routine" data-i18n="nav.science">Le Projet</a></li>
-              <li><a href="#communaute" data-i18n="footer.link.contact">Nous Contacter</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 2 : Produit -->
-          <div class="footer-col">
-            <h5 data-i18n="footer.col2.title">Produit</h5>
-            <ul>
-              <li><a href="/products/abadakor/" data-i18n="footer.link.abadakor">Le Muffin Abadakor</a></li>
-              <li><a href="/products/abadakor/#recette-details" data-i18n="footer.link.recipe">Composition &
-                  Recette</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 3 : Engagements -->
-          <div class="footer-col">
-            <h5 data-i18n="footer.col3.title">Engagements</h5>
-            <ul>
-              <li><span data-i18n="footer.exigence1">Protéines Animales Valorisées</span></li>
-              <li><span data-i18n="footer.exigence2">Démarche Anti-Gaspillage</span></li>
-              <li><span data-i18n="footer.exigence3">Savoir-Faire Pâtissier</span></li>
-              <li><span data-i18n="footer.exigence4">Projet Étudiant</span></li>
-            </ul>
-          </div>
-
         </div>
 
         <div class="footer-bottom-bar">
           <div class="footer-bottom-copy" data-i18n="footer.copy">
-            © 2026 Corfovia. Tous droits réservés. Projet d'innovation alimentaire & anti-gaspillage.
-          </div>
-          <div class="footer-bottom-mention" data-i18n="footer.mention">
-            Projet étudiant d’innovation alimentaire.
+            © 2026 Corfovia — Projet étudiant d’innovation alimentaire.
           </div>
         </div>
-
       </div>
     </footer>
 

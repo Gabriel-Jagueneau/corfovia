@@ -392,8 +392,8 @@
       if (!prefersReducedMotion()) {
         drawPathMeta.forEach(({ path, len }) => {
           const rect = path.getBoundingClientRect();
-          const start = winH * 0.92;
-          const end = winH * 0.35;
+          const start = winH * 0.98;
+          const end = winH * 0.70;
           const prog = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
           path.style.strokeDashoffset = (len * (1 - prog)).toFixed(1);
         });
@@ -515,7 +515,7 @@
       ticking = false;
       const H = window.innerHeight || 800;
       const start = H * 0.98;       // l'élément commence à apparaître en entrant par le bas
-      const defaultEnd = H * 0.82;  // achèvement complet dans le bas visible de l'écran
+      const defaultEnd = H * 0.70;  // achèvement complet à 70 % de l'écran
 
       revealEls.forEach((el) => {
         let p;
@@ -599,6 +599,51 @@
         trigger.focus();
       }
     });
+  };
+
+  // =========================================================================
+  // 3B. DROPDOWN HEADER MOBILE (Changer de page & langue sur téléphone)
+  // =========================================================================
+  const initMobileNavDropdown = () => {
+    const siteNav = document.querySelector('.site-nav');
+    const trigger = document.getElementById('navMobileTrigger');
+    const navLinks = document.querySelector('.nav-links');
+    if (!siteNav || !trigger || !navLinks) return;
+
+    const closeMenu = () => {
+      if (!siteNav.classList.contains('is-mobile-open')) return;
+      siteNav.classList.remove('is-mobile-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+
+    const toggleMenu = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const willOpen = !siteNav.classList.contains('is-mobile-open');
+      siteNav.classList.toggle('is-mobile-open', willOpen);
+      trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    };
+
+    trigger.addEventListener('click', toggleMenu);
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => closeMenu());
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!siteNav.contains(e.target)) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && siteNav.classList.contains('is-mobile-open')) {
+        closeMenu();
+        trigger.focus();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 880) closeMenu();
+    }, { passive: true });
   };
 
   // =========================================================================
@@ -2061,6 +2106,7 @@
     initScrollEngine();
     initScrollReveal();
     initProductsDropdown();
+    initMobileNavDropdown();
     initTactileResponse();
     initAccordions();
     initPerspectiveViewer();
