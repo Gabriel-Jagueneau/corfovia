@@ -325,7 +325,7 @@
       { id: 'piliers', labelKey: 'nav.vision', fallback: 'Les 4 Piliers', navSection: 'vision' },
       { id: 'creation', labelKey: 'nav.innovation', fallback: 'Notre Équipe', navSection: 'creation' },
       { id: 'routine', labelKey: 'nav.science', fallback: 'Le Projet', navSection: 'routine' },
-      { id: 'communaute', labelKey: 'footer.link.contact', fallback: 'Contact', navSection: 'routine' }
+      { id: 'communaute', labelKey: 'nav.contact', fallback: 'Contacter', navSection: 'communaute' }
     ];
 
     let isScrolled = false;

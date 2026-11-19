@@ -20,15 +20,14 @@ window.CORFOVIA_NEWS_DURATION_MS = 5500;
 
 window.CORFOVIA_NEWS = [
   {
-    image: '/products/abadakor/images/hero-muffins.jpg',
-    tag: 'Création',
-    tagEn: 'Creation',
-    title: 'Abadakor 90 g, le premier muffin Corfovia',
-    titleEn: 'Abadakor 90 g, Corfovia’s first muffin',
-    desc: 'Chocolat noir 85 %, chicorée prébiotique et 11,2 g de protéines valorisées sans sucre raffiné.',
-    descEn: '85% dark chocolate, prebiotic chicory and 11.2 g upcycled protein with zero refined sugar.',
-    link: '/products/abadakor/',
-    imagePos: '50% 58%'
+    image: 'images/actuality/yepday18112026.jpeg',
+    tag: 'YEP day',
+    tagEn: 'YEP day',
+    title: 'Notre YEP day',
+    titleEn: 'Our YEP day',
+    desc: 'Une journée avec LJE à la HEPL pour rencontrer des experts.',
+    descEn: 'A day with LJE at HEPL to meet with experts.',
+    link: 'https://lje.be/fr/news'
   },
   {
     image: '/images/brand/corfovia-meta.jpg',

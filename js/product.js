@@ -947,6 +947,37 @@
     }
 
     measureAll();
+
+    // Indicateur de scroll sticky : apparaît après 2s sans scroll
+    const scrollHint = document.getElementById('pScrollHint');
+    if (scrollHint) {
+      let hintTimer = null;
+      const scheduleHint = () => {
+        clearTimeout(hintTimer);
+        const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        const docH = document.documentElement.scrollHeight || 0;
+        const winH = window.innerHeight || 900;
+        if (scrollY + winH >= docH - 160) return;
+        hintTimer = setTimeout(() => {
+          scrollHint.classList.add('is-visible');
+        }, 2000);
+      };
+
+      window.addEventListener('scroll', () => {
+        scrollHint.classList.remove('is-visible');
+        scheduleHint();
+      }, { passive: true });
+
+      scrollHint.addEventListener('click', () => {
+        scrollHint.classList.remove('is-visible');
+        window.scrollBy({
+          top: Math.round((window.innerHeight || 800) * 0.68),
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      });
+
+      scheduleHint();
+    }
   };
 
   if (document.readyState === 'loading') {
