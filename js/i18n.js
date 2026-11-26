@@ -8,6 +8,7 @@
 
   const STORAGE_KEY = 'corfovia_language';
   const VALID_LANGS = ['fr', 'en'];
+  let activeLang = null;
 
   const translations = {
     fr: {
@@ -156,6 +157,7 @@
       'product.hero.subtitle': 'Moelleux au chocolat noir, 0 % sucre raffiné et 11,2 g de protéines riches en fer.',
       'product.hero.scroll': 'Explorer le muffin',
       'product.scroll.hint': 'Défiler pour découvrir',
+      'product.scroll.auto': 'Lecture auto',
       'product.orbit.1': '0 % Sucre Raffiné',
       'product.orbit.2': '11,2 g Protéines',
       'product.orbit.3': '13,1 g Fibres',
@@ -269,7 +271,6 @@
       'product.acc3.content': 'Revalorisation noble de protéines animales délaissées, intégrées au cœur d’une matrice chocolatée familière sans compromis de goût.',
 
       // Page 404
-      'error404.badge': 'Erreur 404',
       'error404.title': 'Aucune miette',
       'error404.title.span': 'à cette adresse.',
       'error404.desc': 'Cette page a été déplacée ou n’existe pas.',
@@ -426,6 +427,7 @@
       'product.hero.subtitle': 'Soft dark chocolate, 0% refined sugar, and 11.2 g of iron-rich protein.',
       'product.hero.scroll': 'Explore the muffin',
       'product.scroll.hint': 'Scroll to explore',
+      'product.scroll.auto': 'Auto scroll',
       'product.orbit.1': '0% Refined Sugar',
       'product.orbit.2': '11.2 g Protein',
       'product.orbit.3': '13.1 g Fibre',
@@ -539,7 +541,6 @@
       'product.acc3.content': 'Noble upcycling of overlooked animal proteins into a familiar, beloved chocolate matrix with zero taste compromise.',
 
       // Page 404
-      'error404.badge': 'Error 404',
       'error404.title': 'No crumbs',
       'error404.title.span': 'at this address.',
       'error404.desc': 'This page has moved or does not exist.',
@@ -559,6 +560,10 @@
   };
 
   const getLanguage = () => {
+    if (activeLang && VALID_LANGS.includes(activeLang)) {
+      return activeLang;
+    }
+
     const urlLang = getLanguageFromPath();
     if (urlLang && VALID_LANGS.includes(urlLang)) {
       localStorage.setItem(STORAGE_KEY, urlLang);
@@ -606,6 +611,7 @@
    */
   const setLanguage = (langCode, syncUrl = true, isUserClick = false) => {
     if (!VALID_LANGS.includes(langCode)) return;
+    activeLang = langCode;
     try {
       localStorage.setItem(STORAGE_KEY, langCode);
     } catch (_) { }

@@ -304,6 +304,7 @@
     };
 
     stage.addEventListener('pointerdown', (e) => {
+      if (e.target && e.target.closest('#pSplitControls')) return;
       e.preventDefault();
       isDragging = true;
       stage.classList.add('is-dragging');
@@ -385,11 +386,11 @@
       } else {
         const prevPos = pos;
         if (isDragging) {
-          pos = lerp(pos, targetPos, 0.44);
-          posVel = (pos - prevPos) * 0.35;
+          pos = lerp(pos, targetPos, 0.28);
+          posVel = (pos - prevPos) * 0.25;
         } else {
-          // Très léger ressort amorti au relâchement des bords
-          posVel = posVel * 0.56 + (targetPos - pos) * 0.22;
+          // Ressort amorti doux au relâchement et lors des clics
+          posVel = posVel * 0.62 + (targetPos - pos) * 0.12;
           pos += posVel;
         }
         const vel = pos - prevPos;
@@ -949,32 +950,127 @@
     measureAll();
 
     // Indicateur de scroll sticky : apparaît après 2s sans scroll
+    const scrollDock = document.getElementById('pScrollDock');
     const scrollHint = document.getElementById('pScrollHint');
-    if (scrollHint) {
+    const autoScrollBtn = document.getElementById('pAutoScrollBtn');
+    if (scrollDock || scrollHint) {
+      const dockEl = scrollDock || scrollHint;
       let hintTimer = null;
+      let autoScrollRaf = null;
+      let isAutoScrolling = false;
+
+      const stopAutoScroll = () => {
+        if (!isAutoScrolling) return;
+        isAutoScrolling = false;
+        if (autoScrollRaf) {
+          cancelAnimationFrame(autoScrollRaf);
+          autoScrollRaf = null;
+        }
+        if (autoScrollBtn) {
+          autoScrollBtn.classList.remove('is-active');
+          autoScrollBtn.setAttribute('aria-pressed', 'false');
+        }
+      };
+
+      const startAutoScroll = () => {
+        if (isAutoScrolling) return;
+        isAutoScrolling = true;
+        if (autoScrollBtn) {
+          autoScrollBtn.classList.add('is-active');
+          autoScrollBtn.setAttribute('aria-pressed', 'true');
+        }
+        dockEl.classList.add('is-visible');
+
+        const focusTargets = Array.from(document.querySelectorAll('main section, .p-story-step'));
+        let lastTime = performance.now();
+        let currentSpeed = 240;
+        let scrollPos = window.scrollY || document.documentElement.scrollTop || 0;
+
+        const getTargetSpeed = (scrollY, winH) => {
+          const focusY = scrollY + winH * 0.5;
+          let minEdgeDist = Infinity;
+
+          for (let i = 0; i < focusTargets.length; i += 1) {
+            const rect = focusTargets[i].getBoundingClientRect();
+            const top = rect.top + scrollY;
+            const bottom = top + rect.height;
+            if (rect.height < 120) continue;
+            const dTop = Math.abs(focusY - top);
+            const dBottom = Math.abs(focusY - bottom);
+            const d = Math.min(dTop, dBottom);
+            if (d < minEdgeDist) minEdgeDist = d;
+          }
+
+          // Proche de la frontière entre deux sections (< 220px) -> accélère fort (950 px/s) ; dans la section -> 220 px/s
+          const t = 1 - Math.min(1, Math.max(0, minEdgeDist / 220));
+          const eased = t * t * (3 - 2 * t);
+          return 220 + (950 - 220) * eased;
+        };
+
+        const step = (now) => {
+          if (!isAutoScrolling) return;
+          const dt = Math.min(0.05, Math.max(0.001, (now - lastTime) / 1000));
+          lastTime = now;
+
+          const currentY = window.scrollY || document.documentElement.scrollTop || 0;
+          const docH = document.documentElement.scrollHeight || 0;
+          const winH = window.innerHeight || 900;
+          if (currentY + winH >= docH - 2) {
+            stopAutoScroll();
+            dockEl.classList.remove('is-visible');
+            return;
+          }
+
+          const targetSpeed = getTargetSpeed(currentY, winH);
+          currentSpeed += (targetSpeed - currentSpeed) * Math.min(1, dt * 8);
+          scrollPos += currentSpeed * dt;
+          window.scrollTo(0, Math.round(scrollPos));
+          autoScrollRaf = requestAnimationFrame(step);
+        };
+        autoScrollRaf = requestAnimationFrame(step);
+      };
+
       const scheduleHint = () => {
         clearTimeout(hintTimer);
+        if (isAutoScrolling) return;
         const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
         const docH = document.documentElement.scrollHeight || 0;
         const winH = window.innerHeight || 900;
         if (scrollY + winH >= docH - 160) return;
         hintTimer = setTimeout(() => {
-          scrollHint.classList.add('is-visible');
+          dockEl.classList.add('is-visible');
         }, 2000);
       };
 
       window.addEventListener('scroll', () => {
-        scrollHint.classList.remove('is-visible');
+        if (isAutoScrolling) return;
+        dockEl.classList.remove('is-visible');
         scheduleHint();
       }, { passive: true });
 
-      scrollHint.addEventListener('click', () => {
-        scrollHint.classList.remove('is-visible');
-        window.scrollBy({
-          top: Math.round((window.innerHeight || 800) * 0.68),
-          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      window.addEventListener('wheel', stopAutoScroll, { passive: true });
+      window.addEventListener('touchstart', stopAutoScroll, { passive: true });
+
+      if (scrollHint) {
+        scrollHint.addEventListener('click', () => {
+          stopAutoScroll();
+          dockEl.classList.remove('is-visible');
+          window.scrollBy({
+            top: Math.round((window.innerHeight || 800) * 0.68),
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+          });
         });
-      });
+      }
+
+      if (autoScrollBtn) {
+        autoScrollBtn.addEventListener('click', () => {
+          if (isAutoScrolling) {
+            stopAutoScroll();
+          } else {
+            startAutoScroll();
+          }
+        });
+      }
 
       scheduleHint();
     }

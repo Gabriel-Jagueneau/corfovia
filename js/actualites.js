@@ -16,41 +16,47 @@
  * - imageScale : (optionnel) léger zoom d'appoint (ex: 1.15)
  * ============================================================================
  */
-window.CORFOVIA_NEWS_DURATION_MS = 5500;
+window.CORFOVIA_NEWS_DURATION_MS = 5000;
 
 window.CORFOVIA_NEWS = [
   {
     image: 'images/actuality/yepday18112026.jpeg',
+    link: 'https://lje.be/fr/news',
+
     tag: 'YEP day',
-    tagEn: 'YEP day',
     title: 'Notre YEP day',
-    titleEn: 'Our YEP day',
     desc: 'Une journée avec LJE à la HEPL pour rencontrer des experts.',
-    descEn: 'A day with LJE at HEPL to meet with experts.',
-    link: 'https://lje.be/fr/news'
+
+    tagEn: 'YEP day',
+    titleEn: 'Our YEP day',
+    descEn: 'A day with LJE at HEPL to meet with experts.'
   },
   {
     image: '/images/brand/corfovia-meta.jpg',
-    tag: 'Le Projet',
-    tagEn: 'The Project',
-    title: 'Six étudiants réunis contre le gaspillage',
-    titleEn: 'Six students united against food waste',
-    desc: 'Redonner de la valeur à des protéines animales délaissées dans un goûter sain que les enfants adorent.',
-    descEn: 'Giving value back to overlooked animal proteins inside a healthy snack children love.',
     link: '#routine',
-    imagePos: '50% 50%'
+    imagePos: '50% 50%',
+
+    tag: 'Le Projet',
+    title: 'Six étudiants réunis contre le gaspillage',
+    desc: 'Redonner de la valeur à des protéines animales délaissées dans un goûter sain que les enfants adorent.',
+
+    tagEn: 'The Project',
+    titleEn: 'Six students united against food waste',
+    descEn: 'Giving value back to overlooked animal proteins inside a healthy snack children love.',
   },
   {
     image: '/products/abadakor/images/hero-muffins.jpg',
-    tag: 'Fournée R&D',
-    tagEn: 'R&D Batch',
-    title: '6 ingrédients simples et 100 % transparents',
-    titleEn: '6 simple and fully transparent ingredients',
-    desc: 'Des essais pâtissiers centrés sur le moelleux, l’assimilation du fer naturel et zéro pic glycémique.',
-    descEn: 'Bakery trials focused on softness, natural iron absorption and zero sugar spikes.',
     link: '/products/abadakor/#ingredients-section',
     imagePos: '48% 64%',
-    imageScale: 1.24
+    imageScale: 1.24,
+
+    tag: 'Fournée R&D',
+    title: '6 ingrédients simples et 100 % transparents',
+    desc: 'Des essais pâtissiers centrés sur le moelleux, l’assimilation du fer naturel et zéro pic glycémique.',
+
+    tagEn: 'R&D Batch',
+    titleEn: '6 simple and fully transparent ingredients',
+    descEn: 'Bakery trials focused on softness, natural iron absorption and zero sugar spikes.',
   }
 ];
 

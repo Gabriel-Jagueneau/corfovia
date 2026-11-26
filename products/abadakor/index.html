@@ -96,13 +96,29 @@
   </header>
 
   <!-- Indicateur de scroll sticky (apparaît après 2s sans scroll) -->
-  <button type="button" class="p-scroll-hint" id="pScrollHint" aria-label="Défiler vers le bas">
-    <span data-i18n="product.scroll.hint">Défiler pour découvrir</span>
-    <svg class="p-scroll-hint-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-  </button>
+  <div class="p-scroll-dock" id="pScrollDock">
+    <button type="button" class="p-scroll-hint" id="pScrollHint" aria-label="Défiler vers le bas">
+      <span data-i18n="product.scroll.hint">Défiler pour découvrir</span>
+      <svg class="p-scroll-hint-icon" width="16" height="22" viewBox="0 0 16 22" fill="none" stroke="currentColor"
+        stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="13" height="19" rx="6.5" />
+        <line class="p-scroll-wheel" x1="8" y1="5.5" x2="8" y2="9" />
+      </svg>
+    </button>
+
+    <button type="button" class="p-auto-scroll" id="pAutoScrollBtn" aria-label="Lecture automatique" aria-pressed="false">
+      <svg class="p-auto-scroll-icon is-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+        aria-hidden="true">
+        <path d="M8 5.5v13l10.5-6.5L8 5.5z" />
+      </svg>
+      <svg class="p-auto-scroll-icon is-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+        aria-hidden="true">
+        <rect x="6.5" y="5.5" width="3.8" height="13" rx="1.2" />
+        <rect x="13.7" y="5.5" width="3.8" height="13" rx="1.2" />
+      </svg>
+      <span class="p-auto-scroll-label" data-i18n="product.scroll.auto">Lecture auto</span>
+    </button>
+  </div>
 
   <div class="site-wrapper product-main-flow">
 
@@ -251,39 +267,39 @@
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
                 </div>
-              </div>
 
-              <div class="p-split-controls" id="pSplitControls" data-active-mode="mid" role="group"
-                aria-label="Choisir le regard sur le muffin">
-                <div class="p-split-glider" id="pSplitGlider" aria-hidden="true"></div>
-                <button type="button" class="p-split-preset-btn" data-mode="kid" data-split-target="0.86">
-                  <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
-                    aria-hidden="true">
-                    <path d="M12 3l1.9 4.5L18.5 9l-4.6 1.5L12 15l-1.9-4.5L5.5 9l4.6-1.5L12 3z" />
-                    <path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z" />
-                  </svg>
-                  <span data-i18n="product.split.btn.kid">Regard Enfant</span>
-                </button>
-                <button type="button" class="p-split-preset-btn is-active" data-mode="mid" data-split-target="0.50">
-                  <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
-                    aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" />
-                    <path d="M12 3v18" />
-                    <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" fill-opacity="0.28" stroke="none" />
-                  </svg>
-                  <span data-i18n="product.split.btn.mid">50 / 50</span>
-                </button>
-                <button type="button" class="p-split-preset-btn" data-mode="parent" data-split-target="0.14">
-                  <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
-                    aria-hidden="true">
-                    <path d="M12 3l7 3v5c0 5-3 8.8-7 10-4-1.2-7-5-7-10V6l7-3z" />
-                    <path d="M9.5 12l1.8 1.8 3.5-3.8" />
-                  </svg>
-                  <span data-i18n="product.split.btn.parent">Regard Parent</span>
-                </button>
+                <div class="p-split-controls" id="pSplitControls" data-active-mode="mid" role="group"
+                  aria-label="Choisir le regard sur le muffin">
+                  <div class="p-split-glider" id="pSplitGlider" aria-hidden="true"></div>
+                  <button type="button" class="p-split-preset-btn" data-mode="kid" data-split-target="0.86">
+                    <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M12 3l1.9 4.5L18.5 9l-4.6 1.5L12 15l-1.9-4.5L5.5 9l4.6-1.5L12 3z" />
+                      <path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9L19 16z" />
+                    </svg>
+                    <span data-i18n="product.split.btn.kid">Regard Enfant</span>
+                  </button>
+                  <button type="button" class="p-split-preset-btn is-active" data-mode="mid" data-split-target="0.50">
+                    <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 3v18" />
+                      <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" fill-opacity="0.28" stroke="none" />
+                    </svg>
+                    <span data-i18n="product.split.btn.mid">50 / 50</span>
+                  </button>
+                  <button type="button" class="p-split-preset-btn" data-mode="parent" data-split-target="0.14">
+                    <svg class="p-split-btn-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <path d="M12 3l7 3v5c0 5-3 8.8-7 10-4-1.2-7-5-7-10V6l7-3z" />
+                      <path d="M9.5 12l1.8 1.8 3.5-3.8" />
+                    </svg>
+                    <span data-i18n="product.split.btn.parent">Regard Parent</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

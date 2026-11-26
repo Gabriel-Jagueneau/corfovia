@@ -1823,8 +1823,9 @@
       ? window.CorfoviaI18n.getLanguage()
       : (document.documentElement.lang || 'fr'));
 
-    const textFor = (item, field) => {
-      if (getLang() === 'en') {
+    const textFor = (item, field, langOverride) => {
+      const lang = langOverride || getLang();
+      if (lang === 'en') {
         const enVal = item[field + 'En'];
         if (enVal) return enVal;
       }
@@ -1900,10 +1901,10 @@
 
     let activeIdx = 0;
 
-    const syncTagAndLink = (idx) => {
+    const syncTagAndLink = (idx, langOverride) => {
       const item = items[idx];
       if (tagEl) {
-        const tagText = textFor(item, 'tag');
+        const tagText = textFor(item, 'tag', langOverride);
         if (tagText) {
           tagEl.textContent = tagText;
           tagEl.hidden = false;
@@ -1914,7 +1915,7 @@
       if (stageLink) {
         if (item.link) {
           stageLink.setAttribute('href', item.link.startsWith('/') ? resolveSiteHref(item.link) : item.link);
-          stageLink.setAttribute('aria-label', textFor(item, 'title'));
+          stageLink.setAttribute('aria-label', textFor(item, 'title', langOverride));
           stageLink.hidden = false;
         } else {
           stageLink.hidden = true;
@@ -2024,13 +2025,42 @@
       stage.addEventListener('pointerup', onTouchEnd, { passive: true });
     }
 
-    window.addEventListener('corfoviaLanguageChange', () => {
+    const triggerI18nReveal = (el, delayMs = 0) => {
+      if (!el || prefersReducedMotion()) return;
+      el.classList.remove('i18n-reveal');
+      void el.offsetWidth;
+      el.style.animationDelay = delayMs ? `${delayMs}ms` : '';
+      el.classList.add('i18n-reveal');
+      if (el._i18nRevealTimer) clearTimeout(el._i18nRevealTimer);
+      el._i18nRevealTimer = setTimeout(() => {
+        el.classList.remove('i18n-reveal');
+        el.style.animationDelay = '';
+        el._i18nRevealTimer = null;
+      }, 1200);
+    };
+
+    window.addEventListener('corfoviaLanguageChange', (e) => {
+      const nextLang = e && e.detail && e.detail.lang;
+      const isUserClick = Boolean(e && e.detail && e.detail.isUserClick);
       items.forEach((item, idx) => {
-        imgEls[idx].alt = textFor(item, 'title');
-        captionEls[idx].h3.textContent = textFor(item, 'title');
-        captionEls[idx].p.textContent = textFor(item, 'desc');
+        imgEls[idx].alt = textFor(item, 'title', nextLang);
+        captionEls[idx].h3.textContent = textFor(item, 'title', nextLang);
+        captionEls[idx].p.textContent = textFor(item, 'desc', nextLang);
       });
-      syncTagAndLink(activeIdx);
+      syncTagAndLink(activeIdx, nextLang);
+
+      if (isUserClick) {
+        let delay = 0;
+        if (tagEl && !tagEl.hidden) {
+          triggerI18nReveal(tagEl, delay);
+          delay += 35;
+        }
+        const activeCap = captionEls[activeIdx];
+        if (activeCap) {
+          triggerI18nReveal(activeCap.h3, delay);
+          triggerI18nReveal(activeCap.p, delay + 35);
+        }
+      }
     });
   };
 

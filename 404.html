@@ -28,7 +28,7 @@
           if (l.hash) {
             try {
               sessionStorage.setItem('corfovia_pending_scroll', l.hash.replace(/^#/, ''));
-            } catch (_) {}
+            } catch (_) { }
           }
           window.location.replace(l.protocol + '//' + l.host + target + (l.search || '') + (l.hash || ''));
           return;
@@ -140,15 +140,20 @@
               <div class="error-404-muffin-zero">
                 <svg class="error-404-muffin-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <!-- Dôme chocolaté du muffin -->
-                  <path d="M12 31C10 21 18.5 13 32 13C45.5 13 54 21 52 31C53.5 31.8 54 34.5 51.5 36H12.5C10 34.5 10.5 31.8 12 31Z"
-                    fill="#c41818" fill-opacity="0.16" stroke="#c41818" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                  <path
+                    d="M12 31C10 21 18.5 13 32 13C45.5 13 54 21 52 31C53.5 31.8 54 34.5 51.5 36H12.5C10 34.5 10.5 31.8 12 31Z"
+                    fill="#c41818" fill-opacity="0.16" stroke="#c41818" stroke-width="2.4" stroke-linecap="round"
+                    stroke-linejoin="round" />
                   <!-- Caissette plissée pâtissière -->
                   <path d="M15.5 36L19.5 51C20 52.8 21.6 54 23.5 54H40.5C42.4 54 44 52.8 44.5 51L48.5 36"
                     stroke="#c41818" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
                   <!-- Plis de la caissette -->
-                  <line x1="25.5" y1="36" x2="27" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
-                  <line x1="32" y1="36" x2="32" y2="54" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
-                  <line x1="38.5" y1="36" x2="37" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round" opacity="0.55" />
+                  <line x1="25.5" y1="36" x2="27" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round"
+                    opacity="0.55" />
+                  <line x1="32" y1="36" x2="32" y2="54" stroke="#c41818" stroke-width="1.8" stroke-linecap="round"
+                    opacity="0.55" />
+                  <line x1="38.5" y1="36" x2="37" y2="53.5" stroke="#c41818" stroke-width="1.8" stroke-linecap="round"
+                    opacity="0.55" />
                   <!-- Pépites de chocolat -->
                   <circle cx="24" cy="24" r="2.2" fill="#c41818" />
                   <circle cx="33" cy="20" r="2.4" fill="#c41818" />
@@ -157,13 +162,6 @@
                 </svg>
               </div>
               <span class="error-404-digit">4</span>
-            </div>
-
-            <div>
-              <span class="error-404-badge">
-                <span class="error-404-badge-dot"></span>
-                <span data-i18n="error404.badge">Erreur 404</span>
-              </span>
             </div>
 
             <h1 class="error-404-title">
@@ -177,12 +175,8 @@
             </p>
 
             <div class="error-404-actions">
-              <a href="/" class="btn-clay btn-clay-primary" data-i18n="error404.btn.home">
-                Retourner à l’accueil →
-              </a>
-              <a href="/products/abadakor/" class="btn-clay btn-clay-secondary" data-i18n="error404.btn.product">
-                Découvrir le muffin Abadakor
-              </a>
+              <a href="/" class="btn-clay btn-clay-primary" data-i18n="error404.btn.home"></a>
+              <a href="/products/abadakor/" class="btn-clay btn-clay-secondary" data-i18n="error404.btn.product"></a>
             </div>
 
             <div class="error-404-quicklinks">
